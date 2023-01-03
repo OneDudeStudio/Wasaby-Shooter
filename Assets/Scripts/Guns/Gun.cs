@@ -3,13 +3,13 @@ using UnityEngine;
 
 public abstract class Gun : MonoBehaviour
 {
-    [SerializeField] private float _defaultBulletDamage;
+    [SerializeField] private float _defaultDamage;
     [SerializeField] private int _defaultMaxAmmo;
     [SerializeField] private float _defaultRange;
     [SerializeField] private float _defaultIntervalTime;
     [SerializeField] private AnimationCurve _damageByDistance;
 
-    private float _bulletDamage;
+    private float _damage;
     private int _maxAmmo;
     protected float _range;
     private float _intervalTime;
@@ -32,7 +32,7 @@ public abstract class Gun : MonoBehaviour
         Shotgun
     }
 
-    public float GetDamage() => _defaultBulletDamage;
+    public float GetDamage() => _defaultDamage;
     public int GetAmmo() => _defaultMaxAmmo;
     public float GetRange() => _defaultRange;
     public float GetInterval() => _defaultIntervalTime;
@@ -40,7 +40,7 @@ public abstract class Gun : MonoBehaviour
     public void SetDamage(float damage)
     {
         if (damage > 0)
-            _bulletDamage = damage;
+            _damage = damage;
     }
     public void SetAmmo(int ammo)
     {
@@ -61,6 +61,7 @@ public abstract class Gun : MonoBehaviour
     public void CalculateCharacteristics()
     {
         _supportModule.CalculateModuleCharacteristics();
+        _damage *= _bullet.GetAdditionalDamage();
         _currentAmmo = _maxAmmo;
     }
 
@@ -71,10 +72,10 @@ public abstract class Gun : MonoBehaviour
         _shootParticles = GetComponentInChildren<ParticleSystem>();
         _recoil = FindObjectOfType<Recoil>();
         _holePool = FindObjectOfType<BulletHolesPool>();
-        _supportModule = new ExtendedMag(this, GunType.Rifle);
-        CalculateCharacteristics();
-
+        _supportModule = new ExtendedMag(this, GunType.Rifle, _recoil);
         _bullet = new FireBullet();
+        _bullet = new DefaultBullet();
+        CalculateCharacteristics();       
     }
 
     protected bool IsOutOfAmmo() => _currentAmmo-- <= 0;
@@ -91,7 +92,7 @@ public abstract class Gun : MonoBehaviour
         _isCanShoot = true;
     }
 
-    protected float CalculateDamage(float len) => Mathf.Clamp01(_damageByDistance.Evaluate(len / _range)) * _bulletDamage;
+    protected float CalculateDamage(float len) => Mathf.Clamp01(_damageByDistance.Evaluate(len / _range)) * _damage;
 
     protected IEnumerator Interval()
     {

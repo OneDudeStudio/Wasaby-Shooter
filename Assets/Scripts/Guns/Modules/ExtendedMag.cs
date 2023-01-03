@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class ExtendedMag : SupportModule
 {
@@ -9,7 +8,7 @@ public class ExtendedMag : SupportModule
         { Gun.GunType.Shotgun, 5}
     };
 
-    public ExtendedMag(Gun gun, Gun.GunType type) : base(gun, type)
+    public ExtendedMag(Gun gun, Gun.GunType type, Recoil recoil) : base(gun, type, recoil)
     {
     }
 

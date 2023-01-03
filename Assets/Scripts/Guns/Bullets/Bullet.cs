@@ -1,6 +1,7 @@
-using UnityEngine;
-
 public abstract class Bullet
 {
-    public abstract void ShootBullet(IApplyableDamage target, RaycastHit hit);
+    
+    protected float _additionalDamagePrecent = 0;
+    public abstract void ShootBullet(IApplyableDamage target);
+    public float GetAdditionalDamage() => SupportFunctions.PrecentToFloat(_additionalDamagePrecent);
 }

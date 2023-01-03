@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class Rifle : Gun
@@ -18,7 +17,7 @@ public class Rifle : Gun
             {
                 if (!damaged.TryApplyDamage(CalculateDamage(hit.distance)))
                     return;
-                _bullet.ShootBullet(damaged, hit);
+                _bullet.ShootBullet(damaged);
                 //if (hit.transform.gameObject.TryGetComponent(out IApplyableEffect effectable))
                     //_bullet.ApplyBullectEffect(effectable);
             }

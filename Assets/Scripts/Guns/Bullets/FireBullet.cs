@@ -2,7 +2,7 @@
 
 public class FireBullet : EffectBullet
 {
-    public override void ApplyBulletEffect(IApplyableEffect target) => target.ApplyEffect(typeof(IApplyableBurning));
+    public override void ApplyBulletEffect(IApplyableEffect effectTarget) => effectTarget.ApplyEffect(typeof(IApplyableBurning));
 
 
     //private int _ticks = 5;

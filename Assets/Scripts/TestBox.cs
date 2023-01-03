@@ -10,12 +10,6 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
     [SerializeField] private Material _hitMaterial;
     private Material _defaultMaterial;
 
-
-
-
-
-
-
     public bool _isBurning = false;
     private int _ticks = 5;
     private float _interval = .5f;
@@ -36,6 +30,8 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
 
     public bool TryApplyDamage(float damage)
     {
+        if (damage < 0)
+            return true;
         _health -= damage;
         if (_health <= 0)
         {
@@ -70,9 +66,16 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
 
     public void StartFreeze()
     {
-        Debug.Log("freeze");
+        StartCoroutine(Freeze());
     }
     
+    private IEnumerator Freeze()
+    {
+        _isFreeze = true;
+        //
+        yield return new WaitForSeconds(_freezeDuration);
+        _isFreeze = false;
+    }
 
     public void StartBurning()
     {

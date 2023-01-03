@@ -1,11 +1,13 @@
-using UnityEngine;
-
 public abstract class EffectBullet : Bullet
 {
-    public override void ShootBullet(IApplyableDamage target, RaycastHit hit)
+    public EffectBullet()
     {
-        if(hit.transform.TryGetComponent(out IApplyableEffect effectable))
-            ApplyBulletEffect(effectable);
+        _additionalDamagePrecent = 0;
     }
-    public abstract void ApplyBulletEffect(IApplyableEffect target);
+    public override void ShootBullet(IApplyableDamage target)
+    {
+        if(target is IApplyableEffect effectTarget)
+            ApplyBulletEffect(effectTarget);
+    }
+    public abstract void ApplyBulletEffect(IApplyableEffect effectTarget);
 }
