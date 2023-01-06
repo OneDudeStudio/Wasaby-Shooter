@@ -5,6 +5,7 @@ public class Recoil : MonoBehaviour
     private Vector3 _currentRotation;
     private Vector3 _targetRotation;
 
+    [SerializeField] private Transform _targetToRecoilEffect;
     [SerializeField] private Vector3 _DefaultRecoil;
     [SerializeField] private float _DefaultReturnSpeed;
     [SerializeField] private float _DefaultSnappines;
@@ -17,7 +18,7 @@ public class Recoil : MonoBehaviour
     {
         _targetRotation = Vector3.Lerp(_targetRotation, Vector3.zero, _returnSpeed * Time.fixedDeltaTime);
         _currentRotation = Vector3.Slerp(_currentRotation, _targetRotation, _snappines * Time.fixedDeltaTime);
-        transform.localRotation = Quaternion.Euler(_currentRotation);
+        _targetToRecoilEffect.localRotation = Quaternion.Euler(_currentRotation);
     }
 
     public void RecoilFire() => _targetRotation += new Vector3(_recoil.x,
