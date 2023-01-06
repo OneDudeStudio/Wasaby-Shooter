@@ -181,7 +181,7 @@ MonoBehaviour:
   _poisonPrefab: {fileID: -325475914867204368, guid: d783c9e213d94f04db205bf8f3825f4b, type: 3}
   _layer:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 1536
 --- !u!1 &751403257993783242
 GameObject:
   m_ObjectHideFlags: 0
