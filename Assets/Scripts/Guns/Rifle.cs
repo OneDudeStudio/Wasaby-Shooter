@@ -47,3 +47,12 @@ public interface IApplyableFreeze : IApplyableEffect
 {
     public void StartFreeze();
 }
+public interface IApplyablePoison
+{
+    public void Poison(float damage);
+
+}
+public interface IapplyableElectric
+{
+    public void Electric();
+}

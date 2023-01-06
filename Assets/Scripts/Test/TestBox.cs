@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IApplyableFreeze
+public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IApplyableFreeze, IApplyablePoison, IapplyableElectric
 {
     [SerializeField] private float _health = 10;
     private Renderer _renderer;
@@ -19,7 +19,11 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
     private float _freezeDuration = 3f;
     private float _freezeSpeedModifier = .5f;
 
+    private bool _isCanPoisoned = true;
+    private float _poisonDamage = 1f;
+    private float _poisonInterval = .8f;
 
+    private Dictionary<Type, bool> _isApplyableEffect = new Dictionary<Type, bool>();
 
     private void Start()
     {
@@ -53,6 +57,7 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
     {
         GlobalEventManager.SendDie(transform);
         gameObject.SetActive(false);
+        /// 
         Destroy(gameObject);
     }
 
@@ -62,6 +67,8 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
             StartBurning();
         if (type == typeof(IApplyableFreeze) && _isApplyableEffect.ContainsKey(type))
             StartFreeze();
+        if (type == typeof(IApplyablePoison) && _isApplyableEffect.ContainsKey(type))
+            Poison(_poisonDamage);
     }
 
     public void StartFreeze()
@@ -94,7 +101,7 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
         }
         _isBurning = false;
     }
-    private Dictionary<Type, bool> _isApplyableEffect = new Dictionary<Type, bool>();
+    
 
     private void CheckEffects()
     {
@@ -102,5 +109,25 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
         {
             _isApplyableEffect.Add(type, true);
         }        
+    }
+
+    public void Poison(float damage)
+    {
+        if (_isCanPoisoned)
+        {
+            StartCoroutine(PoisonInterval());
+            TryApplyDamage(damage);            
+        }
+    }
+    private IEnumerator PoisonInterval()
+    {
+        _isCanPoisoned = false;
+        yield return new WaitForSeconds(_poisonInterval);
+        _isCanPoisoned = true;
+    }
+
+    public void Electric()
+    {
+        throw new NotImplementedException();
     }
 }

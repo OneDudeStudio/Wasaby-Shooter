@@ -8,12 +8,13 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] private float _defaultRange;
     [SerializeField] private float _defaultIntervalTime;
     [SerializeField] private AnimationCurve _damageByDistance;
+    [SerializeField] private float _GrenadeLauncherInterval;
 
     private float _damage;
     private int _maxAmmo;
     protected float _range;
     private float _intervalTime;
-
+    
     protected Camera _playerCamera;
     protected ParticleSystem _shootParticles;
     protected Recoil _recoil;
@@ -22,9 +23,11 @@ public abstract class Gun : MonoBehaviour
 
     protected int _currentAmmo;    
     protected bool _isCanShoot = true;
+    private bool _isCanLauncherShoot = true;
 
     private SupportModule _supportModule;
     protected Bullet _bullet;
+    private GrenadeLauncher _grenadeLauncher;
 
     public enum GunType
     {
@@ -74,8 +77,9 @@ public abstract class Gun : MonoBehaviour
         _holePool = FindObjectOfType<BulletHolesPool>();
         _supportModule = new ExtendedMag(this, GunType.Rifle, _recoil);
         _bullet = new FireBullet();
-        _bullet = new DefaultBullet();
-        CalculateCharacteristics();       
+        //_bullet = new DefaultBullet();
+        CalculateCharacteristics();
+        _grenadeLauncher = GetComponent<GrenadeLauncher>();
     }
 
     protected bool IsOutOfAmmo() => _currentAmmo-- <= 0;
@@ -100,10 +104,16 @@ public abstract class Gun : MonoBehaviour
         yield return new WaitForSeconds(_intervalTime);
         _isCanShoot = true;
     }
+    private IEnumerator LauncherIntrval()
+    {
+        _isCanLauncherShoot = false;
+        yield return new WaitForSeconds(_GrenadeLauncherInterval);
+        _isCanLauncherShoot = true;
+    }
 
     private void Update()
     {
-        if (Input.GetButton("Fire1") && (_isCanShoot))
+        if (Input.GetKey(KeyCode.Mouse0) && (_isCanShoot))
         {
             TryShoot();
             StartCoroutine(Interval());
@@ -111,6 +121,11 @@ public abstract class Gun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && _currentAmmo != _maxAmmo)
         {
             Reload();
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1) && (_isCanLauncherShoot))
+        {
+            _grenadeLauncher.ShootGranade();
+            StartCoroutine(LauncherIntrval());
         }
 
     }

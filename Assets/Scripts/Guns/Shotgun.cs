@@ -3,8 +3,7 @@ using UnityEngine;
 public class Shotgun : Gun
 {
     [SerializeField] private int _pelletCount;
-    [SerializeField] private float _koef1;
-    [SerializeField] private float _koef2;
+    [SerializeField] private float _variance;
     public override void TryShoot()
     {
         if (IsOutOfAmmo())
@@ -14,19 +13,7 @@ public class Shotgun : Gun
         _recoil.RecoilFire();
         for (int i = 0; i < _pelletCount; i++)
         {
-            float v = _koef1 * Random.Range(-1f, 1f) - _koef2;
-            float u = _koef1 * Random.Range(-1f, 1f) - _koef2;
-            float s = v * v + u * u;
-            //float x = Mathf.Sqrt(-2 * Mathf.Log(v)) * Mathf.Cos(2 * Mathf.PI * u);
-            //float y = Mathf.Sqrt(-2 * Mathf.Log(v)) * Mathf.Sin(2 * Mathf.PI * u);
-            float a = Mathf.Sqrt(-2 * Mathf.Log(s) / s);
-            float z1 = u * a;
-            float z2 = v * a;
-            //Debug.Log(x);
-            //Debug.Log(y);
-            if (Physics.Raycast(_playerCamera.transform.position, 
-                _playerCamera.transform.forward + _playerCamera.transform.right * z1 * .1f + _playerCamera.transform.up * z2 * .1f,
-                out RaycastHit hit, _range))
+            if (Physics.Raycast(_playerCamera.transform.position, GaussDirection(), out RaycastHit hit, _range))
             {
                 if (hit.transform.TryGetComponent(out IApplyableDamage damaged))
                 {
@@ -37,4 +24,23 @@ public class Shotgun : Gun
             }
         }
     }
+
+    private Vector3 GaussDirection()
+    {
+        float s = 0;
+        float v = 0;
+        float u = 0;
+        
+        while(s == 0 || s > 1)
+        {
+            v = Random.Range(-1f, 1f);
+            u = Random.Range(-1f, 1f);
+            s = v * v + u * u;
+        }
+        float sqrt = Mathf.Sqrt(-2 * Mathf.Log(s) / s);
+        float z1 = _variance * u * sqrt;
+        float z2 = _variance * v * sqrt;
+        return _playerCamera.transform.forward + _playerCamera.transform.right * z1 / 10 + _playerCamera.transform.up * z2 / 10;
+    }
+    
 }
