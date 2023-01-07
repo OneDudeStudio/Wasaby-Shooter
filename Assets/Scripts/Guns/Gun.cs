@@ -8,7 +8,9 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] private float _defaultRange;
     [SerializeField] private float _defaultIntervalTime;
     [SerializeField] private AnimationCurve _damageByDistance;
-    [SerializeField] private float _GrenadeLauncherInterval;
+
+
+    
 
     private float _damage;
     private int _maxAmmo;
@@ -23,11 +25,10 @@ public abstract class Gun : MonoBehaviour
 
     protected int _currentAmmo;    
     protected bool _isCanShoot = true;
-    private bool _isCanLauncherShoot = true;
+    
 
     private SupportModule _supportModule;
     protected Bullet _bullet;
-    private GrenadeLauncher _grenadeLauncher;
 
     public enum GunType
     {
@@ -75,11 +76,12 @@ public abstract class Gun : MonoBehaviour
         _shootParticles = GetComponentInChildren<ParticleSystem>();
         _recoil = FindObjectOfType<Recoil>();
         _holePool = FindObjectOfType<BulletHolesPool>();
-        _supportModule = new ExtendedMag(this, GunType.Rifle, _recoil);
+        _supportModule = new NullModule(this, GunType.Rifle, _recoil);
+        //_supportModule = new ExtendedMag(this, GunType.Rifle, _recoil);
         _bullet = new FireBullet();
+        _bullet = new ElectricBullet();
         //_bullet = new DefaultBullet();
         CalculateCharacteristics();
-        _grenadeLauncher = GetComponent<GrenadeLauncher>();
     }
 
     protected bool IsOutOfAmmo() => _currentAmmo-- <= 0;
@@ -104,12 +106,7 @@ public abstract class Gun : MonoBehaviour
         yield return new WaitForSeconds(_intervalTime);
         _isCanShoot = true;
     }
-    private IEnumerator LauncherIntrval()
-    {
-        _isCanLauncherShoot = false;
-        yield return new WaitForSeconds(_GrenadeLauncherInterval);
-        _isCanLauncherShoot = true;
-    }
+    
 
     private void Update()
     {
@@ -122,11 +119,5 @@ public abstract class Gun : MonoBehaviour
         {
             Reload();
         }
-        if (Input.GetKeyDown(KeyCode.Mouse1) && (_isCanLauncherShoot))
-        {
-            _grenadeLauncher.ShootGranade();
-            StartCoroutine(LauncherIntrval());
-        }
-
     }
 }

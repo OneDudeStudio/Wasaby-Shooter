@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 public class ExtendedMag : SupportModule
 {
+    //add n bullets to default magazine
     private readonly Dictionary<Gun.GunType, int> _addedAmmo = new Dictionary<Gun.GunType, int>()
     {
         { Gun.GunType.Rifle, 10},

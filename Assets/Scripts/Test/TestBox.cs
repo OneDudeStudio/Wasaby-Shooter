@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IApplyableFreeze, IApplyablePoison, IapplyableElectric
+public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IApplyableFreeze, IApplyablePoison, IApplyableElectric
 {
     [SerializeField] private float _health = 10;
     private Renderer _renderer;
@@ -23,7 +23,11 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
     private float _poisonDamage = 1f;
     private float _poisonInterval = .8f;
 
+    private float _electricDamage = .5f;
+
     private Dictionary<Type, bool> _isApplyableEffect = new Dictionary<Type, bool>();
+
+    
 
     private void Start()
     {
@@ -32,14 +36,18 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
         CheckEffects();
     }
 
+    private bool _isCanApplyDamage = true;
     public bool TryApplyDamage(float damage)
     {
+        if (!_isCanApplyDamage)
+            return false;
         if (damage < 0)
             return true;
         _health -= damage;
         if (_health <= 0)
         {
             Die();
+            _isCanApplyDamage = false;
             return false;
         }
         StartCoroutine(hit());
@@ -52,12 +60,17 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
         yield return new WaitForSeconds(.05f);
         _renderer.material = _defaultMaterial;
     }
+    private IEnumerator wait()
+    {
+        //gameObject.SetActive(false);
+        yield return new WaitForSeconds(.5f);
+        Destroy(gameObject);
+    }
 
     public void Die()
     {
         GlobalEventManager.SendDie(transform);
-        gameObject.SetActive(false);
-        /// 
+        //StartCoroutine(wait());
         Destroy(gameObject);
     }
 
@@ -69,6 +82,8 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
             StartFreeze();
         if (type == typeof(IApplyablePoison) && _isApplyableEffect.ContainsKey(type))
             Poison(_poisonDamage);
+        if (type == typeof(IApplyableElectric) && _isApplyableEffect.ContainsKey(type))
+            Electric(true);
     }
 
     public void StartFreeze()
@@ -126,8 +141,10 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
         _isCanPoisoned = true;
     }
 
-    public void Electric()
+    public void Electric(bool isStartPoint)
     {
-        throw new NotImplementedException();
+        TryApplyDamage(_electricDamage);
+        if (isStartPoint)
+            GlobalEventManager.SendLightningChain(transform);
     }
 }

@@ -26,7 +26,7 @@ public class PoisonSpawner : MonoBehaviour
 
     private bool RayCheck(Transform point)
     {
-        Vector3 direction = point.position - _centralPoint.position;
+        Vector3 direction = (point.position - _centralPoint.position).normalized;
         if (Physics.Raycast(_centralPoint.position, direction, direction.magnitude, _layer))
         {
             Destroy(point.gameObject);

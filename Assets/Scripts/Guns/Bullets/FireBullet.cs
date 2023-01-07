@@ -2,21 +2,7 @@
 
 public class FireBullet : EffectBullet
 {
+    //precent of dammage to add to current for fire bullet
+    public FireBullet() => _additionalDamagePrecent = 0;
     public override void ApplyBulletEffect(IApplyableEffect effectTarget) => effectTarget.ApplyEffect(typeof(IApplyableBurning));
-
-
-    //private int _ticks = 5;
-    // private float _interval = 1f;
-    // private float _fireDamage = 1f;
-    //private async Task Burning(IApplyableDamage target)
-    //{
-    //    int millisecondInterval = (int)(_interval * 1000);
-    //    for(int i=0; i < _ticks; i++)
-    //    {
-    //        if (target.Equals(null))
-    //            break;
-    //        target.TryApplyDamage(_fireDamage);
-    //        await Task.Delay(millisecondInterval);
-    //    }        
-    //}
 }

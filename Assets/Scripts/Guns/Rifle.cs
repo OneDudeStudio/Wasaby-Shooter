@@ -3,11 +3,19 @@ using UnityEngine;
 
 public class Rifle : Gun
 {
+    private bool _checker = true;
+    [SerializeField] protected AudioClip clip1;
+    [SerializeField] protected AudioClip clip2;
+    [SerializeField] protected AudioSource _source;
     public override void TryShoot()
     {
         if (IsOutOfAmmo())
             return;
-        
+        if (_checker)
+            _source.PlayOneShot(clip1);
+        else
+            _source.PlayOneShot(clip2);
+        _checker = !_checker;
         _shootParticles.Play();
         _recoil.RecoilFire();
         if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out RaycastHit hit, _range))
@@ -18,12 +26,9 @@ public class Rifle : Gun
                 if (!damaged.TryApplyDamage(CalculateDamage(hit.distance)))
                     return;
                 _bullet.ShootBullet(damaged);
-                //if (hit.transform.gameObject.TryGetComponent(out IApplyableEffect effectable))
-                    //_bullet.ApplyBullectEffect(effectable);
             }
-            _holePool.AddHole(hit);
-        }
-        
+            //_holePool.AddHole(hit);
+        }        
     }
 }
 
@@ -52,7 +57,7 @@ public interface IApplyablePoison
     public void Poison(float damage);
 
 }
-public interface IapplyableElectric
+public interface IApplyableElectric
 {
-    public void Electric();
+    public void Electric(bool isStartPoint);
 }
