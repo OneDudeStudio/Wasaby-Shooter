@@ -25,9 +25,10 @@ public class Rifle : Gun
             {
                 if (!damaged.TryApplyDamage(CalculateDamage(hit.distance)))
                     return;
-                _bullet.ShootBullet(damaged);
+                //_bullet.ShootBullet(damaged);
+                return;
             }
-            //_holePool.AddHole(hit);
+            _holePool.AddHole(hit);
         }        
     }
 }

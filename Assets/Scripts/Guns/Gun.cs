@@ -78,9 +78,9 @@ public abstract class Gun : MonoBehaviour
         _holePool = FindObjectOfType<BulletHolesPool>();
         _supportModule = new NullModule(this, GunType.Rifle, _recoil);
         //_supportModule = new ExtendedMag(this, GunType.Rifle, _recoil);
-        _bullet = new FireBullet();
-        _bullet = new ElectricBullet();
-        //_bullet = new DefaultBullet();
+        //_bullet = new FireBullet();
+        //_bullet = new ElectricBullet();
+        _bullet = new DefaultBullet();
         CalculateCharacteristics();
     }
 

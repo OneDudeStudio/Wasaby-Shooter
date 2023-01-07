@@ -22,6 +22,7 @@ public class Shotgun : Gun
                 {
                     if (!damaged.TryApplyDamage(CalculateDamage(hit.distance)))
                         return;
+                    return;
                 }
                 _holePool.AddHole(hit);
             }
