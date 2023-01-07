@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/LubaScene.unity
+    guid: 80b6afb78e3c94347b7528b4906ee07f
+  - enabled: 1
+    path: Assets/Scenes/LubaScene2.unity
+    guid: 1eaf4cfea015d00a1a532ad57dc4960a
   m_configObjects: {}
