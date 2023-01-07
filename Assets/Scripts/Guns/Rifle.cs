@@ -52,12 +52,12 @@ public interface IApplyableFreeze : IApplyableEffect
 {
     public void StartFreeze();
 }
-public interface IApplyablePoison
+public interface IApplyablePoison : IApplyableEffect
 {
     public void Poison(float damage);
 
 }
-public interface IApplyableElectric
+public interface IApplyableElectric : IApplyableEffect
 {
     public void Electric(bool isStartPoint);
 }

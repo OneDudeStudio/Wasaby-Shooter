@@ -60,12 +60,6 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
         yield return new WaitForSeconds(.05f);
         _renderer.material = _defaultMaterial;
     }
-    private IEnumerator wait()
-    {
-        //gameObject.SetActive(false);
-        yield return new WaitForSeconds(.5f);
-        Destroy(gameObject);
-    }
 
     public void Die()
     {
