@@ -9,9 +9,6 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] private float _defaultIntervalTime;
     [SerializeField] private AnimationCurve _damageByDistance;
 
-
-    
-
     private float _damage;
     private int _maxAmmo;
     protected float _range;

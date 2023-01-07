@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour, IApplyableDamage, IApplyablePoison
 {
     private bool _isCanApplyDamage = true;
-    [SerializeField] private float _health = 10f;
+    [SerializeField] private float _health = 100f;
 
     public bool isAlive() => _isCanApplyDamage;
     public void Die()
@@ -25,7 +25,8 @@ public class PlayerManager : MonoBehaviour, IApplyableDamage, IApplyablePoison
             Die();
             return false;
         }
-
+        
+        Debug.Log($"Health: {_health}");
         return true;
     }
     public void ApplyEffect(Type type)

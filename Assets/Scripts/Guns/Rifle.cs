@@ -18,6 +18,7 @@ public class Rifle : Gun
         _checker = !_checker;
         _shootParticles.Play();
         _recoil.RecoilFire();
+        
         if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out RaycastHit hit, _range))
         {
             Instantiate(_hitParticles, hit.point, Quaternion.LookRotation(hit.normal));
