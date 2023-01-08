@@ -15,17 +15,24 @@ namespace Enemies.CustomTasks
 		protected override void OnUpdate()
 		{
 			float distance = Vector3.Distance(agent.transform.position, Target.value.position);
-
+			 
 			if (distance > MinimumDistance.value)
 			{
-				Agent.value.isStopped = false;
-				Agent.value.SetDestination(Target.value.transform.position);
+				 //Agent.value.isStopped = false;
+				 Agent.value.SetDestination(Target.value.transform.position);
 			}
 			else
 			{
-				Agent.value.isStopped = true;
-				EndAction(true);
+				 Agent.value.SetDestination(Agent.value.transform.position);
+				 //Agent.value.isStopped = true;
 			}
+		}
+
+		protected override void OnStop()
+		{
+			//Agent.value.isStopped = true;
+			if(Agent.value.enabled)
+				Agent.value.SetDestination(Agent.value.transform.position);
 		}
 	}
 }
