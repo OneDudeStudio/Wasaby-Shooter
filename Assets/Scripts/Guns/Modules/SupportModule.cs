@@ -5,11 +5,13 @@ public abstract class SupportModule
     protected Gun _gun;
     protected Gun.GunType _gunType;
     protected Recoil _recoil;
+    protected GunModulesConfig _thisGunModuleConfig;
     public SupportModule(Gun gun, Gun.GunType type, Recoil recoil)
     {
         _gun = gun;
         _gunType = type;
         _recoil = recoil;
+        _thisGunModuleConfig = _gun.ThisGunModuleConfig;
     }
 
     public void CalculateModuleCharacteristics()

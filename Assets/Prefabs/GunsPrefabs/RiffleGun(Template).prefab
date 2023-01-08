@@ -4970,6 +4970,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _shootKey: 323
+  _reloadKey: 114
+  _shootParticles: {fileID: 2887280712272207077}
+  _recoil: {fileID: 3524004760113458520}
   _hitParticles: {fileID: 4379133665793430431, guid: 3e92e1d66a344f346b40c0e5fb813b55, type: 3}
   clip1: {fileID: 8300000, guid: 0f9569645e7150b4d9456adeadecc7a2, type: 3}
   clip2: {fileID: 8300000, guid: 5311c8211340d334ba1f9a66e57fe076, type: 3}

@@ -5,15 +5,15 @@ public class Shotgun : Gun
     [SerializeField] private int _pelletCount;
     [SerializeField] private float _variance;
 
-    [SerializeField] protected AudioClip clip1;
-    [SerializeField] protected AudioSource _source;
-    public override void TryShoot()
+   //[SerializeField] protected AudioClip clip1;
+   //[SerializeField] protected AudioSource _source;
+
+    protected override void TryShoot()
     {
-        if (IsOutOfAmmo())
-            return;
-        _source.PlayOneShot(clip1);
-        _shootParticles.Play();
-        _recoil.RecoilFire();
+        base.TryShoot();
+       //if (IsOutOfAmmo())
+       //    return;
+       // _source.PlayOneShot(clip1);
         for (int i = 0; i < _pelletCount; i++)
         {
             if (Physics.Raycast(_playerCamera.transform.position, GaussDirection(), out RaycastHit hit, _range))

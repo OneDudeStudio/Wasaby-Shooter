@@ -3,36 +3,46 @@ using UnityEngine;
 
 public abstract class Gun : MonoBehaviour
 {
-    [SerializeField] private float _defaultDamage;
-    [SerializeField] private int _defaultMaxAmmo;
-    [SerializeField] private float _defaultRange;
-    [SerializeField] private float _defaultIntervalTime;
-    [SerializeField] private AnimationCurve _damageByDistance;
-
-    private float _damage;
-    private int _maxAmmo;
-    protected float _range;
-    private float _intervalTime;
-    
-    protected Camera _playerCamera;
-    protected ParticleSystem _shootParticles;
-    protected Recoil _recoil;
-    protected BulletHolesPool _holePool;
-    [SerializeField] protected GameObject _hitParticles;
-
-    protected int _currentAmmo;    
-    protected bool _isCanShoot = true;
-    
-
-    private SupportModule _supportModule;
-    protected Bullet _bullet;
-
     public enum GunType
     {
         Rifle,
         Shotgun
     }
+    
+    [Header("Basic Gun Stats")]
+    [SerializeField] private float _defaultDamage;
+    [SerializeField] private int _defaultMaxAmmo;
+    [SerializeField] private float _defaultRange;
+    [SerializeField] private float _defaultIntervalTime;
+    [SerializeField] private AnimationCurve _damageByDistance;
+    
+    [Space] 
+    [Header("Gun Keys")]
+    [SerializeField] private KeyCode _shootKey;
+    [SerializeField] private KeyCode _reloadKey;
+    
+    [Space] 
+    [Header("Need Refactor")]
+    [SerializeField] protected ParticleSystem _shootParticles;
+    [SerializeField] protected Recoil _recoil;
+    [SerializeField] protected GameObject _hitParticles;
+    [SerializeField] private GunModulesConfig _thisGunModuleConfig;
+    
+    private float _damage;
+    private int _maxAmmo;
+    private float _intervalTime;
+    protected float _range;
 
+    protected int _currentAmmo;    
+    protected bool _isCanShoot = true;
+    protected Camera _playerCamera;
+    protected BulletHolesPool _holePool;
+    private SupportModule _supportModule;
+    protected Bullet _bullet;
+
+
+    public GunModulesConfig ThisGunModuleConfig => _thisGunModuleConfig;
+    
     public float GetDamage() => _defaultDamage;
     public int GetAmmo() => _defaultMaxAmmo;
     public float GetRange() => _defaultRange;
@@ -59,19 +69,12 @@ public abstract class Gun : MonoBehaviour
             _intervalTime = interval;
     }
 
-    public void CalculateCharacteristics()
-    {
-        _supportModule.CalculateModuleCharacteristics();
-        _damage *= _bullet.GetAdditionalDamage();
-        _currentAmmo = _maxAmmo;
-    }
-
     private void Start()
     {
         _currentAmmo = _defaultMaxAmmo;
-        _playerCamera = FindObjectOfType<Camera>();  
-        _shootParticles = GetComponentInChildren<ParticleSystem>();
-        _recoil = FindObjectOfType<Recoil>();
+        _playerCamera = Camera.main; 
+        //_shootParticles = GetComponentInChildren<ParticleSystem>();
+        //_recoil = FindObjectOfType<Recoil>();
         _holePool = FindObjectOfType<BulletHolesPool>();
         _supportModule = new NullModule(this, GunType.Rifle, _recoil);
         //_supportModule = new ExtendedMag(this, GunType.Rifle, _recoil);
@@ -80,41 +83,57 @@ public abstract class Gun : MonoBehaviour
         _bullet = new DefaultBullet();
         CalculateCharacteristics();
     }
+    
+    private void Update()
+    {
+        if (Input.GetKey(_shootKey) && (_isCanShoot))
+        {
+            TryShoot();
+            StartCoroutine(IntervalBetweenShoots());
+        }
+        
+        if (Input.GetKeyDown(_reloadKey) && _currentAmmo != _maxAmmo)
+        {
+            Reload();
+        }
+    }
 
-    protected bool IsOutOfAmmo() => _currentAmmo-- <= 0;
-   
-    public abstract void TryShoot();
+    private bool IsOutOfAmmo() => _currentAmmo-- <= 0;
 
-    public void Reload()
+    protected virtual void TryShoot()
+    {
+        if (IsOutOfAmmo())
+        {
+            return;
+        }
+        
+        _shootParticles.Play();
+        _recoil.RecoilFire();
+    }
+
+    private void Reload()
     {
         _isCanShoot = false;
-        ////
-        ///
-        ///
+        //StartReloadAnim();
         _currentAmmo = _maxAmmo;
         _isCanShoot = true;
+    }
+    
+    private void CalculateCharacteristics()
+    {
+        _supportModule.CalculateModuleCharacteristics();
+        _damage *= _bullet.GetAdditionalDamage();
+        //Refactor?
+        _currentAmmo = _maxAmmo;
     }
 
     protected float CalculateDamage(float len) => Mathf.Clamp01(_damageByDistance.Evaluate(len / _range)) * _damage;
 
-    protected IEnumerator Interval()
+    private IEnumerator IntervalBetweenShoots()
     {
         _isCanShoot = false;
         yield return new WaitForSeconds(_intervalTime);
         _isCanShoot = true;
     }
-    
 
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Mouse0) && (_isCanShoot))
-        {
-            TryShoot();
-            StartCoroutine(Interval());
-        }
-        if (Input.GetKeyDown(KeyCode.R) && _currentAmmo != _maxAmmo)
-        {
-            Reload();
-        }
-    }
 }

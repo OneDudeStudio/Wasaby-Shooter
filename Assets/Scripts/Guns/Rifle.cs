@@ -3,34 +3,53 @@ using UnityEngine;
 
 public class Rifle : Gun
 {
-    private bool _checker = true;
-    [SerializeField] protected AudioClip clip1;
-    [SerializeField] protected AudioClip clip2;
-    [SerializeField] protected AudioSource _source;
-    public override void TryShoot()
+    //refactor
+    //private bool _shootAudioClipChecker = true;
+    //[SerializeField] protected AudioClip clip1;
+    //[SerializeField] protected AudioClip clip2;
+    //[SerializeField] protected AudioSource _source;
+    
+
+    protected override void TryShoot()
     {
-        if (IsOutOfAmmo())
-            return;
-        if (_checker)
-            _source.PlayOneShot(clip1);
-        else
-            _source.PlayOneShot(clip2);
-        _checker = !_checker;
-        _shootParticles.Play();
-        _recoil.RecoilFire();
-        
+        base.TryShoot();
+
+       //if (_shootAudioClipChecker)
+       //{
+       //    _source.PlayOneShot(clip1);
+       //}
+
+       //else
+       //{
+       //    _source.PlayOneShot(clip2);
+       //}
+
+       //_shootAudioClipChecker = !_shootAudioClipChecker;
+       
         if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out RaycastHit hit, _range))
         {
             Instantiate(_hitParticles, hit.point, Quaternion.LookRotation(hit.normal));
+            
             if (hit.transform.TryGetComponent(out IApplyableDamage damaged))
             {
-                if (!damaged.TryApplyDamage(CalculateDamage(hit.distance)))
-                    return;
-                //_bullet.ShootBullet(damaged);
-                return;
+                damaged.TryApplyDamage(CalculateDamage(hit.distance));
+                
+               //if (!damaged.TryApplyDamage(CalculateDamage(hit.distance)))
+               //{
+               //    return;
+               //}
+               
+               //Refactor
+               if (damaged != null)
+               {
+                   _bullet.ShootBullet(damaged);
+               }
+               return;
             }
+            
             _holePool.AddHole(hit);
-        }        
+        }    
+        
     }
 }
 
