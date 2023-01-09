@@ -26,6 +26,8 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] protected ParticleSystem _shootParticles;
     [SerializeField] protected Recoil _recoil;
     [SerializeField] protected GameObject _hitParticles;
+
+    [SerializeField] protected GunConfig _thisGunConfig;
     [SerializeField] private GunModulesConfig _thisGunModuleConfig;
     
     private float _damage;
@@ -82,6 +84,9 @@ public abstract class Gun : MonoBehaviour
         //_bullet = new ElectricBullet();
         _bullet = new DefaultBullet();
         CalculateCharacteristics();
+
+        DefaultGun d =_thisGunConfig.riffle;
+        d._defaultDamage = 1;
     }
     
     private void Update()

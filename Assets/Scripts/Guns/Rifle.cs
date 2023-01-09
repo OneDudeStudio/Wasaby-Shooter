@@ -8,7 +8,6 @@ public class Rifle : Gun
     //[SerializeField] protected AudioClip clip1;
     //[SerializeField] protected AudioClip clip2;
     //[SerializeField] protected AudioSource _source;
-    
 
     protected override void TryShoot()
     {
@@ -45,8 +44,7 @@ public class Rifle : Gun
                    _bullet.ShootBullet(damaged);
                }
                return;
-            }
-            
+            }            
             _holePool.AddHole(hit);
         }    
         
