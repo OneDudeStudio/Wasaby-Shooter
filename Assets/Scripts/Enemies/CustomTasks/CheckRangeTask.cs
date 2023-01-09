@@ -18,6 +18,5 @@ namespace Enemies.CustomTasks{
 			float distance = Vector3.Distance(Origin.value.position, Target.value.position);
 			return distance <= Range.value;
 		}
-
 	}
 }
