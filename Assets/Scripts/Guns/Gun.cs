@@ -28,7 +28,7 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] protected GameObject _hitParticles;
 
     [SerializeField] protected GunConfig _thisGunConfig;
-    [SerializeField] private GunModulesConfig _thisGunModuleConfig;
+    //[SerializeField] private GunModulesConfig _thisGunModuleConfig;
     
     private float _damage;
     private int _maxAmmo;
@@ -43,7 +43,7 @@ public abstract class Gun : MonoBehaviour
     protected Bullet _bullet;
 
 
-    public GunModulesConfig ThisGunModuleConfig => _thisGunModuleConfig;
+    //public GunModulesConfig ThisGunModuleConfig => _thisGunModuleConfig;
     
     public float GetDamage() => _defaultDamage;
     public int GetAmmo() => _defaultMaxAmmo;
@@ -85,9 +85,34 @@ public abstract class Gun : MonoBehaviour
         _bullet = new DefaultBullet();
         CalculateCharacteristics();
 
-        DefaultGun d =_thisGunConfig.riffle;
-        d._defaultDamage = 1;
+        //DefaultGun d =_thisGunConfig.Riffle;
+        //d._defaultDamage = 1;
     }
+
+
+    protected void SetNewGunStats()
+    {
+        
+    }
+
+    protected void SetNewGunDamage(float damageMultiplier)
+    {
+        _damage = _thisGunConfig._defaultDamage;
+        _damage *= damageMultiplier;
+    }
+
+    protected void SetNewGunRange(float rangeMultiplier)
+    {
+        _range = _thisGunConfig._defaultRange;
+        _range *= rangeMultiplier;
+    }
+
+    protected void SetNewGunMag(int magMultiplier)
+    {
+        _maxAmmo = _thisGunConfig._defaultMaxAmmo;
+        _maxAmmo += magMultiplier;
+    }
+    
     
     private void Update()
     {
