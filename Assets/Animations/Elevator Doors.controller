@@ -112,7 +112,7 @@ AnimatorController:
   m_Name: Elevator Doors
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: openigDoors
+  - m_Name: openingDoors
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -195,7 +195,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: openigDoors
+    m_ConditionEvent: openingDoors
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8255772624354634401}

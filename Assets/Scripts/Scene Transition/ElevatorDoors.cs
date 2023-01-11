@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ElevatorDoors : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Animator _componentAnimator;
+
     void Start()
     {
-        
+        _componentAnimator = GetComponent<Animator>();
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        _componentAnimator.SetTrigger("openingDoors");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        _componentAnimator.SetTrigger("closingDoors");
     }
+    
 }
