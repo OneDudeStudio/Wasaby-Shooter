@@ -27,7 +27,7 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
 
     private Dictionary<Type, bool> _isApplyableEffect = new Dictionary<Type, bool>();
 
-    
+
 
     private void Start()
     {
@@ -84,7 +84,7 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
     {
         StartCoroutine(Freeze());
     }
-    
+
     private IEnumerator Freeze()
     {
         _isFreeze = true;
@@ -110,14 +110,14 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
         }
         _isBurning = false;
     }
-    
+
 
     private void CheckEffects()
     {
         foreach (Type type in GetType().GetInterfaces())
         {
             _isApplyableEffect.Add(type, true);
-        }        
+        }
     }
 
     public void Poison(float damage)
@@ -125,7 +125,7 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
         if (_isCanPoisoned)
         {
             StartCoroutine(PoisonInterval());
-            TryApplyDamage(damage);            
+            TryApplyDamage(damage);
         }
     }
     private IEnumerator PoisonInterval()

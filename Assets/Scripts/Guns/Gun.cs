@@ -92,7 +92,11 @@ public abstract class Gun : MonoBehaviour
 
     protected void SetNewGunStats()
     {
-        
+        float dmg = _thisGunConfig._defaultDamage;
+
+        /// modify 
+
+        _damage = dmg;
     }
 
     protected void SetNewGunDamage(float damageMultiplier)

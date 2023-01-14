@@ -11,13 +11,22 @@ public class GunConfig : ScriptableObject
     public int _defaultMaxAmmo;
     public float _defaultRange;
     public float _defaultIntervalTime;
+    public Vector3 _defaultRecoil;
+    public float _defaultReturnSpeed;
+    public float _defaultSnappines;
+
     public AnimationCurve _damageByDistance;
     
-    [Header("Potential Gun Modules")] 
-    public RangeModule rangeModule;
-    public TestDamageModule damageModule;
-    public SupportModule supportModule;
     
+    [Header("Potential Gun Modules")] 
+    [SerializeField] private DamageModule _damageModule;
+    [SerializeField] private ExtendedMag _extendedMagModule;
+    [SerializeField] private RangeModule _rangeModule;
+
+    public DamageModule Damage => _damageModule;
+    public ExtendedMag Mag => _extendedMagModule;
+    public RangeModule Range => _rangeModule;
+
     [Serializable]
     public class Module
     {
@@ -25,28 +34,23 @@ public class GunConfig : ScriptableObject
     }
 
     [Serializable]
-    public class TestDamageModule : Module
+    public class DamageModule : Module
     {
-        public float DamageMultiplier;
+        public float DamagePrecentMultiplier;
+        public float AdditionalRange;
     }
 
     [Serializable]
-    public class RangeModule : Module
+    public class ExtendedMag : Module
     {
-        public float multiplier;
-        public float rangePersentMultiplier;
-        
-        //public float SetNewRange(float range)
-        //{
-        //    return range *= multiplier;
-        //}
+        public int AdditioanalAmmo;
     }
     
     [Serializable]
-    public class SupportModule : Module
+    public class RangeModule : Module
     {
-        public float multiplier;
-        public float rangePersentMultiplier;
+        public float DamagePrecentMultiplier;
+        public float AdditionalRange;
     }
 
 }
