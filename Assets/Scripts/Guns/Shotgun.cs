@@ -10,10 +10,13 @@ public class Shotgun : Gun
 
     protected override void TryShoot()
     {
-        base.TryShoot();
-       //if (IsOutOfAmmo())
-       //    return;
-       // _source.PlayOneShot(clip1);
+        if (!TryDecreaseAmmo())
+        {
+            return;
+        }
+        //if (IsOutOfAmmo())
+        //    return;
+        // _source.PlayOneShot(clip1);
         for (int i = 0; i < _pelletCount; i++)
         {
             if (Physics.Raycast(_playerCamera.transform.position, GaussDirection(), out RaycastHit hit, _range))

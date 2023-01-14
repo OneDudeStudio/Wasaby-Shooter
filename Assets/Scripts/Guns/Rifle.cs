@@ -11,7 +11,10 @@ public class Rifle : Gun
 
     protected override void TryShoot()
     {
-        base.TryShoot();
+        if(!TryDecreaseAmmo())
+        {
+            return;
+        }
 
        //if (_shootAudioClipChecker)
        //{

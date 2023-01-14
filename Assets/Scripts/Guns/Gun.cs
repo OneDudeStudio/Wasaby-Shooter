@@ -134,16 +134,18 @@ public abstract class Gun : MonoBehaviour
 
     private bool IsOutOfAmmo() => _currentAmmo-- <= 0;
 
-    protected virtual void TryShoot()
+    protected bool TryDecreaseAmmo()
     {
         if (IsOutOfAmmo())
         {
-            return;
+            return false;
         }
-        
+
         _shootParticles.Play();
         _recoil.RecoilFire();
+        return true;
     }
+    protected abstract void TryShoot();  
 
     private void Reload()
     {
