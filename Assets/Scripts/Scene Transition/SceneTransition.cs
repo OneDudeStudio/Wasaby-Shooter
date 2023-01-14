@@ -32,9 +32,11 @@ public class SceneTransition : MonoBehaviour
 
         if (_shouldPlayOpeningAnimation)
         {
+            
             _componentAnimator.SetTrigger("SceneOpening");
             _instanceSceneTransition._loadingProgressBar.fillAmount = 1;
             _shouldPlayOpeningAnimation = false;
+            
         }
     }
 
@@ -42,8 +44,10 @@ public class SceneTransition : MonoBehaviour
     {
         if (_loadingSceneOperation != null)
         {
+            
             _loadingPercentage.text = Mathf.RoundToInt(_loadingSceneOperation.progress * 100) + "%";
             _loadingProgressBar.fillAmount = _loadingSceneOperation.progress;
+            
         }
     }
 
