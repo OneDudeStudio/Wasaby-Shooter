@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +10,8 @@ namespace Enemies
         [SerializeField] protected float speedModifier = 1;
 
         private NavMeshAgent _navMeshAgent;
+
+        public event Action Died;
 
         private void Awake()
         {
@@ -25,6 +28,11 @@ namespace Enemies
         public void SetSpeed(float speed)
         {
             _navMeshAgent.speed = _navMeshAgent.acceleration = speed * speedModifier;
+        }
+
+        public void Die()
+        {
+            Died?.Invoke();
         }
     }
 }
