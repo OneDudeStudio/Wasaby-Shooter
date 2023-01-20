@@ -8,6 +8,7 @@ namespace Enemies
     {
         [SerializeField] private List<EnemySquadInfo> _infos;
         [SerializeField] private EnemySpawner _enemySpawner;
+        [SerializeField] private EnemyDetector _enemyDetector;
         
         private bool _started;
         private int _currentSquadIndex;
@@ -15,7 +16,7 @@ namespace Enemies
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent(out PlayerManager playerManager) && !_started)
+            if(other.TryGetComponent(out PlayerManager _) && !_started)
                 StartScenario();
         }
         
@@ -32,9 +33,11 @@ namespace Enemies
 
             if (_currentSquadEnemiesCount != 0) 
                 return;
-            
-            if(_currentSquadIndex != _infos.Count)
+
+            if (_currentSquadIndex != _infos.Count)
                 SpawnSquad();
+            else
+                _enemyDetector.PlayerDetected = false;
         }
 
         private void SpawnSquad()

@@ -260,6 +260,7 @@ MonoBehaviour:
     - {fileID: 1865260288}
     - {fileID: 371192022}
   _enemySpawner: {fileID: 2130557713}
+  _enemyDetector: {fileID: 2114871642}
 --- !u!1 &371192021
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,6 +438,80 @@ RectTransform:
   m_AnchoredPosition: {x: 225, y: 25}
   m_SizeDelta: {x: 450, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &500749924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500749925}
+  - component: {fileID: 500749927}
+  - component: {fileID: 500749926}
+  m_Layer: 0
+  m_Name: BattleTrigger (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &500749925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500749924}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.0661678, y: -14.473596, z: -16.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1932248881}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &500749926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500749924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de8293798bb482a8657df572f8cb0cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _infos:
+  - _strikingEnemyCount: 2
+    _explodingEnemyCount: 2
+    _points:
+    - {fileID: 1811027356}
+    - {fileID: 175283011}
+    - {fileID: 1865260288}
+    - {fileID: 371192022}
+  - _strikingEnemyCount: 4
+    _explodingEnemyCount: 0
+    _points:
+    - {fileID: 1811027356}
+    - {fileID: 175283011}
+    - {fileID: 1865260288}
+    - {fileID: 371192022}
+  _enemySpawner: {fileID: 2130557713}
+  _enemyDetector: {fileID: 2114871642}
+--- !u!65 &500749927
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500749924}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 14.495499, y: 2.4704528, z: 1}
+  m_Center: {x: 0.6707592, y: 0.7352265, z: 0}
 --- !u!1 &504716072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,6 +1188,7 @@ Transform:
   - {fileID: 963154903}
   - {fileID: 2114871641}
   - {fileID: 1940963193}
+  - {fileID: 500749925}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
