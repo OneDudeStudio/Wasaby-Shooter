@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 7202442099099083611}
   - component: {fileID: 7202442099099083610}
   - component: {fileID: 7202442099099083609}
-  - component: {fileID: 7202442099099083601}
   m_Layer: 0
   m_Name: StrikingEnemy
   m_TagString: Untagged
@@ -33,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 7202442099099083608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.1594114, y: 0.6259981, z: -7.880463}
-  m_LocalScale: {x: 1, y: 0.626, z: 1}
+  m_LocalScale: {x: 1, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -188,20 +187,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  speedModifier: 1
-  _damage: 5
---- !u!114 &7202442099099083601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7202442099099083608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa6cab6303e1d2c42b2c4a178c379ade, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 9
   _hitMaterial: {fileID: 2100000, guid: a412690647998804aac311a00150d816, type: 2}
-  _isBurning: 0
+  _health: 4
+  _damage: 5

@@ -10,7 +10,7 @@ namespace Enemies
         public override void Attack(IApplyableDamage player)
         {
             player.TryApplyDamage(_damage);
-            Destroy(gameObject);
+            Die();
 
             Instantiate(_explosion, transform.position, Quaternion.identity);
         }
