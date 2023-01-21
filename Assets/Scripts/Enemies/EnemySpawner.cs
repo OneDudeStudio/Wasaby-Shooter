@@ -8,27 +8,23 @@ namespace Enemies
     {
         [SerializeField] private EnemyFactory _enemyFactory;
 
-        private BattleScenario _battleScenario;
-
-        public void SetBattleScenario(BattleScenario scenario)
-        {
-            _battleScenario = scenario;
-        }
-
-        public void SpawnSquad(EnemySquad squad, List<Transform> points)
+        public List<Enemy> SpawnSquad(EnemySquad squad, List<Transform> points)
         {
             int index = 0;
-            
+            var enemies = new List<Enemy>();
+
             foreach (var enemy in squad.GetEnemies())
             {
                 for (var i = 0; i < enemy.Value; i++)
                 {
                     if (index == points.Count)
-                        return;
+                        return null;
                     
-                    Spawn(enemy.Key, points[index++].position);
+                    enemies.Add(Spawn(enemy.Key, points[index++].position));
                 }
             }
+
+            return enemies;
         }
 
         private void Spawn(EnemyType type, Vector3 position, int count)
@@ -37,15 +33,17 @@ namespace Enemies
                 Spawn(type, position);
         }
 
-        private void Spawn(EnemyType type, Vector3 position)
+        private Enemy Spawn(EnemyType type, Vector3 position)
         {
             var enemy = _enemyFactory.Get(type);
 
-            if (_battleScenario)
-                enemy.Died += _battleScenario.ChangeScenario;
-
             if (NavMesh.SamplePosition(position, out NavMeshHit hit, 1f, NavMesh.AllAreas))
+            {
                 enemy.transform.position = position;
+                return enemy;
+            }
+            
+            return null;
         }
     }
 }

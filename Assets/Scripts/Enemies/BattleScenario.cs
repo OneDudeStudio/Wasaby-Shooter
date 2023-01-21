@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +22,6 @@ namespace Enemies
         private void StartScenario()
         {
             _started = true;
-            _enemySpawner.SetBattleScenario(this);
             SpawnSquad();
         }
 
@@ -48,8 +46,19 @@ namespace Enemies
             List<Transform> points = info.Points;
             _currentSquadEnemiesCount = info.EnemiesCount;
             
-            _enemySpawner.SpawnSquad(squad, points);
+            var enemies = _enemySpawner.SpawnSquad(squad, points);
+            InitializeEnemies(enemies);
+            
             _currentSquadIndex++;
+        }
+
+        private void InitializeEnemies(List<Enemy> enemies)
+        {
+            foreach (var enemy in enemies)
+            {
+                enemy.Died += ChangeScenario;
+                enemy.Damaged += () => _enemyDetector.PlayerDetected = true;
+            }
         }
     }
 }

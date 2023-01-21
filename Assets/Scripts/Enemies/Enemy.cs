@@ -8,19 +8,19 @@ namespace Enemies
     public abstract class Enemy : MonoBehaviour, IApplyableDamage
     {
         [SerializeField] protected float speed;
-
         [SerializeField] private Material _hitMaterial;
-
         [SerializeField] private float _health;
-        
+
         private Renderer _renderer;
         private Material _defaultMaterial;
         
         private bool _canApplyDamage = true;
+        private float _maxHealth;
 
         private NavMeshAgent _navMeshAgent;
 
         public event Action Died;
+        public event Action Damaged;
 
         private void Awake()
         {
@@ -30,6 +30,7 @@ namespace Enemies
 
         private void Start()
         {
+            _maxHealth = _health;
             _defaultMaterial = _renderer.material;
             SetSpeed(speed);
         }
@@ -45,8 +46,13 @@ namespace Enemies
         {
             if (!_canApplyDamage)
                 return false;
+
             if (damage < 0)
                 return true;
+
+            if(Math.Abs(_health - _maxHealth) < 1e-5)
+                Damaged?.Invoke();
+
             _health -= damage;
             if (_health <= 0)
             {
