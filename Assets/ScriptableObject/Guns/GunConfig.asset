@@ -12,27 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a333f9ce82fb14a98318870af57d3f, type: 3}
   m_Name: GunConfig
   m_EditorClassIdentifier: 
-  _defaultDamage: 456
-  _defaultMaxAmmo: 654
-  _defaultRange: 6
-  _defaultIntervalTime: 7
-  _defaultRecoil: {x: 0, y: 0, z: 0}
-  _defaultReturnSpeed: 0
-  _defaultSnappines: 0
+  _defaultDamage: 5
+  _defaultMaxAmmo: 20
+  _defaultRange: 30
+  _defaultIntervalTime: 0.16
   _damageByDistance:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.0000012841141
+      outSlope: -0.0000012841141
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.04641694
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.3451679
+      outSlope: -3.3451679
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.0333876
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _defaultRecoil: {x: -12, y: 7, z: 0.7}
+  _defaultReturnSpeed: 10
+  _defaultSnappines: 10
+  _defaultPositionRecoil: {x: 0.01, y: 0.01, z: -0.2}
+  _defaultPositionReturnSpeed: 10
+  _defaultPositionSnappines: 20
   _damageModule:
-    isActive: 0
-    DamagePrecentMultiplier: 10
+    DamagePrecentMultiplier: 15
     AdditionalRange: -5
   _extendedMagModule:
-    isActive: 0
-    AdditioanalAmmo: 0
+    AdditioanalAmmo: 5
   _rangeModule:
-    isActive: 0
-    DamagePrecentMultiplier: 0
-    AdditionalRange: 0
+    DamagePrecentMultiplier: -20
+    AdditionalRange: 5

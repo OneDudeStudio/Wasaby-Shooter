@@ -1,17 +1,8 @@
-using System.Collections.Generic;
-
-public class ExtendedMag : SupportModule
+public class ExtendedMag : GunModule
 {
-    //add n bullets to default magazine
-    private readonly Dictionary<Gun.GunType, int> _addedAmmo = new Dictionary<Gun.GunType, int>()
+    public ExtendedMag(Gun gun) : base(gun)
     {
-        { Gun.GunType.Rifle, 10},
-        { Gun.GunType.Shotgun, 5}
-    };
-
-    public ExtendedMag(Gun gun, Gun.GunType type, Recoil recoil) : base(gun, type, recoil)
-    {
+        _gunModifiers.Add(new AmmoModifier(gun.ThisGunConfig.Mag.AdditioanalAmmo));
     }
 
-    public override void ModifyMag(int maxAmmo) => _gun.SetAmmo(maxAmmo + _addedAmmo[_gunType]);
 }

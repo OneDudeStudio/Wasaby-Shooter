@@ -6,18 +6,25 @@ using UnityEngine;
 
 public class GunConfig : ScriptableObject
 {
-    [Header("Stats")]
+    [Header("Gun Stats")]
     public float _defaultDamage;
     public int _defaultMaxAmmo;
     public float _defaultRange;
     public float _defaultIntervalTime;
+    public AnimationCurve _damageByDistance;
+
+    [Space]
+    [Header("Recoil Stats")]
     public Vector3 _defaultRecoil;
     public float _defaultReturnSpeed;
     public float _defaultSnappines;
+    public Vector3 _defaultPositionRecoil;
+    public float _defaultPositionReturnSpeed;
+    public float _defaultPositionSnappines;
 
-    public AnimationCurve _damageByDistance;
-    
-    
+
+
+    [Space]
     [Header("Potential Gun Modules")] 
     [SerializeField] private DamageModule _damageModule;
     [SerializeField] private ExtendedMag _extendedMagModule;
@@ -28,26 +35,25 @@ public class GunConfig : ScriptableObject
     public RangeModule Range => _rangeModule;
 
     [Serializable]
-    public class Module
+    public class ModuleConfig
     {
-        public bool isActive;
     }
 
     [Serializable]
-    public class DamageModule : Module
+    public class DamageModule : ModuleConfig
     {
         public float DamagePrecentMultiplier;
         public float AdditionalRange;
     }
 
     [Serializable]
-    public class ExtendedMag : Module
+    public class ExtendedMag : ModuleConfig
     {
         public int AdditioanalAmmo;
     }
     
     [Serializable]
-    public class RangeModule : Module
+    public class RangeModule : ModuleConfig
     {
         public float DamagePrecentMultiplier;
         public float AdditionalRange;
