@@ -13,7 +13,7 @@ namespace Enemies
 
         private Renderer _renderer;
         private Material _defaultMaterial;
-        
+
         private bool _canApplyDamage = true;
         private float _maxHealth;
 
@@ -60,21 +60,45 @@ namespace Enemies
                 _canApplyDamage = false;
                 return false;
             }
-            StartCoroutine(hit());
+            StartCoroutine(Hit());
             return true;
         }
         
-        private IEnumerator hit()
+        private IEnumerator Hit()
         {
             _renderer.material = _hitMaterial;
             yield return new WaitForSeconds(.05f);
             _renderer.material = _defaultMaterial;
+
+            StartCoroutine(nameof(Push));
+        }
+
+        private IEnumerator Push()
+        {
+            Vector3 start = transform.position;
+            Vector3 direction = (start - FindObjectOfType<PlayerManager>().transform.position).normalized * 1.5f;
+            Vector3 end = new Vector3((start + direction).x, start.y, (start + direction).z);
+
+            float pushTime = 0.5f;
+            float timer = pushTime;
+            
+            _navMeshAgent.isStopped = true;
+            
+            while (timer > 0)
+            {
+                float interpolant = (pushTime - timer) / pushTime;
+                transform.position = Vector3.Lerp(start, end, interpolant);
+                timer -= Time.deltaTime;
+                yield return null;
+            }
+            
+            _navMeshAgent.isStopped = false;
         }
 
         public void Die()
         {
-            Destroy(gameObject);
             Died?.Invoke();
+            Destroy(gameObject);
         }
     }
 }

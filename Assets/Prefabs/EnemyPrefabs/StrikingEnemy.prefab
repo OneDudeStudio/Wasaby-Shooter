@@ -188,5 +188,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   _hitMaterial: {fileID: 2100000, guid: a412690647998804aac311a00150d816, type: 2}
-  _health: 4
+  _health: 15
   _damage: 5

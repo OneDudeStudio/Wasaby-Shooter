@@ -130,10 +130,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7063154861225871602}
     m_Modifications:
+    - target: {fileID: 8130549217695923748, guid: 0d7238af137ca21449fb056414034f12, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130549218782786354, guid: 0d7238af137ca21449fb056414034f12, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130549219293918956, guid: 0d7238af137ca21449fb056414034f12, type: 3}
+      propertyPath: _gun
+      value: 
+      objectReference: {fileID: 1223131213}
     - target: {fileID: 8130549219293918956, guid: 0d7238af137ca21449fb056414034f12, type: 3}
       propertyPath: _targetToRecoilEffect
       value: 
       objectReference: {fileID: 7063154861225871602}
+    - target: {fileID: 8130549219293918957, guid: 0d7238af137ca21449fb056414034f12, type: 3}
+      propertyPath: ThisGunConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: b0ad5ec0f510f614cac65d8b104913b9, type: 2}
     - target: {fileID: 8130549219293918958, guid: 0d7238af137ca21449fb056414034f12, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -852,6 +868,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1223131213 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8130549219293918957, guid: 0d7238af137ca21449fb056414034f12, type: 3}
+  m_PrefabInstance: {fileID: 86588208}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150addeb05c5aac4985df3d96f922110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1367508063 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8130549219293918958, guid: 0d7238af137ca21449fb056414034f12, type: 3}

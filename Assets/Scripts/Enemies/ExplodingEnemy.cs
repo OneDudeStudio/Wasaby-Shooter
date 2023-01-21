@@ -11,7 +11,6 @@ namespace Enemies
         {
             player.TryApplyDamage(_damage);
             Die();
-
             Instantiate(_explosion, transform.position, Quaternion.identity);
         }
     }
