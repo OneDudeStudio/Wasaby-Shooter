@@ -21,6 +21,7 @@ namespace Enemies
         
         private void StartScenario()
         {
+            _enemyDetector.PlayerDetected = false;
             _started = true;
             SpawnSquad();
         }
@@ -45,7 +46,7 @@ namespace Enemies
             EnemySquad squad = info.Squad;
             List<Transform> points = info.Points;
             _currentSquadEnemiesCount = info.EnemiesCount;
-            
+
             var enemies = _enemySpawner.SpawnSquad(squad, points);
             InitializeEnemies(enemies);
             

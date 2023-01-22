@@ -33,6 +33,7 @@ namespace Enemies
             _maxHealth = _health;
             _defaultMaterial = _renderer.material;
             SetSpeed(speed);
+            _navMeshAgent.enabled = true;
         }
 
         public abstract void Attack(IApplyableDamage player);

@@ -40,6 +40,7 @@ namespace Enemies
             if (NavMesh.SamplePosition(position, out NavMeshHit hit, 1f, NavMesh.AllAreas))
             {
                 enemy.transform.position = position;
+
                 return enemy;
             }
             
