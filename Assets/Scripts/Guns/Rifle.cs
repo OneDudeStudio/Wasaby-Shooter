@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class Rifle : Gun
@@ -19,17 +20,6 @@ public class Rifle : Gun
             if (hit.transform.TryGetComponent(out IApplyableDamage damaged))
             {
                 damaged.TryApplyDamage(CalculateDamage(hit.distance));
-                
-               //if (!damaged.TryApplyDamage(CalculateDamage(hit.distance)))
-               //{
-               //    return;
-               //}
-               
-               //Refactor
-               if (damaged != null)
-               {
-                   _bullet.ShootBullet(damaged);
-               }
                return;
             }            
             _holePool.AddHole(hit);
@@ -47,7 +37,7 @@ public interface IApplyableDamage
 }
 public interface IApplyableEffect
 {
-    public void ApplyEffect(Type type);
+    
 }
 
 public interface IApplyableBurning : IApplyableEffect
@@ -57,6 +47,8 @@ public interface IApplyableBurning : IApplyableEffect
 public interface IApplyableFreeze : IApplyableEffect
 {
     public void StartFreeze();
+    public void ModifySpeed(float modifier);
+    public void ResetSpeed();
 }
 public interface IApplyablePoison : IApplyableEffect
 {

@@ -141,4 +141,14 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
         if (isStartPoint)
             GlobalEventManager.SendLightningChain(transform);
     }
+
+    public void ModifySpeed(float modifier)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ResetSpeed()
+    {
+        throw new NotImplementedException();
+    }
 }

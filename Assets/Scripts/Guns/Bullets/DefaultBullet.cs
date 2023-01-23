@@ -4,7 +4,7 @@ public class DefaultBullet : Bullet
     {
         _additionalDamagePrecent = 0;
     }
-    public override void ShootBullet(IApplyableDamage target)
-    {
-    }
+    //public override void ShootBullet(IApplyableDamage target)
+    //{
+    //}
 }

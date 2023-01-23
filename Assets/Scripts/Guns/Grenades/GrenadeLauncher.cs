@@ -19,11 +19,11 @@ public class GrenadeLauncher : MonoBehaviour
     private readonly Dictionary<Type, float> _interval = new Dictionary<Type, float>()
     {
         //poison grenade cooldown
-        { typeof(PoisonGrenade), 2f},
+        { typeof(PoisonGrenade), 5f},
         //explosion grenade cooldown
-        { typeof(DefaultExplosionGrenade), 2f},
+        { typeof(DefaultExplosionGrenade), 5f},
         //flash grenade cooldown
-        { typeof(FlashGrenade), 2f }
+        { typeof(FlashGrenade), 5f }
     };
 
     private void Start()

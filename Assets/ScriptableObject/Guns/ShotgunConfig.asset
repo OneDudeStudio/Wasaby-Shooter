@@ -9,48 +9,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22a333f9ce82fb14a98318870af57d3f, type: 3}
-  m_Name: GunConfig
+  m_Script: {fileID: 11500000, guid: b476b2ee957139a4aa373a9f4401f448, type: 3}
+  m_Name: ShotgunConfig
   m_EditorClassIdentifier: 
-  _defaultDamage: 5
-  _defaultMaxAmmo: 20
-  _defaultRange: 30
-  _defaultIntervalTime: 0.16
+  _defaultDamage: 1
+  _defaultMaxAmmo: 5
+  _defaultRange: 12
+  _defaultIntervalTime: 0.7
   _damageByDistance:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -0.0000012841141
-      outSlope: -0.0000012841141
+      inSlope: -0.08021596
+      outSlope: -0.08021596
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.04641694
+      outWeight: 0.41123778
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -3.3451679
-      outSlope: -3.3451679
+      inSlope: -3.267949
+      outSlope: -3.267949
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.0333876
+      inWeight: 0.027687311
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _defaultRecoil: {x: -15, y: 9, z: 0.9}
-  _defaultReturnSpeed: 10
-  _defaultSnappines: 15
-  _defaultPositionRecoil: {x: 0.01, y: 0.01, z: -0.2}
-  _defaultPositionReturnSpeed: 10
-  _defaultPositionSnappines: 20
+  _defaultRecoil: {x: -20, y: 9, z: 0.9}
+  _defaultReturnSpeed: 4
+  _defaultSnappines: 10
+  _defaultPositionRecoil: {x: 0.05, y: 0.05, z: -0.5}
+  _defaultPositionReturnSpeed: 4
+  _defaultPositionSnappines: 40
   _damageModule:
     DamagePrecentMultiplier: 15
-    AdditionalRange: -5
+    AdditionalRange: -2
   _extendedMagModule:
-    AdditioanalAmmo: 5
+    AdditioanalAmmo: 2
   _rangeModule:
     DamagePrecentMultiplier: -20
-    AdditionalRange: 5
+    AdditionalRange: 3
+  PelletCount: 15
+  Variance: 0.4

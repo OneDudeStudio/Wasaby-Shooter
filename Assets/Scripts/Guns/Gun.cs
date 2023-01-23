@@ -77,14 +77,12 @@ public abstract class Gun : MonoBehaviour
     }
 
     public Recoil Rec => _recoil;
-    private void Start()
+    protected void Start()
     {
         _playerCamera = Camera.main; 
         _holePool = FindObjectOfType<BulletHolesPool>();
         _moduleManager = new ModuleManager(this);
         _moduleManager.SetModule(typeof(NullModule));
-        //_bullet = new FireBullet();
-        //_bullet = new ElectricBullet();
         _bullet = new DefaultBullet();
         CalculateCharacteristics();
         _currentAmmo = ThisGunConfig._defaultMaxAmmo;
