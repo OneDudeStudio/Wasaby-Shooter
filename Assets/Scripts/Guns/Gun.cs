@@ -27,7 +27,7 @@ public abstract class Gun : MonoBehaviour
 
     protected Camera _playerCamera;
     protected BulletHolesPool _holePool;
-    protected Bullet _bullet;
+    protected IBullet _bullet;
     private ModuleManager _moduleManager;
 
     public float Damage
@@ -83,8 +83,8 @@ public abstract class Gun : MonoBehaviour
         _holePool = FindObjectOfType<BulletHolesPool>();
         _moduleManager = new ModuleManager(this);
         _moduleManager.SetModule(typeof(NullModule));
-        _bullet = new DefaultBullet();
-        CalculateCharacteristics();
+        _bullet = new Bullet();
+        _bullet = new EffectBullet(_bullet, new Burning());
         _currentAmmo = ThisGunConfig._defaultMaxAmmo;
     }   
     
@@ -135,13 +135,6 @@ public abstract class Gun : MonoBehaviour
         //StartReloadAnim();
         _currentAmmo = _maxAmmo;
         _isCanShoot = true;
-    }
-    
-    private void CalculateCharacteristics()
-    {
-        _damage *= _bullet.GetAdditionalDamage();
-        //Refactor?
-        _currentAmmo = _maxAmmo;
     }
 
     protected float CalculateDamage(float len) => Mathf.Clamp01(ThisGunConfig._damageByDistance.Evaluate(len / _range)) * _damage;

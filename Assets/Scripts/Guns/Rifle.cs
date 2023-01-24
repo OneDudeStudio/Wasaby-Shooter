@@ -19,7 +19,7 @@ public class Rifle : Gun
             
             if (hit.transform.TryGetComponent(out IApplyableDamage damaged))
             {
-                damaged.TryApplyDamage(CalculateDamage(hit.distance));
+                _bullet.DealDamage(damaged, CalculateDamage(hit.distance));
                return;
             }            
             _holePool.AddHole(hit);

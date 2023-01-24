@@ -1,15 +1,21 @@
-public abstract class EffectBullet : Bullet
+public class EffectBullet : IBullet
 {
-    public EffectBullet()
+    private IBullet _bullet;
+    private Effect _effect;
+
+    public EffectBullet(IBullet bullet, Effect effect)
     {
-        _additionalDamagePrecent = 0;
+        _bullet = bullet;
+        _effect = effect;
     }
 
-  //  public override void ShootBullet(IApplyableDamage target)
-  //  {
-  //      if(target is IApplyableEffect effectTarget)
-  //          ApplyBulletEffect(effectTarget);
-   // }
+    public void DealDamage(IApplyableDamage target, float damage)
+    {
+        _bullet.DealDamage(target, damage);
 
-   // public abstract void ApplyBulletEffect(IApplyableEffect effectTarget);
+        if(target is IApplyableEffect effectTarget)
+        {
+            _effect.Apply(effectTarget);
+        }
+    }
 }

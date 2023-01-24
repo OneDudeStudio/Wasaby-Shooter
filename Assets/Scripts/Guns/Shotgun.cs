@@ -26,7 +26,7 @@ public class Shotgun : Gun
                 Instantiate(_hitParticles, hit.point, Quaternion.LookRotation(hit.normal));
                 if (hit.transform.TryGetComponent(out IApplyableDamage damaged))
                 {
-                    damaged.TryApplyDamage(CalculateDamage(hit.distance));
+                    _bullet.DealDamage(damaged, CalculateDamage(hit.distance));
                 }
                 else
                     _holePool.AddHole(hit);
