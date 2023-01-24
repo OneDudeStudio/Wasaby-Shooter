@@ -84,7 +84,7 @@ public abstract class Gun : MonoBehaviour
         _moduleManager = new ModuleManager(this);
         _moduleManager.SetModule(typeof(NullModule));
         _bullet = new Bullet();
-        _bullet = new EffectBullet(_bullet, new Burning());
+       // _bullet = new EffectBullet(_bullet, new Burning());
         _currentAmmo = ThisGunConfig._defaultMaxAmmo;
     }   
     
