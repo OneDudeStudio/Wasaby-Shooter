@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using PlayerController;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,6 +19,9 @@ namespace Enemies
         private float _maxHealth;
 
         private NavMeshAgent _navMeshAgent;
+        
+        // убрать нафиг
+        private PlayerManager _playerManager;
 
         public event Action Died;
         public event Action Damaged;
@@ -30,6 +34,8 @@ namespace Enemies
 
         private void Start()
         {
+            _playerManager = FindObjectOfType<PlayerManager>();
+            
             _maxHealth = _health;
             _defaultMaterial = _renderer.material;
             SetSpeed(speed);
@@ -77,7 +83,7 @@ namespace Enemies
         private IEnumerator Push()
         {
             Vector3 start = transform.position;
-            Vector3 direction = (start - FindObjectOfType<PlayerManager>().transform.position).normalized * 1.5f;
+            Vector3 direction = (start - _playerManager.transform.position).normalized * 1.5f;
             Vector3 end = new Vector3((start + direction).x, start.y, (start + direction).z);
 
             float pushTime = 0.5f;

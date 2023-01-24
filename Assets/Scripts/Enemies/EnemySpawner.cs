@@ -20,7 +20,8 @@ namespace Enemies
                     if (index == points.Count)
                         return null;
                     
-                    enemies.Add(Spawn(enemy.Key, points[index++].position));
+                    enemies.Add(Spawn(enemy.Key, points[index].position));
+                    index = (index + 1) % points.Count;
                 }
             }
 
