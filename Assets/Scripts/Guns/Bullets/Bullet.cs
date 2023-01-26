@@ -1,7 +1,16 @@
-public abstract class Bullet
+public interface IBullet
 {
-    
-    protected float _additionalDamagePrecent = 0;
-    public abstract void ShootBullet(IApplyableDamage target);
-    public float GetAdditionalDamage() => SupportFunctions.PrecentToFloat(_additionalDamagePrecent);
+    public void DealDamage(IApplyableDamage target, float damage);
+}
+
+public class Bullet : IBullet
+{
+    private float _additionalDamagePrecent = 0f;
+
+    public void SetAdditionalDamagePrecent(int precent) => _additionalDamagePrecent = precent;
+
+    public void DealDamage(IApplyableDamage target, float damage)
+    {
+        target.TryApplyDamage(SupportFunctions.PrecentToFloat(_additionalDamagePrecent) * damage);
+    }
 }

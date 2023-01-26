@@ -1,22 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public abstract class Gun : MonoBehaviour
 {
-    public enum GunType
-    {
-        Rifle,
-        Shotgun
-    }
-    
-    [Header("Basic Gun Stats")]
-    [SerializeField] private float _defaultDamage;
-    [SerializeField] private int _defaultMaxAmmo;
-    [SerializeField] private float _defaultRange;
-    [SerializeField] private float _defaultIntervalTime;
-    [SerializeField] private AnimationCurve _damageByDistance;
-    
-    [Space] 
     [Header("Gun Keys")]
     [SerializeField] private KeyCode _shootKey;
     [SerializeField] private KeyCode _reloadKey;
@@ -25,98 +12,81 @@ public abstract class Gun : MonoBehaviour
     [Header("Need Refactor")]
     [SerializeField] protected ParticleSystem _shootParticles;
     [SerializeField] protected Recoil _recoil;
+    [SerializeField] protected GunSoundController _sound;
     [SerializeField] protected GameObject _hitParticles;
-
-    [SerializeField] protected GunConfig _thisGunConfig;
-    //[SerializeField] private GunModulesConfig _thisGunModuleConfig;
+    public GunConfig ThisGunConfig;
     
     private float _damage;
     private int _maxAmmo;
     private float _intervalTime;
     protected float _range;
 
-    protected int _currentAmmo;    
+    private int _currentAmmo;    
     protected bool _isCanShoot = true;
+
+
     protected Camera _playerCamera;
     protected BulletHolesPool _holePool;
-    private SupportModule _supportModule;
-    protected Bullet _bullet;
+    protected IBullet _bullet;
+    private ModuleManager _moduleManager;
 
+    public float Damage
+    {
+        get => ThisGunConfig._defaultDamage;
+        set
+        {
+            if (value >= 0)
+            {
+                _damage = value;
+            }
+        }
+    }
+    public int Ammo
+    {
+        get => ThisGunConfig._defaultMaxAmmo;
+        set
+        {
+            if (value > 0)
+            {
+                _maxAmmo = value;
+            }
 
-    //public GunModulesConfig ThisGunModuleConfig => _thisGunModuleConfig;
-    
-    public float GetDamage() => _defaultDamage;
-    public int GetAmmo() => _defaultMaxAmmo;
-    public float GetRange() => _defaultRange;
-    public float GetInterval() => _defaultIntervalTime;
-
-    public void SetDamage(float damage)
-    {
-        if (damage > 0)
-            _damage = damage;
+        }
     }
-    public void SetAmmo(int ammo)
+    public float Range
     {
-        if (ammo > 0)
-            _maxAmmo = ammo;
+        get => ThisGunConfig._defaultRange;
+        set
+        {
+            if (value > 0)
+            {
+                _range = value;
+            }
+        }
     }
-    public void SetRange(float range)
+    public float Interval
     {
-        if (range > 0)
-            _range = range;
-    }
-    public void SetInterval(float interval)
-    {
-        if (interval > 0)
-            _intervalTime = interval;
+        get => ThisGunConfig._defaultIntervalTime;
+        set
+        {
+            if(value>=0)
+            {
+                _intervalTime = value;
+            }
+        }
     }
 
-    private void Start()
+    public Recoil Rec => _recoil;
+    protected void Start()
     {
-        _currentAmmo = _defaultMaxAmmo;
         _playerCamera = Camera.main; 
-        //_shootParticles = GetComponentInChildren<ParticleSystem>();
-        //_recoil = FindObjectOfType<Recoil>();
         _holePool = FindObjectOfType<BulletHolesPool>();
-        _supportModule = new NullModule(this, GunType.Rifle, _recoil);
-        //_supportModule = new ExtendedMag(this, GunType.Rifle, _recoil);
-        //_bullet = new FireBullet();
-        //_bullet = new ElectricBullet();
-        _bullet = new DefaultBullet();
-        CalculateCharacteristics();
-
-        //DefaultGun d =_thisGunConfig.Riffle;
-        //d._defaultDamage = 1;
-    }
-
-
-    protected void SetNewGunStats()
-    {
-        float dmg = _thisGunConfig._defaultDamage;
-
-        /// modify 
-
-        _damage = dmg;
-    }
-
-    protected void SetNewGunDamage(float damageMultiplier)
-    {
-        _damage = _thisGunConfig._defaultDamage;
-        _damage *= damageMultiplier;
-    }
-
-    protected void SetNewGunRange(float rangeMultiplier)
-    {
-        _range = _thisGunConfig._defaultRange;
-        _range *= rangeMultiplier;
-    }
-
-    protected void SetNewGunMag(int magMultiplier)
-    {
-        _maxAmmo = _thisGunConfig._defaultMaxAmmo;
-        _maxAmmo += magMultiplier;
-    }
-    
+        _moduleManager = new ModuleManager(this);
+        _moduleManager.SetModule(typeof(NullModule));
+        _bullet = new Bullet();
+       // _bullet = new EffectBullet(_bullet, new Burning());
+        _currentAmmo = ThisGunConfig._defaultMaxAmmo;
+    }   
     
     private void Update()
     {
@@ -130,6 +100,16 @@ public abstract class Gun : MonoBehaviour
         {
             Reload();
         }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SetModule(typeof(ExtendedMag));
+        }
+    }
+
+    public void SetModule(Type moduleType)
+    {
+        _moduleManager.SetModule(moduleType);
     }
 
     private bool IsOutOfAmmo() => _currentAmmo-- <= 0;
@@ -138,6 +118,7 @@ public abstract class Gun : MonoBehaviour
     {
         if (IsOutOfAmmo())
         {
+            _sound.PlayOutOfAmmoSound();
             return false;
         }
 
@@ -145,6 +126,7 @@ public abstract class Gun : MonoBehaviour
         _recoil.RecoilFire();
         return true;
     }
+
     protected abstract void TryShoot();  
 
     private void Reload()
@@ -154,16 +136,8 @@ public abstract class Gun : MonoBehaviour
         _currentAmmo = _maxAmmo;
         _isCanShoot = true;
     }
-    
-    private void CalculateCharacteristics()
-    {
-        _supportModule.CalculateModuleCharacteristics();
-        _damage *= _bullet.GetAdditionalDamage();
-        //Refactor?
-        _currentAmmo = _maxAmmo;
-    }
 
-    protected float CalculateDamage(float len) => Mathf.Clamp01(_damageByDistance.Evaluate(len / _range)) * _damage;
+    protected float CalculateDamage(float len) => Mathf.Clamp01(ThisGunConfig._damageByDistance.Evaluate(len / _range)) * _damage;
 
     private IEnumerator IntervalBetweenShoots()
     {

@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class Shotgun : Gun
 {
-    [SerializeField] private int _pelletCount;
-    [SerializeField] private float _variance;
+    private int _pelletCount;
+    private float _variance;
 
-   //[SerializeField] protected AudioClip clip1;
-   //[SerializeField] protected AudioSource _source;
+    private void Start()
+    {
+        base.Start();
+        _pelletCount = ((ShotgunConfig)ThisGunConfig).PelletCount;
+        _variance = ((ShotgunConfig)ThisGunConfig).Variance;
+    }
 
     protected override void TryShoot()
     {
@@ -14,20 +18,18 @@ public class Shotgun : Gun
         {
             return;
         }
-        //if (IsOutOfAmmo())
-        //    return;
-        // _source.PlayOneShot(clip1);
+        _sound.PlayShootSound();
         for (int i = 0; i < _pelletCount; i++)
         {
             if (Physics.Raycast(_playerCamera.transform.position, GaussDirection(), out RaycastHit hit, _range))
             {
+                Instantiate(_hitParticles, hit.point, Quaternion.LookRotation(hit.normal));
                 if (hit.transform.TryGetComponent(out IApplyableDamage damaged))
                 {
-                    if (!damaged.TryApplyDamage(CalculateDamage(hit.distance)))
-                        return;
-                    return;
+                    _bullet.DealDamage(damaged, CalculateDamage(hit.distance));
                 }
-                _holePool.AddHole(hit);
+                else
+                    _holePool.AddHole(hit);
             }
         }
     }

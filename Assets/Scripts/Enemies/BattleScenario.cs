@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using PlayerController;
 using UnityEngine;
 
 namespace Enemies
@@ -8,6 +8,7 @@ namespace Enemies
     {
         [SerializeField] private List<EnemySquadInfo> _infos;
         [SerializeField] private EnemySpawner _enemySpawner;
+        [SerializeField] private EnemyDetector _enemyDetector;
         
         private bool _started;
         private int _currentSquadIndex;
@@ -15,14 +16,14 @@ namespace Enemies
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent(out PlayerManager playerManager) && !_started)
+            if(other.TryGetComponent(out PlayerManager _) && !_started)
                 StartScenario();
         }
         
         private void StartScenario()
         {
+            _enemyDetector.PlayerDetected = false;
             _started = true;
-            _enemySpawner.SetBattleScenario(this);
             SpawnSquad();
         }
 
@@ -32,9 +33,11 @@ namespace Enemies
 
             if (_currentSquadEnemiesCount != 0) 
                 return;
-            
-            if(_currentSquadIndex != _infos.Count)
+
+            if (_currentSquadIndex != _infos.Count)
                 SpawnSquad();
+            else
+                _enemyDetector.PlayerDetected = false;
         }
 
         private void SpawnSquad()
@@ -44,9 +47,20 @@ namespace Enemies
             EnemySquad squad = info.Squad;
             List<Transform> points = info.Points;
             _currentSquadEnemiesCount = info.EnemiesCount;
+
+            var enemies = _enemySpawner.SpawnSquad(squad, points);
+            InitializeEnemies(enemies);
             
-            _enemySpawner.SpawnSquad(squad, points);
             _currentSquadIndex++;
+        }
+
+        private void InitializeEnemies(List<Enemy> enemies)
+        {
+            foreach (var enemy in enemies)
+            {
+                enemy.Died += ChangeScenario;
+                enemy.Damaged += () => _enemyDetector.PlayerDetected = true;
+            }
         }
     }
 }

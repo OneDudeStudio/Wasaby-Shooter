@@ -182,6 +182,9 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 1536
+  _ticks: 5
+  _interval: 1
+  _poisonDamage: 1
 --- !u!1 &751403257993783242
 GameObject:
   m_ObjectHideFlags: 0

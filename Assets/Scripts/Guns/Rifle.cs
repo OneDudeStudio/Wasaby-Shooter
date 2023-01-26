@@ -1,14 +1,9 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 public class Rifle : Gun
 {
-    //refactor
-    //private bool _shootAudioClipChecker = true;
-    //[SerializeField] protected AudioClip clip1;
-    //[SerializeField] protected AudioClip clip2;
-    //[SerializeField] protected AudioSource _source;
-
     protected override void TryShoot()
     {
         if(!TryDecreaseAmmo())
@@ -16,36 +11,15 @@ public class Rifle : Gun
             return;
         }
 
-       //if (_shootAudioClipChecker)
-       //{
-       //    _source.PlayOneShot(clip1);
-       //}
+        _sound.PlayShootSound();
 
-       //else
-       //{
-       //    _source.PlayOneShot(clip2);
-       //}
-
-       //_shootAudioClipChecker = !_shootAudioClipChecker;
-       
         if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out RaycastHit hit, _range))
         {
             Instantiate(_hitParticles, hit.point, Quaternion.LookRotation(hit.normal));
             
             if (hit.transform.TryGetComponent(out IApplyableDamage damaged))
             {
-                damaged.TryApplyDamage(CalculateDamage(hit.distance));
-                
-               //if (!damaged.TryApplyDamage(CalculateDamage(hit.distance)))
-               //{
-               //    return;
-               //}
-               
-               //Refactor
-               if (damaged != null)
-               {
-                   _bullet.ShootBullet(damaged);
-               }
+                _bullet.DealDamage(damaged, CalculateDamage(hit.distance));
                return;
             }            
             _holePool.AddHole(hit);
@@ -63,7 +37,7 @@ public interface IApplyableDamage
 }
 public interface IApplyableEffect
 {
-    public void ApplyEffect(Type type);
+    
 }
 
 public interface IApplyableBurning : IApplyableEffect
@@ -73,6 +47,8 @@ public interface IApplyableBurning : IApplyableEffect
 public interface IApplyableFreeze : IApplyableEffect
 {
     public void StartFreeze();
+    public void ModifySpeed(float modifier);
+    public void ResetSpeed();
 }
 public interface IApplyablePoison : IApplyableEffect
 {
