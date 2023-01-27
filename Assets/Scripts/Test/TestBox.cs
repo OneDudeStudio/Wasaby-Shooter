@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IApplyableFreeze, IApplyablePoison, IApplyableElectric
 {
@@ -25,15 +26,23 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
 
     private float _electricDamage = .5f;
 
+
+    [SerializeField] private bool[] _isEffectSupported;
+
+    private Effect[] _effects;
+
     private Dictionary<Type, bool> _isApplyableEffect = new Dictionary<Type, bool>();
 
-
+    private GameObject g;
 
     private void Start()
     {
+        g = gameObject;
         _renderer = GetComponent<Renderer>();
         _defaultMaterial = _renderer.material;
         CheckEffects();
+        _effects = new Effect[10];
+        _effects[0] = new Burning(this);
     }
 
     private bool _isCanApplyDamage = true;
@@ -65,19 +74,24 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
     {
         GlobalEventManager.SendDie(transform);
         //StartCoroutine(wait());
-        Destroy(gameObject);
+        Destroy(g);
     }
 
-    public void ApplyEffect(Type type)
+    public void ApplyEffect()
     {
-        if (type == typeof(IApplyableBurning) && _isApplyableEffect.ContainsKey(type))
-            StartBurning();
-        if (type == typeof(IApplyableFreeze) && _isApplyableEffect.ContainsKey(type))
-            StartFreeze();
-        if (type == typeof(IApplyablePoison) && _isApplyableEffect.ContainsKey(type))
-            Poison(_poisonDamage);
-        if (type == typeof(IApplyableElectric) && _isApplyableEffect.ContainsKey(type))
-            Electric(true);
+        StartCoroutine(((Burning)_effects[0]).BurningCoroutine());
+    
+
+
+
+        //if (type == typeof(IApplyableBurning) && _isApplyableEffect.ContainsKey(type))
+        //    StartBurning();
+        //if (type == typeof(IApplyableFreeze) && _isApplyableEffect.ContainsKey(type))
+        //    StartFreeze();
+        //if (type == typeof(IApplyablePoison) && _isApplyableEffect.ContainsKey(type))
+        //    Poison(_poisonDamage);
+        //if (type == typeof(IApplyableElectric) && _isApplyableEffect.ContainsKey(type))
+        //    Electric(true);
     }
 
     public void StartFreeze()
@@ -151,4 +165,8 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
     {
         throw new NotImplementedException();
     }
+
+
+
+    
 }

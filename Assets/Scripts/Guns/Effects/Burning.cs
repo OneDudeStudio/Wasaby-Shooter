@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Burning : Effect
@@ -10,68 +9,38 @@ public class Burning : Effect
     private float _interval;
     private float _damage;
 
-    private CancellationTokenSource _tokenSource;
-    private CancellationToken _token;
-    public Burning()
+    private IApplyableDamage _damadable;
+
+    public Burning(IApplyableDamage damageable)
     {
-        _tokenSource = new CancellationTokenSource();
-        _token = _tokenSource.Token;
         EffectsConfig config = Resources.Load<EffectsConfig>("EffectsConfig");
         _ticks = config.Burning.Ticks;
         _interval = config.Burning.Interval;
         _damage = config.Burning.Damage;
 
-
-    }
-    public override void Apply(IApplyableEffect target)
-    {
-        TryStop();
-        _tokenSource = new CancellationTokenSource();
-        _token = _tokenSource.Token;
-        _isBurning = true;
-        if (target is IApplyableBurning burningTarget)
-        {
-            //await Execute(burningTarget, _token);
-            DangerExecute(burningTarget).Wait();
-        }
-        TryStop();
-        Debug.Log("end");
-    }
-    public void TryStop()
-    {
-        if (_isBurning)
-        {
-            _tokenSource.Cancel();
-        }
-        _isBurning = false;
+        _damadable = damageable;
     }
 
-    public async Task Execute(IApplyableBurning target, CancellationToken token)
+    public override void Apply()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    //public override void Apply()
+    //{
+    //    if (_isBurning)
+    //        StopCoroutine("BurningCoroutine");
+    //    StartCoroutine("BurningCoroutine");
+    //    _isBurning = true;
+    //}
+
+    public IEnumerator BurningCoroutine()
     {
         for (int i = 0; i < _ticks; i++)
         {
-            if (token.IsCancellationRequested)
-            {
-                return;
-            }
-            await Task.Delay((int)(_interval * 1000));
-            if (token.IsCancellationRequested)
-            {
-                return;
-            }
-            ((IApplyableDamage)target).TryApplyDamage(_damage);
+            yield return new WaitForSeconds(_interval);
+            _damadable.TryApplyDamage(_damage);
         }
-    }
-
-    public async Task DangerExecute(IApplyableBurning target)
-    {
-        await Task.Run(async () =>
-        {
-            for (int i = 0; i < _ticks; i++)
-            {
-                await Task.Delay((int)(_interval * 1000));
-                ((IApplyableDamage)target).TryApplyDamage(_damage);
-            }
-        }, _tokenSource.Token);
+        _isBurning = false;
     }
 }
