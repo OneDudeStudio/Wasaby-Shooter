@@ -1094,7 +1094,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 846886827}
-  - component: {fileID: 846886826}
   m_Layer: 0
   m_Name: Railway
   m_TagString: Untagged
@@ -1102,23 +1101,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &846886826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 846886825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad05c65bebc850aef9f7f73ad9b3b746, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Generatator: 0
-  _gameObjectForGeneration: {fileID: 1484281593865342, guid: 124e105039673654384ba4ab56f3296f, type: 3}
-  _count: 10
-  _distance: 0
-  _directionPoint: {fileID: 1755846626}
 --- !u!4 &846886827
 Transform:
   m_ObjectHideFlags: 0
@@ -1561,7 +1543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Generatator: 1
   _gameObjectForGeneration: {fileID: 1484281593865342, guid: 124e105039673654384ba4ab56f3296f, type: 3}
-  _count: 40
+  _count: 25
   _distance: 2.5
   _directionPoint: {fileID: 1755846626}
 --- !u!1 &1294066047 stripped
