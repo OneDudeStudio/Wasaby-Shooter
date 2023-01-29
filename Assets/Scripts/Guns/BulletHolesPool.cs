@@ -15,7 +15,7 @@ public class BulletHolesPool : MonoBehaviour
         {
             _pool[i] = Instantiate(_buletHolePrefab);
         }
-        GlobalEventManager.OnDie.AddListener(DestroyObject);
+        //GlobalEventManager.OnDie.AddListener(DestroyObject);
     }
 
 

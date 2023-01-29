@@ -20,7 +20,7 @@ public class ElectricityController : MonoBehaviour
     {
         _targets = new IApplyableEffect[_maxTargets];
         GlobalEventManager.OnStartLightningChain.AddListener(TryStartLightningChain);
-        GlobalEventManager.OnDie.AddListener(DestroyObject);
+        //GlobalEventManager.OnDie.AddListener(DestroyObject);
         _source = GetComponent<AudioSource>();
     }
     public void TryStartLightningChain(Transform targetTransform)

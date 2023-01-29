@@ -37,7 +37,7 @@ public interface IApplyableDamage
 }
 public interface IApplyableEffect
 {
-    
+    public void ApplyEffect();
 }
 
 public interface IApplyableBurning : IApplyableEffect
