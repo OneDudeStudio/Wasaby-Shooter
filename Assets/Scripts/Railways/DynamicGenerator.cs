@@ -5,7 +5,7 @@ using UnityEngine.PlayerLoop;
 public class DynamicGenerator : MonoBehaviour
 {
     [SerializeField] bool Generatator = false;
-    
+
     [SerializeField] private GameObject _gameObjectForGeneration;
     [SerializeField] private float _delay = 2f;
     [SerializeField] private float _speed = 3f;
@@ -23,40 +23,32 @@ public class DynamicGenerator : MonoBehaviour
         if (Time.time > _nextTimeToSpawn)
         {
             _nextTimeToSpawn = Time.time + _delay;
-            GameObject newGameObject = Instantiate(_gameObjectForGeneration, transform.position, Quaternion.identity);
-            newGameObject.AddComponent<Move>();
-            newGameObject.GetComponent<Move>().speed = _speed;
-        }
-    }
-    
-
-    /*private float _lastSpawnedTime;
-
-    void Update()
-    {
-        if (Time.time > _lastSpawnedTime + _delay)
-        {
-            Generate();
-            _lastSpawnedTime = Time.time;
-
+            if (Generatator)
+            {
+                Generate();
+            }
         }
     }
 
-    public void Generate()
+    private void Generate()
     {
-        GameObject newGameObject = Instantiate(_gameObjectForGeneration, transform.position, Quaternion.identity);
-        newGameObject.GetComponent<Rigidbody>().velocity = transform.forward * _speed;
-    }*/
+        GameObject newGameObject = Instantiate(_gameObjectForGeneration, transform.position + Vector3.up, Quaternion.identity);
+        newGameObject.AddComponent<Move>();
+        newGameObject.GetComponent<Move>().speed = _speed;
+        newGameObject.GetComponent<Move>().directionPoint = _directionPoint;
+        newGameObject.transform.parent = transform;
+    }
 }
 
 
 public class Move : MonoBehaviour
 {
     public float speed;
+    public GameObject directionPoint;
 
     private void Update()
     {
-        transform.Translate(Vector2.right * Time.deltaTime * speed);
+        transform.position =
+            Vector3.MoveTowards(transform.position, directionPoint.transform.position, Time.deltaTime * speed);
     }
-    
 }

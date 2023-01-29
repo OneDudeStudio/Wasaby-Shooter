@@ -22,16 +22,23 @@ public class StaticGenerator : MonoBehaviour
 
         if (Generatator)
         {
-            // NEED TO DO
-            for (int i = 0; i < _count;)
-            {
-                Vector3 newGameObjectPosition = new Vector3(
-                    transform.position.x + _distance * ++i,
-                    transform.position.y,
-                    transform.position.z
-                );
+            Generate();
+        }
+    }
+
+    private void Generate()
+    {
+        // NEED TO DO
+        for (int i = 0; i < _count;)
+        {
+            Vector3 newGameObjectPosition = new Vector3(
+                transform.position.x + _distance * ++i,
+                transform.position.y - transform.localScale.y / 2, // attach to the ground
+                transform.position.z
+            );
+            GameObject newGameObject =
                 Instantiate(_gameObjectForGeneration, newGameObjectPosition, _gameObjectRotation);
-            }
+            newGameObject.transform.parent = transform;
         }
     }
 }
