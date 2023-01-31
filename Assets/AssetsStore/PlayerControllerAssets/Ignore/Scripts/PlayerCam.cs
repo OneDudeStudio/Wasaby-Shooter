@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
@@ -24,19 +22,12 @@ public class PlayerCam : MonoBehaviour
     public float minFov;
     public float maxFov;
 
-    private void Start()
+    public void RotateCamera(float xInput, float yInput)
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    private void Update()
-    {
-        // get mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * sensY;
-
+        float mouseX = xInput * sensX;
+        float mouseY = yInput * sensY;
         yRotation += mouseX * multiplier;
+
 
         xRotation -= mouseY * multiplier;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
