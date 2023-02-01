@@ -1,48 +1,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
-public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IApplyableFreeze, IApplyablePoison, IApplyableElectric
+public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableFreeze
 {
     [SerializeField] private float _health = 10;
     private Renderer _renderer;
     [SerializeField] private Material _hitMaterial;
     private Material _defaultMaterial;
 
-    public bool _isBurning = false;
-    private int _ticks = 5;
-    private float _interval = .5f;
-    private float _fireDamage = 1f;
-
-    private bool _isFreeze = false;
-    private float _freezeDuration = 3f;
-    private float _freezeSpeedModifier = .5f;
-
-    private bool _isCanPoisoned = true;
-    private float _poisonDamage = 1f;
-    private float _poisonInterval = .8f;
+    //private void OnDestroy()
+    //{
+    //    FindObjectOfType<EffectsController>().RemoveVictim(this);
+    //}
 
     private float _electricDamage = .5f;
 
 
-    [SerializeField] private bool[] _isEffectSupported;
-
-    private Effect[] _effects;
-
-    private Dictionary<Type, bool> _isApplyableEffect = new Dictionary<Type, bool>();
-
-    private GameObject g;
+    private List<Effect> _applyableEffects = new List<Effect>();
 
     private void Start()
     {
-        g = gameObject;
         _renderer = GetComponent<Renderer>();
         _defaultMaterial = _renderer.material;
-        CheckEffects();
-        _effects = new Effect[10];
-        _effects[0] = new Burning(this);
+
+        _applyableEffects.Add(new Burning(this));
+        _applyableEffects.Add(new Freeze(this));
+        _applyableEffects.Add(new Poison(this));
     }
 
     private bool _isCanApplyDamage = true;
@@ -72,81 +58,7 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
 
     public void Die()
     {
-        GlobalEventManager.SendDie(transform);
-        //StartCoroutine(wait());
-        Destroy(g);
-    }
-
-    public void ApplyEffect()
-    {
-        StartCoroutine(((Burning)_effects[0]).BurningCoroutine());
-    
-
-
-
-        //if (type == typeof(IApplyableBurning) && _isApplyableEffect.ContainsKey(type))
-        //    StartBurning();
-        //if (type == typeof(IApplyableFreeze) && _isApplyableEffect.ContainsKey(type))
-        //    StartFreeze();
-        //if (type == typeof(IApplyablePoison) && _isApplyableEffect.ContainsKey(type))
-        //    Poison(_poisonDamage);
-        //if (type == typeof(IApplyableElectric) && _isApplyableEffect.ContainsKey(type))
-        //    Electric(true);
-    }
-
-    public void StartFreeze()
-    {
-        StartCoroutine(Freeze());
-    }
-
-    private IEnumerator Freeze()
-    {
-        _isFreeze = true;
-        //
-        yield return new WaitForSeconds(_freezeDuration);
-        _isFreeze = false;
-    }
-
-    public void StartBurning()
-    {
-        if (_isBurning)
-            StopCoroutine("Burning");
-        StartCoroutine("Burning");
-        _isBurning = true;
-    }
-
-    private IEnumerator Burning()
-    {
-        for (int i = 0; i < _ticks; i++)
-        {
-            yield return new WaitForSeconds(_interval);
-            TryApplyDamage(_fireDamage);
-        }
-        _isBurning = false;
-    }
-
-
-    private void CheckEffects()
-    {
-        foreach (Type type in GetType().GetInterfaces())
-        {
-            _isApplyableEffect.Add(type, true);
-        }
-    }
-
-    public void Poison(float damage)
-    {
-        if (_isCanPoisoned)
-        {
-            StartCoroutine(PoisonInterval());
-            TryApplyDamage(damage);
-        }
-    }
-    private IEnumerator PoisonInterval()
-    {
-        _isCanPoisoned = false;
-        yield return new WaitForSeconds(_poisonInterval);
-        _isCanPoisoned = true;
+        Destroy(gameObject);
     }
 
     public void Electric(bool isStartPoint)
@@ -158,15 +70,29 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableBurning, IAppl
 
     public void ModifySpeed(float modifier)
     {
-        throw new NotImplementedException();
+        
     }
 
     public void ResetSpeed()
     {
-        throw new NotImplementedException();
+        
     }
 
 
 
-    
+
+    public void StartEffect<T>() where T : Effect
+    {
+        var effect = _applyableEffects.OfType<T>().FirstOrDefault();
+        if (effect != null)
+            effect.StartEffect();
+    }
+
+    public void ApplyEffects(float currentTime)
+    {
+        foreach (var item in _applyableEffects)
+        {
+            item.Apply(currentTime);
+        }
+    }
 }

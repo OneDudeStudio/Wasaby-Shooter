@@ -33,11 +33,6 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public float crouchYScale;
     private float startYScale;
 
-    [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode sprintKey = KeyCode.LeftShift;
-    public KeyCode crouchKey = KeyCode.LeftControl;
-
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
@@ -82,6 +77,8 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public bool climbing;
     public bool vaulting;
 
+    private bool _isSprinting = false;
+
     public bool freeze;
     public bool unlimited;
     
@@ -101,14 +98,16 @@ public class PlayerMovementAdvanced : MonoBehaviour
         startYScale = transform.localScale.y;
     }
 
+    public void Sprint() => _isSprinting = true;
+
     private void Update()
     {
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        MyInput();
         SpeedControl();
         StateHandler();
+        _isSprinting = false;
         TextStuff();
 
         // handle drag
@@ -123,38 +122,36 @@ public class PlayerMovementAdvanced : MonoBehaviour
         MovePlayer();
     }
 
-    private void MyInput()
-    {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+    public void SetInputs(float xInput, float yInput) => (horizontalInput, verticalInput) = (xInput, yInput);
 
-        // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+    public void TryJump()
+    {
+        if(readyToJump && grounded)
         {
             readyToJump = false;
-
             Jump();
-
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+    }
 
-        // start crouch
-        if (Input.GetKeyDown(crouchKey) && horizontalInput == 0 && verticalInput == 0)
+    public void TryStartCrouch()
+    {
+        if(horizontalInput == 0 && verticalInput == 0)
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-
             crouching = true;
         }
-
-        // stop crouch
-        if (Input.GetKeyUp(crouchKey))
-        {
-            transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
-
-            crouching = false;
-        }
     }
+
+    public void StopCrouch()
+    {
+        transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
+        crouching = false;
+    }
+
+
+
 
     bool keepMomentum;
     private void StateHandler()
@@ -219,7 +216,7 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
 
         // Mode - Sprinting
-        else if (grounded && Input.GetKey(sprintKey))
+        else if (grounded && _isSprinting)
         {
             state = MovementState.sprinting;
             desiredMoveSpeed = sprintSpeed;

@@ -13,13 +13,19 @@ MonoBehaviour:
   m_Name: EffectsConfig
   m_EditorClassIdentifier: 
   _burning:
-    Ticks: 5
+    Ticks: 10
     Interval: 0.4
-    Damage: 2
+    Damage: 1
   _freeze:
-    FreezeDuration: 10
+    FreezeDuration: 8
     SpeedPrecentModifier: -50
   _poison:
     Ticks: 10
     Interval: 1
     Damage: 1
+  _electric:
+    Interval: 0.2
+    MaxRadius: 10
+    MaxTargets: 15
+    MaxConductors: 5
+    Damage: 0
