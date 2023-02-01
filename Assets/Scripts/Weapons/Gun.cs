@@ -85,6 +85,9 @@ public abstract class Gun : MonoBehaviour
 
         SetStatsFromConfig();
         _currentAmmo = ThisGunConfig._defaultMaxAmmo;
+        
+        
+        _bullet = new Bullet(0);
     }
 
     protected virtual void SetStatsFromConfig()
