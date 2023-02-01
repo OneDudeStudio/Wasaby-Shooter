@@ -378,7 +378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5456757870563664778, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5456757870563664778, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1109,7 +1109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846886825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -120, y: 0, z: -50}
+  m_LocalPosition: {x: -120, y: -1.5, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1276559896}
@@ -1208,7 +1208,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1050647093
 GameObject:
@@ -1526,8 +1526,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Generatator: 1
   _gameObjectForGeneration: {fileID: 3797347900914657096, guid: 402f162fd22555f85908e95c1bfb8854, type: 3}
-  _delay: 1
-  _speed: 30
+  _delay: 2
+  _speed: 20
   _directionPoint: {fileID: 1755846626}
 --- !u!114 &1276559898
 MonoBehaviour:
