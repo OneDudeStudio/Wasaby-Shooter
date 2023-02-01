@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Enemies
@@ -6,6 +7,8 @@ namespace Enemies
     {
         [SerializeField] private bool _playerDetected;
 
+        public event Action<bool> Detected;
+        
         public bool PlayerDetected
         {
             get => _playerDetected;
@@ -13,7 +16,9 @@ namespace Enemies
             {
                 if (value && _playerDetected)
                     return;
+                
                 _playerDetected = value;
+                Detected?.Invoke(_playerDetected);
             }
         }
     }

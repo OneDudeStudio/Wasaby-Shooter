@@ -4,30 +4,38 @@ using UnityEngine;
 
 namespace Enemies
 {
-    public class BattleScenario : MonoBehaviour
+    public class BattleSequence : MonoBehaviour
     {
         [SerializeField] private List<EnemySquadInfo> _infos;
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private EnemyDetector _enemyDetector;
-        
-        private bool _started;
+        [SerializeField] private List<GameObject> _obstacles;
+
+        private bool _initialized;
         private int _currentSquadIndex;
         private int _currentSquadEnemiesCount;
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent(out PlayerManager _) && !_started)
-                StartScenario();
+            if(other.TryGetComponent(out PlayerManager _) && !_initialized)
+                StartBattle();
         }
         
-        private void StartScenario()
+        private void StartBattle()
         {
+            _initialized = true;
             _enemyDetector.PlayerDetected = false;
-            _started = true;
+            _enemyDetector.Detected += SetObstacles;
+            
             SpawnSquad();
         }
 
-        public void ChangeScenario()
+        private void FinishBattle()
+        {
+            _enemyDetector.PlayerDetected = false;
+        }
+        
+        private void ChangeScenario()
         {
             _currentSquadEnemiesCount--;
 
@@ -37,7 +45,7 @@ namespace Enemies
             if (_currentSquadIndex != _infos.Count)
                 SpawnSquad();
             else
-                _enemyDetector.PlayerDetected = false;
+                FinishBattle();
         }
 
         private void SpawnSquad()
@@ -61,6 +69,11 @@ namespace Enemies
                 enemy.Died += ChangeScenario;
                 enemy.Damaged += () => _enemyDetector.PlayerDetected = true;
             }
+        }
+
+        private void SetObstacles(bool state)
+        {
+            _obstacles.ForEach(obstacle => obstacle.SetActive(state));
         }
     }
 }
