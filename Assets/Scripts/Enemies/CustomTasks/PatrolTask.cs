@@ -9,17 +9,25 @@ namespace Enemies.CustomTasks{
 	public class PatrolTask : ActionTask{
 		public BBParameter<NavMeshAgent> Agent;
 		public BBParameter<float> Range;
+		public BBParameter<Animator> Animator;
 
 		private Vector3 _centrePoint;
 
 		protected override void OnExecute()
 		{
 			_centrePoint = Agent.value.transform.position;
+
+			if (!Animator.isNull)
+			{
+				Animator.value.SetTrigger("EnemyWalking");
+			}
 		}
 
 		protected override void OnUpdate(){
-			if(Agent.value.remainingDistance <= Agent.value.stoppingDistance)
+			if (Agent.value.remainingDistance <= Agent.value.stoppingDistance)
+			{
 				TrySetNewWayPoint();
+			}
 		}
 
 		private void TrySetNewWayPoint()

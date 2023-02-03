@@ -1,5 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using NodeCanvas.Tasks.Actions;
 using PlayerController;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,15 +15,12 @@ namespace Enemies
         [SerializeField] private Material _hitMaterial;
         [SerializeField] private float _health;
 
-        private Renderer _renderer;
-        private Material _defaultMaterial;
+        private List<SkinnedMeshRenderer> _meshRenderers;
 
         private bool _canApplyDamage = true;
         private float _maxHealth;
 
         private NavMeshAgent _navMeshAgent;
-        
-        // убрать нафиг
         private PlayerManager _playerManager;
 
         public event Action Died;
@@ -29,7 +29,7 @@ namespace Enemies
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            _renderer = GetComponent<Renderer>();
+            _meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
         }
 
         private void Start()
@@ -37,7 +37,6 @@ namespace Enemies
             _playerManager = FindObjectOfType<PlayerManager>();
             
             _maxHealth = _health;
-            _defaultMaterial = _renderer.material;
             SetSpeed(speed);
             _navMeshAgent.enabled = true;
         }
@@ -73,10 +72,19 @@ namespace Enemies
         
         private IEnumerator Hit()
         {
-            _renderer.material = _hitMaterial;
-            yield return new WaitForSeconds(.05f);
-            _renderer.material = _defaultMaterial;
+            List<Material> materials = new List<Material>();
 
+            foreach (var meshRenderer in _meshRenderers)
+            {
+                materials.Add(meshRenderer.material);
+                meshRenderer.material = _hitMaterial;
+            }
+            
+            yield return new WaitForSeconds(.05f);
+            
+            for (int i = 0; i < _meshRenderers.Count; i++)
+                _meshRenderers[i].material = materials[i];
+            
             StartCoroutine(nameof(Push));
         }
 

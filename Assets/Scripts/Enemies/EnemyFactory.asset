@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa035e510a8d6764bb938eeb93f0f000, type: 3}
   m_Name: EnemyFactory
   m_EditorClassIdentifier: 
-  _strikingEnemyPrefab: {fileID: 7202442099099083609, guid: c6bfa3bec584a6a4996b4251bd396f0e, type: 3}
-  _explodingEnemyPrefab: {fileID: 3400213021471037747, guid: 59eabbd033652794db1c112052c4a48c, type: 3}
+  _strikingEnemyPrefab: {fileID: 2004059494326421248, guid: 94856a8f0c6e5144cb0396bc511f992b, type: 3}
+  _explodingEnemyPrefab: {fileID: 5016727104060328839, guid: 9b02c8e0c81a1c44c8100921ca166a41, type: 3}

@@ -35,7 +35,6 @@ namespace PlayerController
                 return false;
             }
             
-            Debug.Log($"Health: {_health}");
             return true;
         }
     }
