@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class TrainCollision : MonoBehaviour
 {
-    [SerializeField] float _pushForce = 5;
+    [SerializeField] private float _pushForce = 5;
+    [SerializeField] private float _pushHeight = 5;
+    [SerializeField] private float _damage = 5;
     private Ragdoll _otherObjectRagdoll;
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
@@ -13,24 +15,25 @@ public class TrainCollision : MonoBehaviour
         
         Debug.Log("Collision!!! " + collision.gameObject.name);
         
-        //TakeDamage();
-        //_otherObjectRagdoll.ActivateRagdoll();
-        PushObject(GetComponent<Move>().directionPoint.transform.position);
-        //_otherObjectRagdoll.DeactivateRagdoll();
+        //PushObject(GetComponent<Move>().directionPoint.transform.position);
+        PushObject(transform.position);
+        TakeDamage(collision.gameObject, _damage);
         
     }
 
     private void PushObject(Vector3 direction)
     {
-        direction.y = 1;
+        _otherObjectRagdoll.ActivateRagdoll();
+        
+        direction.y = _pushHeight;
         _otherObjectRagdoll.ApplyForce(direction * _pushForce);
+        
     }
 
-    private void TakeDamage(float amount, Vector3 direction)
+    private void TakeDamage(GameObject damagedObject,float amount)
     {
-        // TO DO :: currentHealthOfPlayer -= amount
-        // TO DO :: if (currentHealthOfPlayer <= 0.0f) Die();
-        
+        IApplyableDamage iApplyableDamage = damagedObject.GetComponent<IApplyableDamage>();
+        iApplyableDamage.TryApplyDamage(amount);
     }
     
 }

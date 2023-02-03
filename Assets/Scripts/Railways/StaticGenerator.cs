@@ -1,43 +1,48 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class StaticGenerator : MonoBehaviour
 {
     [SerializeField] bool Generatator = false;
-
     [SerializeField] private GameObject _gameObjectForGeneration;
-    [SerializeField] private int _count = 10;
-    [SerializeField] private float _distance = 0;
     [SerializeField] private GameObject _directionPoint;
-
-    private Quaternion _gameObjectRotation;
+    
+    private Vector3 _direction;
+    private float _distance;
 
     void Start()
     {
-        _gameObjectRotation = transform.rotation;
-        Vector3 direction = new Vector3(
-            _directionPoint.transform.position.x - transform.position.x,
-            _directionPoint.transform.position.y - transform.position.y,
-            _directionPoint.transform.position.z - transform.position.z
-        );
-
+        var direction = _directionPoint.transform.position - transform.position;
+        _distance = direction.magnitude;
+        _direction = direction / _distance;  // This is now the normalized direction.
+        
         if (Generatator)
         {
-            Generate();
+            var objectSizeX = _gameObjectForGeneration.GetComponent<BoxCollider>().size.x;
+            var countObjectsToGenerate = Mathf.RoundToInt(_distance / objectSizeX);
+
+            Generate(countObjectsToGenerate);
         }
     }
 
-    private void Generate()
+    private void Generate(int countObjectsToGenerate)
     {
-        // NEED TO DO
-        for (int i = 0; i < _count;)
+        float lerpValue = 0f;
+        //As we'll be using vector3.lerp we want a value between 0 and 1
+        float lerpForOneObjects = (float) 1 / countObjectsToGenerate;
+
+        for (int i = 0; i < countObjectsToGenerate; i++)
         {
-            Vector3 newGameObjectPosition = new Vector3(
-                transform.position.x + _distance * ++i,
-                transform.position.y - transform.localScale.y / 2, // attach to the ground
-                transform.position.z
-            );
+            // increase lerpValue
+            lerpValue += lerpForOneObjects;
+            Vector3 newGameObjectPosition =
+                Vector3.Lerp(transform.position, _directionPoint.transform.position, lerpValue);
+            
             GameObject newGameObject =
-                Instantiate(_gameObjectForGeneration, newGameObjectPosition, _gameObjectRotation);
+                Instantiate(_gameObjectForGeneration, newGameObjectPosition  + Vector3.down * transform.position.y + Vector3.down * 0.2f , 
+                    Quaternion.LookRotation(_direction) * Quaternion.Euler(0f, -90f, 0f));
+            // TO DO:   can be delete if another prefab
+            // TO DO: * Quaternion.Euler(0f, -90f, 0f) can delete if another prefab
             newGameObject.transform.parent = transform;
         }
     }

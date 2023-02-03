@@ -16,12 +16,12 @@ public class Ragdoll : MonoBehaviour
         _rigidBodies = GetComponentsInChildren<Rigidbody>();
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
-        //DeactivateRagdoll();
     }
 
     public void DeactivateRagdoll()
     {
         if(_rigidbody != null) _rigidbody.isKinematic = true;
+        Debug.Log("Ragdoll deactivate");
         try
         {
             foreach (var rigidBody in _rigidBodies)
@@ -40,6 +40,7 @@ public class Ragdoll : MonoBehaviour
     public void ActivateRagdoll()
     {
         if(_rigidbody != null) _rigidbody.isKinematic = false;
+        Debug.Log("Ragdoll activate");
         try
         {
             foreach (var rigidBody in _rigidBodies)

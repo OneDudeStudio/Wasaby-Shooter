@@ -12,10 +12,12 @@ public class DynamicGenerator : MonoBehaviour
     [SerializeField] private GameObject _directionPoint;
 
     private float _nextTimeToSpawn;
+    private Vector3 _direction;
 
     private void Start()
     {
         _nextTimeToSpawn = Time.time;
+        _direction = _directionPoint.transform.position - transform.position;
     }
 
     private void Update()
@@ -27,12 +29,17 @@ public class DynamicGenerator : MonoBehaviour
             {
                 Generate();
             }
+            
         }
     }
 
     private void Generate()
     {
-        GameObject newGameObject = Instantiate(_gameObjectForGeneration, transform.position + Vector3.up, Quaternion.identity);
+        GameObject newGameObject = 
+            Instantiate(_gameObjectForGeneration, transform.position,
+                Quaternion.LookRotation(_direction));
+        // TO DO:  + Vector3.up * objectSizeY / 2 can change if another prefab
+        // see also static generator
         newGameObject.AddComponent<Move>();
         newGameObject.GetComponent<Move>().speed = _speed;
         newGameObject.GetComponent<Move>().directionPoint = _directionPoint;
