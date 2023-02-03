@@ -7,12 +7,13 @@ namespace PlayerController
     public class PlayerManager : MonoBehaviour, IApplyableDamage
     {
         [SerializeField] private float _health = MaxHealth;
+       
 
         private const float MaxHealth = 100f;
         private bool _canApplyDamage = true;
 
         public event Action<float> Damaged;
-        
+
         public bool IsAlive() => _canApplyDamage;
         public void Die()
         {
@@ -23,6 +24,9 @@ namespace PlayerController
         {
             if (!_canApplyDamage)
                 return false;
+
+            
+           
 
             _health -= damage;
 
@@ -37,6 +41,8 @@ namespace PlayerController
             
             return true;
         }
+
+      
     }
 }
 

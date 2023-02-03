@@ -1,39 +1,38 @@
 ﻿using UnityEngine;
 
-public class Freeze : Effect
+public class Stan : Effect
 {
-    private bool _isFreezing;
+    private bool _isStanned;
 
     private float _duration;
-    private float _speedModifier;
 
     private float _startTime;
     private ISpeedChangeable _victim;
 
-    public Freeze(ISpeedChangeable victim)
+    public Stan(ISpeedChangeable victim)
     {
         EffectsConfig config = Resources.Load<EffectsConfig>("EffectsConfig");
-        _duration = config.Freeze.FreezeDuration;
-        _speedModifier = SupportFunctions.PrecentToFloat(config.Freeze.SpeedPrecentModifier);
+        _duration = config.Stan.StanDuration;
         _victim = victim;
     }
 
     public override void Apply(float currentTime)
     {
-        if (!_isFreezing)
+        if (!_isStanned)
             return;
 
         if (currentTime - _startTime >= _duration)
         {
-            _isFreezing = false;
+            _isStanned = false;
             _victim.ResetSpeed();
         }
     }
 
     public override void StartEffect()
     {
+        Debug.Log("Stan");
         _startTime = Time.time;
-        _isFreezing = true;
-        _victim.ModifySpeed(_speedModifier);
+        _isStanned = true;
+        _victim.ModifySpeed(0);
     }
 }

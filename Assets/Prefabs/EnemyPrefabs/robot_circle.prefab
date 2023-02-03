@@ -2106,7 +2106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 086e483a0bd3222459e1ea76b94b234f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  _defaultSpeed: 7
   _hitMaterial: {fileID: 2100000, guid: a412690647998804aac311a00150d816, type: 2}
   _health: 2
   _damage: 15

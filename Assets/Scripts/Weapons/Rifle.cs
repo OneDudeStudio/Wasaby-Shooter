@@ -39,13 +39,8 @@ public interface IApplyableEffect
     public void ApplyEffects(float currentTime);
 }
 
-public interface IApplyableFreeze : IApplyableEffect
+public interface ISpeedChangeable
 {
     public void ModifySpeed(float modifier);
     public void ResetSpeed();
-}
-
-public interface IApplyableElectric : IApplyableEffect
-{
-    public void Electric(bool isStartPoint);
 }

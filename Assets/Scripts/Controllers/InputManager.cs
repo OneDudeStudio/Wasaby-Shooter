@@ -109,13 +109,13 @@ public class InputManager : MonoBehaviour
         {
             _shop.TryUseShop(false);
         }
-        if (Input.GetKeyDown(_exitKey))
-        {
-            _shop.TryUseShop(true);
+        //if (Input.GetKeyDown(_exitKey))
+        //{
+        //    _shop.TryUseShop(true);
 
-            ////
+        //    ////
 
-        }
+        //}
 
     }
 }

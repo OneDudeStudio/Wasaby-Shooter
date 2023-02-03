@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableFreeze
+public class TestBox : MonoBehaviour, IApplyableDamage, ISpeedChangeable, IApplyableEffect
 {
     [SerializeField] private float _health = 10;
     private Renderer _renderer;
@@ -29,6 +29,8 @@ public class TestBox : MonoBehaviour, IApplyableDamage, IApplyableFreeze
         _applyableEffects.Add(new Burning(this));
         _applyableEffects.Add(new Freeze(this));
         _applyableEffects.Add(new Poison(this));
+        _applyableEffects.Add(new Electricity(this, FindObjectOfType<ElectricityController>()));
+        _applyableEffects.Add(new Stan(this));
     }
 
     private bool _isCanApplyDamage = true;

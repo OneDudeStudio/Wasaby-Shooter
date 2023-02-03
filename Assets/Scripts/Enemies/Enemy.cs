@@ -9,9 +9,9 @@ using UnityEngine.AI;
 
 namespace Enemies
 {
-    public abstract class Enemy : MonoBehaviour, IApplyableDamage
+    public abstract class Enemy : MonoBehaviour, IApplyableDamage, ISpeedChangeable, IApplyableEffect
     {
-        [SerializeField] protected float speed;
+        [SerializeField] protected float _defaultSpeed;
         [SerializeField] private Material _hitMaterial;
         [SerializeField] private float _health;
 
@@ -26,10 +26,18 @@ namespace Enemies
         public event Action Died;
         public event Action Damaged;
 
+        private List<Effect> _applyableEffects = new List<Effect>();
+
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
+
+            _applyableEffects.Add(new Burning(this));
+            _applyableEffects.Add(new Freeze(this));
+            _applyableEffects.Add(new Poison(this));
+            _applyableEffects.Add(new Electricity(this, FindObjectOfType<ElectricityController>()));
+            _applyableEffects.Add(new Stan(this));
         }
 
         private void Start()
@@ -37,8 +45,26 @@ namespace Enemies
             _playerManager = FindObjectOfType<PlayerManager>();
             
             _maxHealth = _health;
-            SetSpeed(speed);
+            SetSpeed(_defaultSpeed);
             _navMeshAgent.enabled = true;
+
+            FindObjectOfType<EffectsController>().AddVictim(this);
+        }
+
+
+        public void StartEffect<T>() where T : Effect
+        {
+            var effect = _applyableEffects.OfType<T>().FirstOrDefault();
+            if (effect != null)
+                effect.StartEffect();
+        }
+
+        public void ApplyEffects(float currentTime)
+        {
+            foreach (var item in _applyableEffects)
+            {
+                item.Apply(currentTime);
+            }
         }
 
         public abstract void Attack(IApplyableDamage player);
@@ -114,6 +140,16 @@ namespace Enemies
         {
             Died?.Invoke();
             Destroy(gameObject);
+        }
+
+        public void ModifySpeed(float modifier)
+        {
+            SetSpeed(_defaultSpeed * modifier);
+        }
+
+        public void ResetSpeed()
+        {
+            SetSpeed(_defaultSpeed);
         }
     }
 }

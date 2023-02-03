@@ -17,7 +17,7 @@ MonoBehaviour:
     Interval: 0.4
     Damage: 1
   _freeze:
-    FreezeDuration: 8
+    FreezeDuration: 5
     SpeedPrecentModifier: -50
   _poison:
     Ticks: 10
@@ -28,4 +28,4 @@ MonoBehaviour:
     MaxRadius: 10
     MaxTargets: 15
     MaxConductors: 5
-    Damage: 0
+    Damage: 1

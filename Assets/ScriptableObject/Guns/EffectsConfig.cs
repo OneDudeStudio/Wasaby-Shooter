@@ -10,11 +10,13 @@ public class EffectsConfig : ScriptableObject
     [SerializeField] private FreezeConfig _freeze;
     [SerializeField] private PoisonConfig _poison;
     [SerializeField] private ElectricConfig _electric;
+    [SerializeField] private StanConfig _stan;
 
     public BurningConfig Burning => _burning;
     public FreezeConfig Freeze => _freeze;
     public PoisonConfig Poison => _poison;
     public ElectricConfig Electric => _electric;
+    public StanConfig Stan => _stan;
 
     [Serializable]
     public class EffectConfig
@@ -49,5 +51,11 @@ public class EffectsConfig : ScriptableObject
         public int MaxTargets;
         public int MaxConductors;
         public float Damage;
+    }
+
+    [Serializable]
+    public class StanConfig : EffectConfig
+    {
+        public float StanDuration;
     }
 }
