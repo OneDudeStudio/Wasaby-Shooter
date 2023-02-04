@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NodeCanvas.Tasks.Actions;
 using PlayerController;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,6 +13,7 @@ namespace Enemies
         [SerializeField] protected float _defaultSpeed;
         [SerializeField] private Material _hitMaterial;
         [SerializeField] private float _health;
+        [SerializeField] private float _pushForce;
 
         private List<SkinnedMeshRenderer> _meshRenderers;
 
@@ -22,6 +22,10 @@ namespace Enemies
 
         private NavMeshAgent _navMeshAgent;
         private PlayerManager _playerManager;
+       
+        private Animator _animator;
+        private float _walkingAnimationSpeed;
+        private const string EnemySpeed = "EnemySpeed";
 
         public event Action Died;
         public event Action Damaged;
@@ -32,6 +36,7 @@ namespace Enemies
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
+            _animator = GetComponent<Animator>();
 
             _applyableEffects.Add(new Burning(this));
             _applyableEffects.Add(new Freeze(this));
@@ -47,6 +52,9 @@ namespace Enemies
             _maxHealth = _health;
             SetSpeed(_defaultSpeed);
             _navMeshAgent.enabled = true;
+            
+            if(_animator)
+                _walkingAnimationSpeed = _animator.GetFloat(EnemySpeed);
 
             FindObjectOfType<EffectsController>().AddVictim(this);
         }
@@ -71,7 +79,9 @@ namespace Enemies
 
         public void SetSpeed(float speed)
         {
-            _navMeshAgent.speed = _navMeshAgent.acceleration = speed;
+            //_navMeshAgent.speed = _navMeshAgent.acceleration = speed;
+            if(_navMeshAgent)
+                _navMeshAgent.speed = speed;
         }
 
         public bool TryApplyDamage(float damage)
@@ -92,6 +102,7 @@ namespace Enemies
                 _canApplyDamage = false;
                 return false;
             }
+            
             StartCoroutine(Hit());
             return true;
         }
@@ -117,7 +128,7 @@ namespace Enemies
         private IEnumerator Push()
         {
             Vector3 start = transform.position;
-            Vector3 direction = (start - _playerManager.transform.position).normalized * 1.5f;
+            Vector3 direction = (start - _playerManager.transform.position).normalized * _pushForce;
             Vector3 end = new Vector3((start + direction).x, start.y, (start + direction).z);
 
             float pushTime = 0.5f;
@@ -145,11 +156,17 @@ namespace Enemies
         public void ModifySpeed(float modifier)
         {
             SetSpeed(_defaultSpeed * modifier);
+  
+            if(_animator)
+                _animator.SetFloat(EnemySpeed, modifier);
         }
 
         public void ResetSpeed()
         {
             SetSpeed(_defaultSpeed);
+            
+            if(_animator)
+                _animator.SetFloat(EnemySpeed, _walkingAnimationSpeed);
         }
     }
 }

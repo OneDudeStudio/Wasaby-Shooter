@@ -8,12 +8,12 @@ namespace Enemies
     {
         [SerializeField] private EnemyFactory _enemyFactory;
 
-        public List<Enemy> SpawnSquad(EnemySquad squad, List<Transform> points)
+        public List<Enemy> SpawnSquad(EnemyWave wave, List<Transform> points)
         {
             int index = 0;
             var enemies = new List<Enemy>();
 
-            foreach (var enemy in squad.GetEnemies())
+            foreach (var enemy in wave.GetEnemies())
             {
                 for (var i = 0; i < enemy.Value; i++)
                 {

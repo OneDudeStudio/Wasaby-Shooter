@@ -5,15 +5,15 @@ namespace Enemies
     [CreateAssetMenu(menuName = "Enemies/Factory")]
     public class EnemyFactory : ScriptableObject
     {
-        [SerializeField] private Enemy _strikingEnemyPrefab;
-        [SerializeField] private Enemy _explodingEnemyPrefab;
+        [SerializeField] private Enemy _meleeEnemyPrefab;
+        [SerializeField] private Enemy _bombEnemyPrefab;
 
         public Enemy Get(EnemyType type)
         {
             return type switch
             {
-                EnemyType.Striking => Instantiate(_strikingEnemyPrefab),
-                EnemyType.Exploding => Instantiate(_explodingEnemyPrefab),
+                EnemyType.Melee => Instantiate(_meleeEnemyPrefab),
+                EnemyType.Bomb => Instantiate(_bombEnemyPrefab),
                 _ => null
             };
         }

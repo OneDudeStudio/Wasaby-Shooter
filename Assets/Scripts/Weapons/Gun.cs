@@ -88,6 +88,7 @@ public abstract class Gun : MonoBehaviour
 
 
         _bullet = new Bullet(0);
+        //_bullet = new EffectBullet<Freeze>(0);
     }
 
     protected virtual void SetStatsFromConfig()

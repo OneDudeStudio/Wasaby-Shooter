@@ -6,7 +6,7 @@ namespace Enemies
 {
     public class BattleSequence : MonoBehaviour
     {
-        [SerializeField] private List<EnemySquadInfo> _infos;
+        [SerializeField] private List<EnemyWaveInfo> _infos;
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private EnemyDetector _enemyDetector;
         [SerializeField] private List<GameObject> _obstacles;
@@ -50,13 +50,13 @@ namespace Enemies
 
         private void SpawnSquad()
         {
-            EnemySquadInfo info = _infos[_currentSquadIndex];
+            EnemyWaveInfo info = _infos[_currentSquadIndex];
             
-            EnemySquad squad = info.Squad;
+            EnemyWave wave = info.Wave;
             List<Transform> points = info.Points;
             _currentSquadEnemiesCount = info.EnemiesCount;
 
-            var enemies = _enemySpawner.SpawnSquad(squad, points);
+            var enemies = _enemySpawner.SpawnSquad(wave, points);
             InitializeEnemies(enemies);
             
             _currentSquadIndex++;

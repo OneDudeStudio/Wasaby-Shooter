@@ -28,6 +28,9 @@ namespace Enemies.CustomTasks
 
 		protected override void OnUpdate()
 		{
+			if (Agent.isNull)
+				return;
+			
 			RotateToTarget();
 			float distance = Vector3.Distance(agent.transform.position, Target.value.position);
 			 
@@ -51,7 +54,7 @@ namespace Enemies.CustomTasks
 
 		protected override void OnStop()
 		{
-			if(Agent.value && Agent.value.enabled)
+			if(!Agent.isNull && Agent.value.enabled)
 				Agent.value.SetDestination(Agent.value.transform.position);
 			
 			if (!Animator.isNull)

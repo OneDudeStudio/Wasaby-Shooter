@@ -2,7 +2,7 @@ namespace Enemies
 {
     public enum EnemyType
     {
-        Striking,
-        Exploding
+        Melee,
+        Bomb
     }
 }

@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace Enemies
 {
-    public class EnemySquad
+    public class EnemyWave
     {
         private Dictionary<EnemyType, int> _enemies;
 
-        public EnemySquad()
+        public EnemyWave()
         {
             _enemies = new Dictionary<EnemyType, int>();
         }

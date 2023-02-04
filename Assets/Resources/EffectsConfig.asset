@@ -29,3 +29,5 @@ MonoBehaviour:
     MaxTargets: 15
     MaxConductors: 5
     Damage: 1
+  _stan:
+    StanDuration: 0

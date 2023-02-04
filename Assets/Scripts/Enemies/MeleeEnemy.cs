@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies
 {
-    public class StrikingEnemy : Enemy
+    public class MeleeEnemy : Enemy
     {
         [SerializeField] private int _damage;
 

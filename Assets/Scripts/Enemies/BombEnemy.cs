@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Enemies
 {
-    public class ExplodingEnemy : Enemy
+    public class BombEnemy : Enemy
     {
         [SerializeField] private int _damage;
         [SerializeField] private GameObject _explosion;

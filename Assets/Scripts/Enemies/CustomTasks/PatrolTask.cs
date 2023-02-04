@@ -24,7 +24,7 @@ namespace Enemies.CustomTasks{
 		}
 
 		protected override void OnUpdate(){
-			if (Agent.value.remainingDistance <= Agent.value.stoppingDistance)
+			if (!Agent.isNull && Agent.value.remainingDistance <= Agent.value.stoppingDistance)
 			{
 				TrySetNewWayPoint();
 			}

@@ -28,7 +28,8 @@ public class GrenadeLauncher : MonoBehaviour
 
     private void Start()
     {
-        SetGrenade(null);
+        //SetGrenade(null);
+        SetGrenade(typeof(FlashGrenade));
     }
 
     private IEnumerator LauncherIntrval()
