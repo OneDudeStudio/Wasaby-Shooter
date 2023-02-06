@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using Random = UnityEngine.Random;
 
 public class DynamicGenerator : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class DynamicGenerator : MonoBehaviour
     [SerializeField] private float _delay = 2f;
     [SerializeField] private float _speed = 3f;
     [SerializeField] private GameObject _directionPoint;
+    [SerializeField] private AudioSource _soundForGeneration;
 
     private float _nextTimeToSpawn;
     private Vector3 _direction;
@@ -27,10 +29,18 @@ public class DynamicGenerator : MonoBehaviour
             _nextTimeToSpawn = Time.time + _delay;
             if (Generatator)
             {
+                PlaySound();
                 Generate();
             }
             
         }
+    }
+
+    private void PlaySound()
+    {
+        //_soundForGeneration.Play();
+        _soundForGeneration.pitch = Random.Range(0.9f, 1.1f);
+        _soundForGeneration.PlayOneShot(_soundForGeneration.clip, 1);
     }
 
     private void Generate()
