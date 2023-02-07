@@ -40,7 +40,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _defaultRecoil: {x: -15, y: 9, z: 0.9}
+  _defaultRecoil: {x: -15, y: 9, z: 0.7}
   _defaultReturnSpeed: 10
   _defaultSnappines: 15
   _defaultPositionRecoil: {x: 0.01, y: 0.01, z: -0.2}

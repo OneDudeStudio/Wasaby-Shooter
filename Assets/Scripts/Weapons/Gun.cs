@@ -1,18 +1,16 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using System;
 
 public abstract class Gun : MonoBehaviour
 {
-    [Header("Gun Keys")]
-    [SerializeField] private KeyCode _shootKey;
-
     [Space]
     [Header("Need Refactor")]
-    [SerializeField] protected ParticleSystem _shootParticles;
     [SerializeField] protected Recoil _recoil;
     [SerializeField] protected GunSoundController _sound;
+    [SerializeField] protected GunVFXController _gunVFX;
     [SerializeField] protected GameObject _hitParticles;
+    [SerializeField] protected Transform _shootingPoint;
     public GunConfig ThisGunConfig;
 
     private float _damage;
@@ -86,9 +84,8 @@ public abstract class Gun : MonoBehaviour
         SetStatsFromConfig();
         _currentAmmo = ThisGunConfig._defaultMaxAmmo;
 
-
-        _bullet = new Bullet(0);
-        //_bullet = new EffectBullet<Freeze>(0);
+        SetBullet(new Bullet(0));
+        //SetBullet(new EffectBullet<Freeze>(0));
     }
 
     protected virtual void SetStatsFromConfig()
@@ -114,7 +111,7 @@ public abstract class Gun : MonoBehaviour
         if (TryDecreaseAmmo())
         {
             _sound.PlayShootSound();
-            _shootParticles.Play();
+            _gunVFX.ShowShootParticles();
             _recoil.RecoilFire();
             Shoot();
         }
@@ -155,5 +152,9 @@ public abstract class Gun : MonoBehaviour
         _moduleManager.SetModule(type);
         _currentAmmo = _maxAmmo;
     }
-    public void SetBullet(IBullet bullet) => _bullet = bullet;
+    public void SetBullet(IBullet bullet)
+    {
+        _bullet = bullet;
+        _gunVFX.SetBulletVFX(bullet.GetType());
+    }
 }
