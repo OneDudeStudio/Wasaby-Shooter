@@ -32,7 +32,6 @@ public class DynamicGenerator : MonoBehaviour
                 PlaySound();
                 Generate();
             }
-            
         }
     }
 
@@ -45,7 +44,7 @@ public class DynamicGenerator : MonoBehaviour
 
     private void Generate()
     {
-        GameObject newGameObject = 
+        GameObject newGameObject =
             Instantiate(_gameObjectForGeneration, transform.position,
                 Quaternion.LookRotation(_direction));
         // TO DO:  + Vector3.up * objectSizeY / 2 can change if another prefab

@@ -20,8 +20,7 @@ public class Ragdoll : MonoBehaviour
 
     public void DeactivateRagdoll()
     {
-        if(_rigidbody != null) _rigidbody.isKinematic = true;
-        Debug.Log("Ragdoll deactivate");
+        if (_rigidbody != null) _rigidbody.isKinematic = true;
         try
         {
             foreach (var rigidBody in _rigidBodies)
@@ -33,14 +32,13 @@ public class Ragdoll : MonoBehaviour
         {
             Console.WriteLine(e);
         }
-        
+
         if (_animator != null) _animator.enabled = true;
     }
 
     public void ActivateRagdoll()
     {
-        if(_rigidbody != null) _rigidbody.isKinematic = false;
-        Debug.Log("Ragdoll activate");
+        if (_rigidbody != null) _rigidbody.isKinematic = false;
         try
         {
             foreach (var rigidBody in _rigidBodies)
@@ -58,6 +56,8 @@ public class Ragdoll : MonoBehaviour
 
     public void ApplyForce(Vector3 force)
     {
+        Debug.Log(force);
+        Debug.DrawRay(transform.position, force, Color.red, 100.0f); 
         _rigidbody.AddForce(force, ForceMode.VelocityChange);
     }
 }
