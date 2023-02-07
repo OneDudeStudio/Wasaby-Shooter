@@ -58,6 +58,8 @@ public class Ragdoll : MonoBehaviour
     {
         Debug.Log(force);
         Debug.DrawRay(transform.position, force, Color.red, 100.0f); 
-        _rigidbody.AddForce(force, ForceMode.VelocityChange);
+        transform.Translate(force);
+        // why dont work addforce??
+        //_rigidbody.AddForce(force, ForceMode.VelocityChange);
     }
 }
