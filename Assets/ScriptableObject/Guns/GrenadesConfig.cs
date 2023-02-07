@@ -20,7 +20,6 @@ public class GrenadeConfig
     public float ExplosionRadius;
     public int MaxTargets;
     public LayerMask CheckLayers;
-    public ParticleSystem Particles;
 }
 [Serializable]
 public class DefaultGrenadeConfig : GrenadeConfig

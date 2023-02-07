@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2233461406765903545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5524131609685762157}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5524131609685762157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2233461406765903545}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.267, z: 0.646}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8130549219293918958}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8130549217695923748
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8130549217695923748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.034, y: 0.047, z: 0.436}
+  m_LocalPosition: {x: 0, y: 0.083, z: 0.633}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8130549219293918958}
@@ -4937,6 +4967,7 @@ GameObject:
   - component: {fileID: 8130549219293918959}
   - component: {fileID: 8130549219293918954}
   - component: {fileID: 944943199}
+  - component: {fileID: 6478493251063759224}
   m_Layer: 0
   m_Name: ShotgunGun(Template)
   m_TagString: Untagged
@@ -4958,6 +4989,7 @@ Transform:
   - {fileID: 8130549218739431107}
   - {fileID: 8130549218782786355}
   - {fileID: 8130549217695923749}
+  - {fileID: 5524131609685762157}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4973,12 +5005,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150addeb05c5aac4985df3d96f922110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shootKey: 323
-  _reloadKey: 114
-  _shootParticles: {fileID: 6481080258880897126, guid: 5026faf18adf1e64f9f23a1a371e228f, type: 3}
   _recoil: {fileID: 8130549219293918956}
   _sound: {fileID: 944943199}
+  _gunVFX: {fileID: 6478493251063759224}
   _hitParticles: {fileID: 4379133665793430431, guid: 3e92e1d66a344f346b40c0e5fb813b55, type: 3}
+  _shootingPoint: {fileID: 5524131609685762157}
   ThisGunConfig: {fileID: 11400000, guid: db1918e4527b0f84c91dc84cbcb934fa, type: 2}
 --- !u!114 &8130549219293918956
 MonoBehaviour:
@@ -5126,6 +5157,29 @@ MonoBehaviour:
   clip2: {fileID: 8300000, guid: 92d7841d975f2e442ba23c7f364d021a, type: 3}
   _source: {fileID: 8130549219293918954}
   _outOfAmmoSound: {fileID: 8300000, guid: a932b215c7c5ba94098d767c488969aa, type: 3}
+--- !u!114 &6478493251063759224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8130549219293918961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5845c226b81be4f41badfcda5fe25176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shootPoint: {fileID: 5524131609685762157}
+  _tracerPrefabs:
+  - {fileID: 3789650827917761935, guid: 8d27ef3cb9c2949468f5fe3812d166e2, type: 3}
+  - {fileID: 3789650827917761935, guid: 8a2534b6c5084684898957c54b513ae5, type: 3}
+  - {fileID: 3789650827917761935, guid: ca6818d65ed44364983f47aa39010778, type: 3}
+  - {fileID: 3789650827917761935, guid: 3d3bb23f20ea9e9418672f59db345cef, type: 3}
+  _shootParticles:
+  - {fileID: 1676645092124182264, guid: ae63d78044737b3429a615778af50a51, type: 3}
+  - {fileID: 1676645092124182264, guid: ae63d78044737b3429a615778af50a51, type: 3}
+  - {fileID: 5681561414608079048, guid: b3b11dedf7f1b98408b2ce7aad12ca2b, type: 3}
+  - {fileID: 1676645092124182264, guid: ae63d78044737b3429a615778af50a51, type: 3}
 --- !u!1001 &8901301518855399801
 PrefabInstance:
   m_ObjectHideFlags: 0

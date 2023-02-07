@@ -6,7 +6,7 @@ public class Explosion : MonoBehaviour
     private float _explosionRadius;
     private int _maxTargets;
     private LayerMask _checkLayers;
-    private ParticleSystem _explosionParticles;
+    [SerializeField] private ParticleSystem _explosionParticles;
 
     public IApplyableDamage[] Explode()
     {
@@ -44,6 +44,5 @@ public class Explosion : MonoBehaviour
         _explosionRadius = config.ExplosionRadius;
         _maxTargets = config.MaxTargets;
         _checkLayers = config.CheckLayers;
-        _explosionParticles = config.Particles;
     }
 }

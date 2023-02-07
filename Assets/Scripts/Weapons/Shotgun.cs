@@ -11,21 +11,27 @@ public class Shotgun : Gun
         _pelletCount = ((ShotgunConfig)ThisGunConfig).PelletCount;
         _variance = ((ShotgunConfig)ThisGunConfig).Variance;
     }
-   
+
     protected override void Shoot()
     {
         for (int i = 0; i < _pelletCount; i++)
         {
-            if (Physics.Raycast(_playerCamera.transform.position, GaussDirection(), out RaycastHit hit, _range))
+            Vector3 gauss = GaussDirection();
+            Vector3 direction = gauss*_range;
+            if (Physics.Raycast(_playerCamera.transform.position, gauss, out RaycastHit hit, _range))
             {
+                direction = (hit.point - _shootingPoint.position).normalized * hit.distance;
                 //Instantiate(_hitParticles, hit.point, Quaternion.LookRotation(hit.normal));
                 if (hit.transform.TryGetComponent(out IApplyableDamage damaged))
                 {
                     _bullet.DealDamage(damaged, CalculateDamage(hit.distance));
                 }
                 else
+                {
                     _holePool.AddHole(hit);
+                }
             }
+            _gunVFX.ShowGunTracer(direction);
         }
     }
 
@@ -34,8 +40,8 @@ public class Shotgun : Gun
         float s = 0;
         float v = 0;
         float u = 0;
-        
-        while(s == 0 || s > 1)
+
+        while (s == 0 || s > 1)
         {
             v = Random.Range(-1f, 1f);
             u = Random.Range(-1f, 1f);
@@ -46,5 +52,5 @@ public class Shotgun : Gun
         float z2 = _variance * v * sqrt;
         return _playerCamera.transform.forward + _playerCamera.transform.right * z1 / 10 + _playerCamera.transform.up * z2 / 10;
     }
-    
+
 }

@@ -59,6 +59,7 @@ public class GrenadeLauncher : MonoBehaviour
     {
         Grenade grenade = Instantiate(_currentGrenade, _grenadeSpawnPoint.position, _cameraTransform.rotation);
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
+
         Vector3 direction = _cameraTransform.forward;
         if (Physics.Raycast(_cameraTransform.position, _cameraTransform.forward, out RaycastHit hit, 300f))
             direction = (hit.point - _grenadeSpawnPoint.position).normalized;

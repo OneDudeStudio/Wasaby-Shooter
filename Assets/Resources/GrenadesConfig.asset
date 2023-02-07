@@ -19,6 +19,7 @@ MonoBehaviour:
     CheckLayers:
       serializedVersion: 2
       m_Bits: 1536
+    Particles: {fileID: 8680538276989047155, guid: 0224ca1d09814aa48965f391b7e91822, type: 3}
   _poison:
     ExplosionDamage: 5
     ExplosionRadius: 5
@@ -26,6 +27,7 @@ MonoBehaviour:
     CheckLayers:
       serializedVersion: 2
       m_Bits: 1536
+    Particles: {fileID: 8680538276989047155, guid: 0224ca1d09814aa48965f391b7e91822, type: 3}
   _flash:
     ExplosionDamage: 5
     ExplosionRadius: 10
@@ -33,3 +35,4 @@ MonoBehaviour:
     CheckLayers:
       serializedVersion: 2
       m_Bits: 1536
+    Particles: {fileID: 8680538276989047155, guid: 0224ca1d09814aa48965f391b7e91822, type: 3}

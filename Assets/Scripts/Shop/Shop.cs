@@ -18,7 +18,7 @@ public class Shop : MonoBehaviour
     private IBullet[] _bullets = new IBullet[4];
     private Type[] _moduleTypes = new Type[] { typeof(NullModule), typeof(ExtendedMag), typeof(BarrelModule), typeof(ShutterModule) };
     private Type[] _grenadeTypes = new Type[] { null, typeof(DefaultExplosionGrenade), typeof(PoisonGrenade), typeof(FlashGrenade) };
-   
+
 
     private void Start()
     {
