@@ -16,7 +16,7 @@ namespace PlayerController
 
         public bool IsAlive() => _canApplyDamage;
         public void Die()
-        {
+        { 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
