@@ -29,8 +29,7 @@ public class InputManager : MonoBehaviour
     [Space]
     [Header("Scripts")]
     [SerializeField] private PlayerMovementAdvanced _movementAdvanced;
-    [SerializeField] private Gun _gun;
-    [SerializeField] private GrenadeLauncher _grenadeLauncher;
+    [SerializeField] private GunController _gunController;
     [SerializeField] private PlayerCam _playerCam;
 
     [SerializeField] private Shop _shop;
@@ -90,17 +89,17 @@ public class InputManager : MonoBehaviour
         {
             if (Input.GetKey(_shootKey))
             {
-                _gun.TryShoot();
+                _gunController.TryShoot();
             }
 
             if (Input.GetKeyDown(_reloadKey))
             {
-                _gun.TryReload();
+                _gunController.TryReloadGun();
             }
 
             if (Input.GetKeyDown(_grenadeLauncherShootKey))
             {
-                _grenadeLauncher.TryShootGrenade();
+                _gunController.TryShootGrenade();
             }
         }
 
