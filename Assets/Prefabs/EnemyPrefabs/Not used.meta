@@ -1,12 +1,4 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream:Assets/Prefabs/Railway/Railway.prefab.meta
-guid: cb4c1240f660d8b40b6b381bbfcde327
-=======
-guid: 437279042f60e6044ba94f38c7584b15
->>>>>>> Stashed changes:Assets/Prefabs/EnemyPrefabs/Melee.prefab.meta
-PrefabImporter:
-=======
 <<<<<<<< HEAD:Assets/Prefabs/EnemyPrefabs/Not used.meta
 guid: fcedbd0b51b359c42a25fbda865574c4
 folderAsset: yes
@@ -15,7 +7,6 @@ DefaultImporter:
 guid: 8fe83f8f230d203038bc2924bc393fb1
 PrefabImporter:
 >>>>>>>> 0333e63de8a3fc5921cda8752493a0479b490b1d:Assets/Prefabs/Railway/Railway.prefab.meta
->>>>>>> Stashed changes
   externalObjects: {}
   userData: 
   assetBundleName: 

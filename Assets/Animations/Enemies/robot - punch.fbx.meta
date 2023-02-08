@@ -1,0 +1,697 @@
+fileFormatVersion: 2
+guid: a16b2f4ba73056f419478aaaa1a8693d
+ModelImporter:
+  serializedVersion: 20300
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|Armature|mixamo.com|Layer0.001
+      takeName: Armature|Armature|mixamo.com|Layer0.001
+      internalID: 6165553400957861818
+      firstFrame: 0
+      lastFrame: 75
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: robot - punch(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Camera
+      parentName: robot - punch(Clone)
+      position: {x: 0.035834014, y: 2.6769924, z: 13.192314}
+      rotation: {x: 2.512148e-15, y: -1, z: -2.1175826e-22, w: 0.00000005960465}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Armature
+      parentName: robot - punch(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.000000081460335, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mixamorig:Hips
+      parentName: Armature
+      position: {x: 0.000000029802322, y: 2.5957413, z: -0.09905075}
+      rotation: {x: 0.000000027093392, y: -0.0000000144527785, z: 0.0000000042775476, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mixamorig:Spine
+      parentName: mixamorig:Hips
+      position: {x: 0.0000000020116566, y: 0.31466538, z: 0.002146044}
+      rotation: {x: 0.0034100718, y: 0.000000014091962, z: 0.000000011683035, w: 0.9999942}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: mixamorig:Spine1
+      parentName: mixamorig:Spine
+      position: {x: -0.000000038146972, y: 0.3671182, z: 0.00000010967254}
+      rotation: {x: 0.00000004167668, y: -1.6001066e-10, z: -0.000000023461489, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mixamorig:Spine2
+      parentName: mixamorig:Spine1
+      position: {x: 0.000000009536743, y: 0.4195635, z: 0.00000031948088}
+      rotation: {x: -0.000000069849186, y: 2.6668354e-10, z: 0.000000039102485, w: 1}
+      scale: {x: 0.9999999, y: 1, z: 1.0000095}
+    - name: mixamorig:Neck
+      parentName: mixamorig:Spine2
+      position: {x: 0.000000019073486, y: 0.4720086, z: -0.00000017404555}
+      rotation: {x: -0.0034100718, y: -1.6000426e-10, z: -0.000000046923798, w: 0.9999942}
+      scale: {x: 1, y: 1, z: 0.9999998}
+    - name: mixamorig:Head
+      parentName: mixamorig:Neck
+      position: {x: 0.000000009536743, y: 0.16947694, z: 0.022807445}
+      rotation: {x: 0.000000017695127, y: -3.566591e-15, z: 0.000000017596523, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 0.99999994}
+    - name: mixamorig:HeadTop_End
+      parentName: mixamorig:Head
+      position: {x: 0.000000019073486, y: 0.9595461, z: 0.12913151}
+      rotation: {x: -0, y: -0, z: 6.3111283e-23, w: 1}
+      scale: {x: 0.99999994, y: 1.0000001, z: 0.99999124}
+    - name: mixamorig:HeadTop_End_end
+      parentName: mixamorig:HeadTop_End
+      position: {x: -0, y: 0.96819514, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mixamorig:LeftShoulder
+      parentName: mixamorig:Spine2
+      position: {x: -0.34916115, y: 0.40547514, z: -0.00036010743}
+      rotation: {x: 0.5300862, y: -0.4680897, z: 0.53069055, w: 0.46719182}
+      scale: {x: 1.0000137, y: 1.0000153, z: 1.0000185}
+    - name: mixamorig:LeftArm
+      parentName: mixamorig:LeftShoulder
+      position: {x: 0.00000030517577, y: 0.6862161, z: -0.00000019073485}
+      rotation: {x: -0.06002126, y: 0.08529592, z: -0.00050935143, w: 0.99454606}
+      scale: {x: 1.0000124, y: 1.0000279, z: 1.0000206}
+    - name: mixamorig:LeftForeArm
+      parentName: mixamorig:LeftArm
+      position: {x: 0.000000076293944, y: 1.1361794, z: 0.000000076293944}
+      rotation: {x: -0.017012572, y: -0.014005823, z: 0.031259377, w: 0.9992684}
+      scale: {x: 0.9999984, y: 1.0000424, z: 1.0000125}
+    - name: mixamorig:LeftHand
+      parentName: mixamorig:LeftForeArm
+      position: {x: 0.000000095367426, y: 0.93227214, z: -0.000000076293944}
+      rotation: {x: -0.0000000372529, y: -0.00000059511507, z: -0.000000008149072, w: 1}
+      scale: {x: 1.0000188, y: 1.0000219, z: 1.0000175}
+    - name: mixamorig:LeftHand_end
+      parentName: mixamorig:LeftHand
+      position: {x: -0, y: 0.9322721, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mixamorig:RightShoulder
+      parentName: mixamorig:Spine2
+      position: {x: 0.34916115, y: 0.4055626, z: 0.012493095}
+      rotation: {x: 0.5397296, y: 0.4591055, z: -0.5207126, w: 0.47620633}
+      scale: {x: 1.000008, y: 1.0000187, z: 1.0000182}
+    - name: mixamorig:RightArm
+      parentName: mixamorig:RightShoulder
+      position: {x: 0.00000020980835, y: 0.6866368, z: -0.00000022888183}
+      rotation: {x: -0.05929725, y: 0.029530317, z: -0.014144361, w: 0.9977033}
+      scale: {x: 1.0000268, y: 1.000033, z: 1.0000237}
+    - name: mixamorig:RightForeArm
+      parentName: mixamorig:RightArm
+      position: {x: -0.0000000667572, y: 1.1236709, z: -0.000000023841856}
+      rotation: {x: -0.041389983, y: -0.001565439, z: 0.009570824, w: 0.999096}
+      scale: {x: 1.0000231, y: 1.0000584, z: 1.0000286}
+    - name: mixamorig:RightHand
+      parentName: mixamorig:RightForeArm
+      position: {x: -0, y: 0.91660863, z: 0.000000009536743}
+      rotation: {x: 0.0000001490116, y: 0.00000033387911, z: 0.000000020139849, w: 1}
+      scale: {x: 1.0000031, y: 1.0000144, z: 1.0000113}
+    - name: mixamorig:RightHand_end
+      parentName: mixamorig:RightHand
+      position: {x: -0, y: 0.91660774, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mixamorig:LeftUpLeg
+      parentName: mixamorig:Hips
+      position: {x: -0.41347697, y: -0.17650981, z: 0.0061471104}
+      rotation: {x: -0.00002080886, y: 0.0054121884, z: 0.99997807, w: 0.003831014}
+      scale: {x: 1.0000194, y: 1.000029, z: 1}
+    - name: mixamorig:LeftLeg
+      parentName: mixamorig:LeftUpLeg
+      position: {x: -0.0000000166893, y: 1.166127, z: -0.000000019073486}
+      rotation: {x: -0.025795726, y: -0.00008323848, z: 0.0032412272, w: 0.99966204}
+      scale: {x: 1.0000566, y: 1.0000544, z: 1.000002}
+    - name: mixamorig:LeftFoot
+      parentName: mixamorig:LeftLeg
+      position: {x: -0.0000000667572, y: 0.8977223, z: -0.00000008702278}
+      rotation: {x: 0.44703275, y: -0.004168149, z: 0.0020830908, w: 0.89450544}
+      scale: {x: 1.0000085, y: 0.99995387, z: 1.0000503}
+    - name: mixamorig:LeftToeBase
+      parentName: mixamorig:LeftFoot
+      position: {x: 0.000000011920928, y: 0.4517385, z: -0.000000085830685}
+      rotation: {x: 0.33699584, y: 0.0103574535, z: -0.0037075137, w: 0.94144183}
+      scale: {x: 1.0000278, y: 1.0015479, z: 0.9984763}
+    - name: mixamorig:LeftToe_End
+      parentName: mixamorig:LeftToeBase
+      position: {x: -0.000000076293944, y: 0.1962821, z: 0.000000014305114}
+      rotation: {x: 0.00000026822084, y: -0.000000007450579, z: 0.0000000116415295, w: 1}
+      scale: {x: 1.0000244, y: 1.0000169, z: 1.0000062}
+    - name: mixamorig:LeftToe_End_end
+      parentName: mixamorig:LeftToe_End
+      position: {x: -0, y: 0.19628206, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mixamorig:RightUpLeg
+      parentName: mixamorig:Hips
+      position: {x: 0.41347688, y: -0.17650974, z: 0.009909706}
+      rotation: {x: -0.000000013405897, y: -0.0000003093042, z: 0.99999267, w: -0.0038312646}
+      scale: {x: 1.0000094, y: 1.0000094, z: 1.0000001}
+    - name: mixamorig:RightLeg
+      parentName: mixamorig:RightUpLeg
+      position: {x: -0.000000095367426, y: 1.1660591, z: -0.000000009536743}
+      rotation: {x: -0.048383974, y: 0.00015601603, z: -0.003239011, w: 0.9988236}
+      scale: {x: 1.0000194, y: 1.0000124, z: 1.0000036}
+    - name: mixamorig:RightFoot
+      parentName: mixamorig:RightLeg
+      position: {x: -0.000000047683713, y: 0.90119475, z: -0.000000035762785}
+      rotation: {x: 0.5039915, y: 0.003350363, z: -0.001955008, w: 0.8636999}
+      scale: {x: 1.0000672, y: 1.0000074, z: 1.0000564}
+    - name: mixamorig:RightToeBase
+      parentName: mixamorig:RightFoot
+      position: {x: -0.000000005960464, y: 0.4978667, z: -0.0000000047683715}
+      rotation: {x: 0.30218852, y: -0.010285192, z: 0.003260679, w: 0.95318717}
+      scale: {x: 1.0000049, y: 1.0003192, z: 0.9996982}
+    - name: mixamorig:RightToe_End
+      parentName: mixamorig:RightToeBase
+      position: {x: 0.0000000500679, y: 0.1942378, z: 0.0000000023841857}
+      rotation: {x: -0.00000020861623, y: -0.000000006519257, z: -0.00000004051253, w: 1}
+      scale: {x: 1.0000222, y: 1.0000094, z: 1.000007}
+    - name: mixamorig:RightToe_End_end
+      parentName: mixamorig:RightToe_End
+      position: {x: -0, y: 0.19423772, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Plane.006
+      parentName: robot - punch(Clone)
+      position: {x: 0.0000000017881393, y: 4.0777054, z: 0.41385624}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 94.92238, y: 94.92238, z: 112.175385}
+    - name: Cone.009
+      parentName: robot - punch(Clone)
+      position: {x: -0.93180573, y: 0.95062786, z: -0.31967634}
+      rotation: {x: -0.42919073, y: 0.652669, z: -0.5619565, w: -0.2720726}
+      scale: {x: 29.581984, y: 20.8278, z: 13.348846}
+    - name: Cylinder.051
+      parentName: robot - punch(Clone)
+      position: {x: 1.0544213, y: 2.32108, z: -0.10717639}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 11.015591, y: 11.015591, z: 8.842}
+    - name: Cylinder.052
+      parentName: robot - punch(Clone)
+      position: {x: -0.58863264, y: -0.2882051, z: -0.10181847}
+      rotation: {x: 0.65313256, y: 0.27095747, z: -0.6531325, w: -0.27095726}
+      scale: {x: 13.46033, y: 13.460329, z: 2.8000019}
+    - name: Cylinder.053
+      parentName: robot - punch(Clone)
+      position: {x: 0.58863246, y: -0.28820512, z: -0.10181841}
+      rotation: {x: 0.27095735, y: -0.65313256, z: -0.27095735, w: 0.65313256}
+      scale: {x: -13.46033, y: -13.46033, z: -2.8000019}
+    - name: Circle.006
+      parentName: robot - punch(Clone)
+      position: {x: -0.00000003762543, y: 3.918116, z: -0.09874825}
+      rotation: {x: -0.7071068, y: -0.0000000011665102, z: -6.110541e-10, w: 0.7071067}
+      scale: {x: 73.285065, y: 58.701153, z: 73.28482}
+    - name: Cone.010
+      parentName: robot - punch(Clone)
+      position: {x: -0.87583196, y: 1.1940465, z: 0.20227252}
+      rotation: {x: 0.37361506, y: 0.6237314, z: -0.60034305, w: 0.33310536}
+      scale: {x: 29.63388, y: 29.633877, z: 29.63388}
+    - name: Cylinder.054
+      parentName: robot - punch(Clone)
+      position: {x: 0.8570258, y: 2.3210802, z: -0.107176475}
+      rotation: {x: 0.5643268, y: 0.42606977, z: -0.5643265, w: -0.42606968}
+      scale: {x: 7.556672, y: 7.556671, z: 3.3022366}
+    - name: Cylinder.055
+      parentName: robot - punch(Clone)
+      position: {x: -0.4229373, y: 0.11469975, z: -0.10159742}
+      rotation: {x: -0.7067756, y: -0.02163798, z: 0.021637982, w: 0.70677567}
+      scale: {x: 23.888075, y: 21.317307, z: 39.652813}
+    - name: Cylinder.056
+      parentName: robot - punch(Clone)
+      position: {x: 0.4229373, y: 0.114699684, z: -0.10159742}
+      rotation: {x: 0.7067757, y: -0.021637984, z: -0.021637982, w: 0.70677555}
+      scale: {x: -23.888079, y: -21.317307, z: -39.652813}
+    - name: Circle.007
+      parentName: robot - punch(Clone)
+      position: {x: -0.000000037625426, y: 3.9181159, z: -0.09874825}
+      rotation: {x: -0.7071068, y: -0.0000000028702123, z: -0.0000000011557731, w: 0.7071067}
+      scale: {x: 77.49108, y: 62.070168, z: 77.49108}
+    - name: Cone.011
+      parentName: robot - punch(Clone)
+      position: {x: -0.9695422, y: 1.5282928, z: 0.040992875}
+      rotation: {x: -0.049077373, y: 0.3129408, z: -0.70540136, w: 0.63408864}
+      scale: {x: 29.69155, y: 15.649703, z: 36.553844}
+    - name: Cylinder.057
+      parentName: robot - punch(Clone)
+      position: {x: 1.2501144, y: 2.3210804, z: -0.10717649}
+      rotation: {x: 0.5643268, y: 0.42606977, z: -0.5643265, w: -0.42606968}
+      scale: {x: 7.556672, y: 7.556671, z: 3.3022366}
+    - name: Cylinder.058
+      parentName: robot - punch(Clone)
+      position: {x: -0.4229373, y: 0.11469975, z: -0.10159742}
+      rotation: {x: 0.70677567, y: -0.021637982, z: -0.02163798, w: 0.7067756}
+      scale: {x: -23.888075, y: -21.317307, z: -39.652813}
+    - name: Cylinder.059
+      parentName: robot - punch(Clone)
+      position: {x: 0.4229373, y: 0.114699684, z: -0.10159742}
+      rotation: {x: -0.7067756, y: -0.021637984, z: 0.021637984, w: 0.70677567}
+      scale: {x: 23.888075, y: 21.317307, z: 39.652813}
+    - name: Circle.008
+      parentName: robot - punch(Clone)
+      position: {x: -0.29224184, y: 2.4560595, z: -0.09874849}
+      rotation: {x: -0.7071068, y: 9.928891e-10, z: -0.0000000023363778, w: 0.7071067}
+      scale: {x: 73.285065, y: 70.8123, z: 73.285065}
+    - name: Cone.012
+      parentName: robot - punch(Clone)
+      position: {x: -0.93180573, y: 0.95062774, z: 0.10532313}
+      rotation: {x: -0.27207327, y: -0.5619562, z: 0.65266836, w: -0.42919153}
+      scale: {x: 29.58198, y: 20.827805, z: 13.348841}
+    - name: Cylinder.060
+      parentName: robot - punch(Clone)
+      position: {x: 1.0544213, y: 1.956389, z: -0.107176445}
+      rotation: {x: 0.000000022476929, y: 0.70710695, z: -0.70710665, w: -0.00000008429414}
+      scale: {x: 12.775599, y: 12.775599, z: 13.710922}
+    - name: Cylinder.061
+      parentName: robot - punch(Clone)
+      position: {x: -0.23972583, y: -0.28820503, z: -0.10181847}
+      rotation: {x: 0.27095732, y: -0.6531325, z: -0.2709574, w: 0.65313256}
+      scale: {x: -13.46033, y: -13.460329, z: -2.8000019}
+    - name: Cylinder.062
+      parentName: robot - punch(Clone)
+      position: {x: 0.23972587, y: -0.2882051, z: -0.10181844}
+      rotation: {x: 0.65313256, y: 0.27095747, z: -0.6531325, w: -0.27095726}
+      scale: {x: 13.460329, y: 13.460329, z: 2.8000019}
+    - name: Cylinder.063
+      parentName: robot - punch(Clone)
+      position: {x: 2.842171e-14, y: 1.9156452, z: -0.10159712}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 16.659908, y: 16.659908, z: 9.04058}
+    - name: Cylinder.064
+      parentName: robot - punch(Clone)
+      position: {x: 0.56664723, y: 1.9142834, z: -0.101597205}
+      rotation: {x: 0.42606974, y: -0.56432664, z: -0.42606968, w: 0.56432676}
+      scale: {x: -7.5566726, y: -7.556672, z: -3.3022363}
+    - name: Cylinder.065
+      parentName: robot - punch(Clone)
+      position: {x: -1.0544926, y: 3.3572009, z: -0.107176214}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 17.660727, y: 17.660727, z: 19.451803}
+    - name: Circle.009
+      parentName: robot - punch(Clone)
+      position: {x: -0.7428192, y: 3.3572009, z: -0.10813272}
+      rotation: {x: -0.7071068, y: -0.0000000028702123, z: -0.0000000011557731, w: 0.7071067}
+      scale: {x: 77.49108, y: 62.070168, z: 77.49108}
+    - name: Cylinder.066
+      parentName: robot - punch(Clone)
+      position: {x: 1.0544213, y: 1.6045114, z: -0.107176505}
+      rotation: {x: 0.000000083252324, y: 0.70710695, z: -0.70710665, w: -0.000000021435058}
+      scale: {x: 21.662968, y: 21.662968, z: 26.826235}
+    - name: Cylinder.067
+      parentName: robot - punch(Clone)
+      position: {x: -0.0000000019743993, y: 1.9106528, z: -0.101597115}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 14.385422, y: 14.385422, z: 9.213444}
+    - name: Cylinder.068
+      parentName: robot - punch(Clone)
+      position: {x: -1.0544897, y: 2.9336126, z: -0.10717651}
+      rotation: {x: 0.00000008566633, y: 0.70710695, z: -0.70710665, w: -0.000000023849067}
+      scale: {x: 10.392551, y: 10.392553, z: 6.242918}
+    - name: Cylinder.069
+      parentName: robot - punch(Clone)
+      position: {x: -0.000000007450666, y: 3.3881426, z: 0.00000055319066}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 30.085445, y: 30.085445, z: 16.326012}
+    - name: Cylinder.070
+      parentName: robot - punch(Clone)
+      position: {x: 1.05449, y: 1.7853934, z: -0.1071767}
+      rotation: {x: 0.000000024416368, y: 0.70710695, z: -0.70710665, w: -0.000000086233584}
+      scale: {x: 14.081493, y: 14.081493, z: 9.228131}
+    - name: Cylinder.071
+      parentName: robot - punch(Clone)
+      position: {x: 1.0545298, y: 0.9298333, z: -0.10717697}
+      rotation: {x: 0.00000008364478, y: 0.70710695, z: -0.70710665, w: -0.000000021827516}
+      scale: {x: 18.196709, y: 18.196709, z: 8.025214}
+    - name: Cylinder.072
+      parentName: robot - punch(Clone)
+      position: {x: -0.4122, y: 1.9142834, z: -0.101597145}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 15.121894, y: 15.121894, z: 12.138044}
+    - name: Cylinder.073
+      parentName: robot - punch(Clone)
+      position: {x: -1.05449, y: 3.3572009, z: -0.10717624}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 12.775599, y: 12.775599, z: 10.254722}
+    - name: Cylinder.074
+      parentName: robot - punch(Clone)
+      position: {x: 0.015049672, y: 3.3572009, z: -0.107176214}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.4999999, w: 0.5}
+      scale: {x: 23.48992, y: 23.48992, z: 33.226974}
+    - name: shoulderplate.002
+      parentName: robot - punch(Clone)
+      position: {x: -0.90945816, y: 3.5950365, z: -0.12753627}
+      rotation: {x: 0.24541178, y: 0.79563063, z: 0.50117284, w: 0.23573458}
+      scale: {x: -177.70554, y: -131.78, z: -15.531868}
+    - name: Cylinder.075
+      parentName: robot - punch(Clone)
+      position: {x: 1.0544213, y: 0.69283605, z: -0.10717666}
+      rotation: {x: 0.13794976, y: 0.69352007, z: -0.6935198, w: 0.13794966}
+      scale: {x: 12.775599, y: 12.775598, z: 9.136204}
+    - name: Cylinder.076
+      parentName: robot - punch(Clone)
+      position: {x: -0.5666473, y: 1.9142834, z: -0.10159715}
+      rotation: {x: 0.5643268, y: 0.42606977, z: -0.5643265, w: -0.42606968}
+      scale: {x: 7.556672, y: 7.556672, z: 3.3022366}
+    - name: Cylinder.077
+      parentName: robot - punch(Clone)
+      position: {x: 0.41219988, y: 1.9142834, z: -0.10159714}
+      rotation: {x: 0.50000006, y: -0.49999997, z: -0.50000006, w: 0.49999994}
+      scale: {x: -15.121894, y: -15.121894, z: -12.1380415}
+    - name: shoulderplate.003
+      parentName: robot - punch(Clone)
+      position: {x: -0.8763899, y: 3.6321807, z: -0.12753604}
+      rotation: {x: 0.24541177, y: 0.79563063, z: 0.5011729, w: 0.23573463}
+      scale: {x: -225.68088, y: -167.35677, z: -19.725023}
+    - name: Cylinder.078
+      parentName: robot - punch(Clone)
+      position: {x: -1.0544927, y: 2.7974923, z: -0.107176304}
+      rotation: {x: 0.000000023549013, y: 0.70710695, z: -0.70710665, w: -0.00000008536623}
+      scale: {x: 15.348543, y: 15.348543, z: 15.0644865}
+    - name: Cylinder.079
+      parentName: robot - punch(Clone)
+      position: {x: -0.4122, y: 0.7105247, z: -0.101597294}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 17.660727, y: 17.660727, z: 19.451803}
+    - name: Cylinder.080
+      parentName: robot - punch(Clone)
+      position: {x: -0.41219997, y: 1.9142834, z: -0.101597145}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 12.775599, y: 12.775599, z: 10.254722}
+    - name: Sphere.003
+      parentName: robot - punch(Clone)
+      position: {x: -1.0544924, y: 2.5968106, z: -0.10717634}
+      rotation: {x: -0.7071068, y: 0.0000000010505311, z: 0.000000001040621, w: 0.7071067}
+      scale: {x: 16.612001, y: 16.612001, z: 16.612005}
+    - name: Cylinder.081
+      parentName: robot - punch(Clone)
+      position: {x: -1.2462251, y: 2.7959783, z: -0.10717639}
+      rotation: {x: 0.5643268, y: 0.42606977, z: -0.5643265, w: -0.42606968}
+      scale: {x: 7.556672, y: 7.556672, z: 3.3022366}
+    - name: Circle.010
+      parentName: robot - punch(Clone)
+      position: {x: -0.84501415, y: 2.0313091, z: -0.020407645}
+      rotation: {x: 0.019801619, y: 0.5528683, z: 0.009577538, w: 0.83297825}
+      scale: {x: 7.1525993, y: 7.152599, z: 7.152603}
+    - name: Cylinder.082
+      parentName: robot - punch(Clone)
+      position: {x: 0.41219988, y: 0.71052474, z: -0.10159729}
+      rotation: {x: 0.50000006, y: -0.49999997, z: -0.50000006, w: 0.49999994}
+      scale: {x: -17.660727, y: -17.660727, z: -19.451803}
+    - name: Cylinder.083
+      parentName: robot - punch(Clone)
+      position: {x: -0.41219988, y: 1.3348324, z: -0.10159724}
+      rotation: {x: 0.00000008431395, y: 0.70710695, z: -0.70710665, w: -0.000000022496687}
+      scale: {x: 13.157283, y: 13.157283, z: 8.426859}
+    - name: Cylinder.084
+      parentName: robot - punch(Clone)
+      position: {x: 0.41219988, y: 1.9142834, z: -0.10159715}
+      rotation: {x: 0.50000006, y: -0.49999997, z: -0.50000006, w: 0.49999994}
+      scale: {x: -12.775599, y: -12.775599, z: -10.25472}
+    - name: Circle.011
+      parentName: robot - punch(Clone)
+      position: {x: -0.9234846, y: 2.703811, z: -0.052911017}
+      rotation: {x: 0.019801613, y: 0.5528683, z: 0.009577539, w: 0.83297837}
+      scale: {x: 5.4167886, y: 5.4167876, z: 5.41679}
+    - name: Cylinder.085
+      parentName: robot - punch(Clone)
+      position: {x: -1.0544926, y: 1.9318643, z: -0.10717645}
+      rotation: {x: 0.000000024119226, y: 0.70710695, z: -0.70710665, w: -0.00000008593644}
+      scale: {x: 24.541918, y: 24.541918, z: 19.72894}
+    - name: Sphere.004
+      parentName: robot - punch(Clone)
+      position: {x: 1.1389313, y: 3.3572, z: -0.107176214}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.4999999, w: 0.5}
+      scale: {x: 31.917423, y: 31.917423, z: 25.344742}
+    - name: Cylinder.086
+      parentName: robot - punch(Clone)
+      position: {x: 0.41219988, y: 1.3348323, z: -0.10159724}
+      rotation: {x: -0.00000013766869, y: 0.7071066, z: 0.70710695, w: -0.00000013768886}
+      scale: {x: -13.157283, y: -13.157283, z: -8.426859}
+    - name: Cylinder.087
+      parentName: robot - punch(Clone)
+      position: {x: 1.0544899, y: 2.7828841, z: -0.10717654}
+      rotation: {x: 0.000000024416368, y: 0.70710695, z: -0.70710665, w: -0.000000086233584}
+      scale: {x: 14.081493, y: 14.081493, z: 9.228131}
+    - name: BezierCurve.003
+      parentName: robot - punch(Clone)
+      position: {x: -0.84501415, y: 2.0313091, z: -0.020407638}
+      rotation: {x: -0.7071068, y: -0.0000000014487985, z: 0.0000000021534408, w: 0.7071067}
+      scale: {x: 100, y: 99.99998, z: 100}
+    - name: Cylinder.088
+      parentName: robot - punch(Clone)
+      position: {x: -1.0544926, y: 1.7153666, z: -0.10717648}
+      rotation: {x: 0.70710695, y: -0.000000056570872, z: -0.000000053382585, w: 0.7071066}
+      scale: {x: -25.214512, y: -25.214514, z: -2.0988417}
+    - name: Cylinder.089
+      parentName: robot - punch(Clone)
+      position: {x: -0.41220003, y: 0.7105248, z: -0.101597294}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 15.074377, y: 15.074377, z: 12.099905}
+    - name: Cylinder.090
+      parentName: robot - punch(Clone)
+      position: {x: -0.41219988, y: 1.4043527, z: -0.10159722}
+      rotation: {x: 0.000000022360073, y: 0.70710695, z: -0.70710665, w: -0.00000008417729}
+      scale: {x: 15.348543, y: 15.348543, z: 15.0644865}
+    - name: Cylinder.091
+      parentName: robot - punch(Clone)
+      position: {x: 1.05449, y: 3.3572009, z: -0.107176214}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 17.660727, y: 17.660727, z: 19.451803}
+    - name: BezierCurve.004
+      parentName: robot - punch(Clone)
+      position: {x: -1.2373111, y: 2.6213198, z: -0.12434628}
+      rotation: {x: -0.43319497, y: 0.5588759, z: -0.55887544, w: -0.4331952}
+      scale: {x: -99.999985, y: -99.99999, z: -100.000015}
+    - name: Cone.013
+      parentName: robot - punch(Clone)
+      position: {x: -1.4118136, y: 1.1940464, z: -0.10717663}
+      rotation: {x: 0.70672, y: 0.023388015, z: 0.02338842, w: 0.70671976}
+      scale: {x: 29.63388, y: 29.63388, z: 29.633877}
+    - name: Cylinder.092
+      parentName: robot - punch(Clone)
+      position: {x: 0.41219997, y: 0.71052474, z: -0.10159729}
+      rotation: {x: 0.50000006, y: -0.49999997, z: -0.5, w: 0.49999997}
+      scale: {x: -15.074377, y: -15.074377, z: -12.099906}
+    - name: Cylinder.093
+      parentName: robot - punch(Clone)
+      position: {x: 0.41219988, y: 1.404353, z: -0.10159722}
+      rotation: {x: -0.00000013766314, y: 0.7071066, z: 0.70710695, w: -0.00000013769441}
+      scale: {x: -15.34854, y: -15.348543, z: -15.064486}
+    - name: Cylinder.094
+      parentName: robot - punch(Clone)
+      position: {x: 1.0544212, y: 3.3572016, z: -0.107176244}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 12.775599, y: 12.775599, z: 10.254722}
+    - name: BezierCurve.005
+      parentName: robot - punch(Clone)
+      position: {x: 1.1667635, y: 2.6213202, z: -0.12434628}
+      rotation: {x: -0.43319497, y: 0.5588759, z: -0.55887544, w: -0.4331952}
+      scale: {x: -99.999985, y: -99.99999, z: -100.000015}
+    - name: Sphere.005
+      parentName: robot - punch(Clone)
+      position: {x: -0, y: 4.22446, z: 0.00000068825193}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 52.226627, y: 52.226627, z: 52.226627}
+    - name: Cone.014
+      parentName: robot - punch(Clone)
+      position: {x: -1.2252861, y: 1.5282928, z: -0.107692085}
+      rotation: {x: 0.5863569, y: -0.3926664, z: -0.39520302, w: 0.5880589}
+      scale: {x: 29.691553, y: 15.649703, z: 36.55385}
+    - name: Cylinder.095
+      parentName: robot - punch(Clone)
+      position: {x: -0.41219988, y: 0.30986452, z: -0.10159741}
+      rotation: {x: 0.000000022547027, y: 0.70710695, z: -0.70710665, w: -0.000000084364245}
+      scale: {x: 13.157283, y: 13.157283, z: 5.1426454}
+    - name: Cylinder.096
+      parentName: robot - punch(Clone)
+      position: {x: -1.286364, y: 3.357201, z: -0.107176214}
+      rotation: {x: 0.5643268, y: 0.42606977, z: -0.5643265, w: -0.42606968}
+      scale: {x: 7.556671, y: 7.556672, z: 3.3022366}
+    - name: Plane.007
+      parentName: robot - punch(Clone)
+      position: {x: -0, y: 0.21450195, z: 0.00000003494681}
+      rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
+      scale: {x: 94.92238, y: 94.92238, z: 94.92238}
+    - name: Cylinder.097
+      parentName: robot - punch(Clone)
+      position: {x: -1.05449, y: 2.32108, z: -0.10717662}
+      rotation: {x: 0.000000023422727, y: 0.70710695, z: -0.70710665, w: -0.00000008523995}
+      scale: {x: 10.392551, y: 10.392553, z: 4.371877}
+    - name: Cone.015
+      parentName: robot - punch(Clone)
+      position: {x: -1.299866, y: 0.95062757, z: -0.10717669}
+      rotation: {x: 0.70126414, y: -0.09071247, z: -0.09071179, w: 0.701264}
+      scale: {x: 29.581984, y: 20.8278, z: 13.348843}
+    - name: Cylinder.098
+      parentName: robot - punch(Clone)
+      position: {x: 0.41219988, y: 0.30986452, z: -0.10159739}
+      rotation: {x: -0.00000013805462, y: 0.7071066, z: 0.70710695, w: -0.00000013730293}
+      scale: {x: -13.157283, y: -13.157283, z: -5.1426454}
+    - name: Plane.008
+      parentName: robot - punch(Clone)
+      position: {x: -0, y: 0.21450195, z: 0.00000003494681}
+      rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071067}
+      scale: {x: 94.92238, y: 94.92238, z: 94.92238}
+    - name: Cone.016
+      parentName: robot - punch(Clone)
+      position: {x: -0.8758319, y: 1.1940466, z: -0.41662556}
+      rotation: {x: 0.33310485, y: -0.6003436, z: 0.6237315, w: 0.3736145}
+      scale: {x: 29.633879, y: 29.63388, z: 29.633877}
+    - name: Cylinder.099
+      parentName: robot - punch(Clone)
+      position: {x: 1.0544806, y: 2.3210797, z: -0.10717639}
+      rotation: {x: -0.5, y: -0.50000006, z: 0.49999988, w: 0.50000006}
+      scale: {x: 15.227728, y: 15.227728, z: 16.772058}
+    - name: Cylinder.100
+      parentName: robot - punch(Clone)
+      position: {x: -0.64696723, y: 0.7105248, z: -0.10159729}
+      rotation: {x: 0.5643267, y: 0.42606974, z: -0.56432664, w: -0.42606977}
+      scale: {x: 9.420013, y: 9.420017, z: 4.1165094}
+    - name: Cylinder.101
+      parentName: robot - punch(Clone)
+      position: {x: 0.64696723, y: 0.71052474, z: -0.10159729}
+      rotation: {x: 0.42606965, y: -0.56432664, z: -0.42606965, w: 0.5643268}
+      scale: {x: -9.420014, y: -9.420014, z: -4.1165094}
+    - name: Plane.009
+      parentName: robot - punch(Clone)
+      position: {x: -0.0000000205636, y: 0.21450166, z: 0.000000028837286}
+      rotation: {x: -0.7071068, y: -4.648265e-10, z: -0.0000000010406573, w: 0.7071067}
+      scale: {x: 94.92239, y: 94.92238, z: 94.92239}
+    - name: Cone.017
+      parentName: robot - punch(Clone)
+      position: {x: -0.968649, y: 1.5282928, z: -0.25483036}
+      rotation: {x: -0.63543415, y: 0.70560735, z: -0.31019837, w: 0.046029724}
+      scale: {x: 29.69155, y: 15.649704, z: 36.553852}
+    - name: Plane.010
+      parentName: robot - punch(Clone)
+      position: {x: -0.4156233, y: -0.46549788, z: -0.54171836}
+      rotation: {x: -0.7071068, y: 1.5962444e-10, z: -7.6341466e-10, w: 0.7071067}
+      scale: {x: 81.02775, y: 106.04267, z: 95.267715}
+    - name: Plane.011
+      parentName: robot - punch(Clone)
+      position: {x: 0.4156233, y: -0.46549788, z: -0.54171836}
+      rotation: {x: 0.7071069, y: -2.3705277e-11, z: 5.4302135e-10, w: 0.7071067}
+      scale: {x: -81.027756, y: -106.04267, z: -95.267715}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

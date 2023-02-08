@@ -10,7 +10,7 @@ namespace Enemies.CustomTasks{
 		public BBParameter<Transform> Origin;
 		public BBParameter<Transform> Target;
 
-		private float radius;
+		public float radius { get; set; }
 
 		protected override bool OnCheck()
 		{
@@ -22,7 +22,7 @@ namespace Enemies.CustomTasks{
 				return false;
 			
 			float distance = Vector3.Distance(Origin.value.position, Target.value.position) - radius;
-			
+
 			if(distance <= Range.value)
 				RotateToTarget();
 			

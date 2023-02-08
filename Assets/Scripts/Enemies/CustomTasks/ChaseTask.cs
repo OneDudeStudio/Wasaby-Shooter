@@ -13,41 +13,42 @@ namespace Enemies.CustomTasks
 		public BBParameter<float> MinimumDistance;
 		public BBParameter<Animator> Animator;
 
-		private const string EnemyWalking = "EnemyWalking";
-		private const string Idle = "Idle";
-
 		private float radius;
-		
+		private readonly int WalkingAnimaitonId = UnityEngine.Animator.StringToHash("Walking");
+
 		protected override void OnExecute()
 		{
 			float targetRadius = Target.value.gameObject.GetComponent<CapsuleCollider>().radius;
 			float originRadius = Agent.value.gameObject.GetComponent<CapsuleCollider>().radius;
+			
 			radius = originRadius + targetRadius;
 			Agent.value.updateRotation = false;
 		}
 
 		protected override void OnUpdate()
 		{
-			if (Agent.isNull)
+			if (!Animator.isNull && Animator.value.GetCurrentAnimatorStateInfo(0).IsName("MeleePunch"))
 				return;
 			
+
 			RotateToTarget();
 			float distance = Vector3.Distance(agent.transform.position, Target.value.position);
-			 
-			if (distance > (MinimumDistance.value + radius) && Agent.value)
+
+			if (Agent.isNull || !Agent.value.isOnNavMesh)
+				return;
+			
+			if (distance > (MinimumDistance.value + radius))
 			{
 				 Agent.value.SetDestination(Target.value.transform.position);
 				 if(!Animator.isNull)
-					 Animator.value.SetTrigger(EnemyWalking);
+					 Animator.value.SetBool(WalkingAnimaitonId, true);
 			}
 			else
 			{
 				 Agent.value.SetDestination(Agent.value.transform.position);
 				 if (!Animator.isNull)
 				 {
-					 Animator.value.ResetTrigger(EnemyWalking);
-					 Animator.value.Play(Idle);
-					 
+					 Animator.value.SetBool(WalkingAnimaitonId, false);
 				 }
 			}
 		}
@@ -58,10 +59,7 @@ namespace Enemies.CustomTasks
 				Agent.value.SetDestination(Agent.value.transform.position);
 			
 			if (!Animator.isNull)
-			{
-				Animator.value.ResetTrigger(EnemyWalking);	
-				Animator.value.Play(Idle);
-			}
+				Animator.value.SetBool(WalkingAnimaitonId, false);
 		}
 
 		private void RotateToTarget()

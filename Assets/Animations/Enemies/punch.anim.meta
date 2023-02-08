@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Materials/Red glow.mat.meta
+guid: 7a99ed2dbd8aa0744814f3852b1f6a49
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+=======
+guid: 355fa0faba1e74c49b8ce32db0e222ec
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+>>>>>>> Stashed changes:Assets/Animations/Enemies/punch.anim.meta
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

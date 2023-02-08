@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NodeCanvas.BehaviourTrees;
 using PlayerController;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,19 +14,23 @@ namespace Enemies
         [SerializeField] protected float _defaultSpeed;
         [SerializeField] private Material _hitMaterial;
         [SerializeField] private float _health;
+        
         [SerializeField] private float _pushForce;
+        [SerializeField] private float _pushTime;
 
+        protected BehaviourTreeOwner behaviourTreeOwner;
         private List<SkinnedMeshRenderer> _meshRenderers;
 
+        private bool _isHit;
         private bool _canApplyDamage = true;
         private float _maxHealth;
 
         private NavMeshAgent _navMeshAgent;
-        private PlayerManager _playerManager;
+        protected PlayerManager playerManager;
        
         private Animator _animator;
         private float _walkingAnimationSpeed;
-        private const string EnemySpeed = "EnemySpeed";
+        private const string EnemySpeedModifier = "EnemySpeed";
 
         public event Action Died;
         public event Action Damaged;
@@ -37,6 +42,7 @@ namespace Enemies
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
             _animator = GetComponent<Animator>();
+            behaviourTreeOwner = GetComponent<BehaviourTreeOwner>();
 
             _applyableEffects.Add(new Burning(this));
             _applyableEffects.Add(new Freeze(this));
@@ -47,14 +53,14 @@ namespace Enemies
 
         private void Start()
         {
-            _playerManager = FindObjectOfType<PlayerManager>();
+            playerManager = FindObjectOfType<PlayerManager>();
             
             _maxHealth = _health;
             SetSpeed(_defaultSpeed);
             _navMeshAgent.enabled = true;
             
             if(_animator)
-                _walkingAnimationSpeed = _animator.GetFloat(EnemySpeed);
+                _walkingAnimationSpeed = _animator.GetFloat(EnemySpeedModifier);
 
             FindObjectOfType<EffectsController>().AddVictim(this);
         }
@@ -102,8 +108,13 @@ namespace Enemies
                 _canApplyDamage = false;
                 return false;
             }
-            
+
+            if (_isHit)
+                return true;
+
+            _isHit = true;
             StartCoroutine(Hit());
+            
             return true;
         }
         
@@ -121,30 +132,30 @@ namespace Enemies
             
             for (int i = 0; i < _meshRenderers.Count; i++)
                 _meshRenderers[i].material = materials[i];
-            
+
+            _isHit = false;
             StartCoroutine(nameof(Push));
         }
 
         private IEnumerator Push()
         {
             Vector3 start = transform.position;
-            Vector3 direction = (start - _playerManager.transform.position).normalized * _pushForce;
+            Vector3 direction = (start - playerManager.transform.position).normalized * _pushForce;
             Vector3 end = new Vector3((start + direction).x, start.y, (start + direction).z);
-
-            float pushTime = 0.5f;
-            float timer = pushTime;
             
-            _navMeshAgent.isStopped = true;
+            float timer = _pushTime;
+            
+            _navMeshAgent.enabled = false;
             
             while (timer > 0)
             {
-                float interpolant = (pushTime - timer) / pushTime;
+                float interpolant = (_pushTime - timer) / _pushTime;
                 transform.position = Vector3.Lerp(start, end, interpolant);
                 timer -= Time.deltaTime;
                 yield return null;
             }
             
-            _navMeshAgent.isStopped = false;
+            _navMeshAgent.enabled = true;
         }
 
         public void Die()
@@ -158,7 +169,7 @@ namespace Enemies
             SetSpeed(_defaultSpeed * modifier);
   
             if(_animator)
-                _animator.SetFloat(EnemySpeed, modifier);
+                _animator.SetFloat(EnemySpeedModifier, modifier);
         }
 
         public void ResetSpeed()
@@ -166,7 +177,7 @@ namespace Enemies
             SetSpeed(_defaultSpeed);
             
             if(_animator)
-                _animator.SetFloat(EnemySpeed, _walkingAnimationSpeed);
+                _animator.SetFloat(EnemySpeedModifier, _walkingAnimationSpeed);
         }
     }
 }

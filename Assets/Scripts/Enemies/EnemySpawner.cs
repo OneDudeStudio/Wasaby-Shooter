@@ -8,7 +8,7 @@ namespace Enemies
     {
         [SerializeField] private EnemyFactory _enemyFactory;
 
-        public List<Enemy> SpawnSquad(EnemyWave wave, List<Transform> points)
+        public List<Enemy> SpawnWave(EnemyWave wave, List<Transform> points)
         {
             int index = 0;
             var enemies = new List<Enemy>();
@@ -17,9 +17,6 @@ namespace Enemies
             {
                 for (var i = 0; i < enemy.Value; i++)
                 {
-                    if (index == points.Count)
-                        return null;
-                    
                     enemies.Add(Spawn(enemy.Key, points[index].position));
                     index = (index + 1) % points.Count;
                 }
