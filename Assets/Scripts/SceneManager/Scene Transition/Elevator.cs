@@ -9,6 +9,7 @@ public class Elevator : MonoBehaviour
     [SerializeField] private Transform _elevatorDoors;
     [SerializeField] private Transform _player;
     [SerializeField] private GameObject _playerCam;
+    [SerializeField] private GameObject _inputManager;
 
     /*private void Update()
     {
@@ -24,7 +25,7 @@ public class Elevator : MonoBehaviour
         print("in elevator");
 
         // disable camera script
-        _playerCam.GetComponent<PlayerCam>().enabled = false;
+        _inputManager.GetComponent<InputManager>().enabled = false;
 
         if (_sceneToSwitch != String.Empty)
         {
@@ -41,7 +42,7 @@ public class Elevator : MonoBehaviour
         print("out elevator");
 
         // enable camera script
-        _playerCam.GetComponent<PlayerCam>().enabled = true;
+        _inputManager.GetComponent<InputManager>().enabled = true;
     }
 
     private void PlayLookAtAnimations()
