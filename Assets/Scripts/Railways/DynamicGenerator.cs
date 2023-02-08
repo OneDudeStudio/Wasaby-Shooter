@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Random = UnityEngine.Random;
@@ -12,6 +13,7 @@ public class DynamicGenerator : MonoBehaviour
     [SerializeField] private float _speed = 3f;
     [SerializeField] private GameObject _directionPoint;
     [SerializeField] private AudioSource _soundForGeneration;
+    [SerializeField] private Renderer _trafficLight;
 
     private float _nextTimeToSpawn;
     private Vector3 _direction;
@@ -22,6 +24,11 @@ public class DynamicGenerator : MonoBehaviour
         _direction = _directionPoint.transform.position - transform.position;
     }
 
+    private void Awake()
+    {
+        
+    }
+
     private void Update()
     {
         if (Time.time > _nextTimeToSpawn)
@@ -30,11 +37,21 @@ public class DynamicGenerator : MonoBehaviour
             if (Generatator)
             {
                 PlaySound();
+                StartCoroutine(TurnTrafficLight());
                 Generate();
             }
         }
     }
 
+    private IEnumerator TurnTrafficLight()
+    {
+        
+        _trafficLight.material.EnableKeyword("_EMISSION");
+        yield return new WaitForSeconds(_delay / 3);
+        _trafficLight.material.DisableKeyword("_EMISSION");
+        
+    }
+    
     private void PlaySound()
     {
         //_soundForGeneration.Play();
