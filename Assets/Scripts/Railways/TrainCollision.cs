@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,8 +14,6 @@ public class TrainCollision : MonoBehaviour
     {
         _otherObjectRagdoll = collision.gameObject.GetComponent<Ragdoll>();
 
-        Debug.Log("Collision!!! " + collision.gameObject.name);
-        
         PushObject(collision);
         PlaySound();
         TakeDamage(collision.gameObject, _damage);
@@ -33,30 +28,36 @@ public class TrainCollision : MonoBehaviour
     private void PushObject(Collision collision)
     {
         _otherObjectRagdoll.ActivateRagdoll();
-        
-        Vector3 vectorFromCollisionPointToCenter = new Vector3(transform.position.x - collision.contacts[0].point.x, 
-            0, 
+
+        var direction = GetPushDirection(collision);
+
+        _otherObjectRagdoll.ApplyForce(new Vector3(direction.x * _pushForce, direction.y, direction.z * _pushForce));
+    }
+
+    private Vector3 GetPushDirection(Collision collision)
+    {
+        Vector3 vectorFromCollisionPointToCenter = new Vector3(transform.position.x - collision.contacts[0].point.x,
+            0,
             transform.position.z - collision.contacts[0].point.z);
 
         Vector3 direction;
         if (Vector3.Dot(vectorFromCollisionPointToCenter, transform.right) <= 0)
         {
-
             direction = Quaternion.Euler(0, 45, 0) * transform.forward;
-
         }
         else
         {
             direction = Quaternion.Euler(0, -45, 0) * transform.forward;
         }
-        
+
         direction.y = _pushHeight;
-        _otherObjectRagdoll.ApplyForce(new Vector3(direction.x * _pushForce, direction.y, direction.z * _pushForce));
+
+        return direction;
     }
 
     private void TakeDamage(GameObject damagedObject, float amount)
     {
         IApplyableDamage iApplyableDamage = damagedObject.GetComponent<IApplyableDamage>();
-        iApplyableDamage.TryApplyDamage(amount);
+        if (iApplyableDamage != null) iApplyableDamage.TryApplyDamage(amount);
     }
 }

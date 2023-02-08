@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ledge
+  - GeneratedDynamicObject
   layers:
   - Default
   - TransparentFX

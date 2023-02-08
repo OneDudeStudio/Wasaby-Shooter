@@ -4,6 +4,11 @@ public class Destroyer : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        if (other.CompareTag("GeneratedDynamicObject"))
+        {
+            
+            Destroy(other.gameObject);
+            
+        }
     }
 }

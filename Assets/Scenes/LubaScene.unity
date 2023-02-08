@@ -390,7 +390,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5456757870563664778, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.54
+      value: 31.7
       objectReference: {fileID: 0}
     - target: {fileID: 5456757870563664778, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -398,7 +398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5456757870563664778, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.37
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 5456757870563664778, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -560,7 +560,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4d5080729cbfecae9aa927775a67ef3f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1046,36 +1046,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d6972a4860090f40b6d13b6f665f722, type: 3}
---- !u!1 &540096109
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 540096110}
-  m_Layer: 0
-  m_Name: SoundDestroyer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &540096110
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 540096109}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 568769831}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &568769830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1074,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 75767234}
-  - {fileID: 540096110}
   - {fileID: 784562650}
   m_Father: {fileID: 846886827}
   m_RootOrder: 2
@@ -1415,7 +1384,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 568769831}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &784562651
 AudioSource:
@@ -1721,7 +1690,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30506
+  m_Name: pb_Mesh30564
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
