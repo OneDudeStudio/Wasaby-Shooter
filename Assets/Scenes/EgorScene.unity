@@ -603,6 +603,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8823273, y: 2, z: 0.58392507}
   m_Center: {x: 0.2645099, y: 0.0000019073486, z: -0.03418564}
+--- !u!114 &504430311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1264350241, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+  m_PrefabInstance: {fileID: 1550153424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150addeb05c5aac4985df3d96f922110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &504716072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,6 +1044,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7015982291206062930, guid: 9d6972a4860090f40b6d13b6f665f722, type: 3}
+      propertyPath: _rifle
+      value: 
+      objectReference: {fileID: 1121649897}
+    - target: {fileID: -7015982291206062930, guid: 9d6972a4860090f40b6d13b6f665f722, type: 3}
+      propertyPath: _shotgun
+      value: 
+      objectReference: {fileID: 504430311}
     - target: {fileID: 6924524828984102728, guid: 9d6972a4860090f40b6d13b6f665f722, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -2042,7 +2061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 533838336659500958, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 533838337751633393, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_IsActive

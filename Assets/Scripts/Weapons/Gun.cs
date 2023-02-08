@@ -11,6 +11,7 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] protected GunVFXController _gunVFX;
     [SerializeField] protected GameObject _hitParticles;
     [SerializeField] protected Transform _shootingPoint;
+
     public GunConfig ThisGunConfig;
 
     private float _damage;
@@ -157,4 +158,9 @@ public abstract class Gun : MonoBehaviour
         _bullet = bullet;
         _gunVFX.SetBulletVFX(bullet.GetType());
     }
+
+
+    public void LockShooting() => _isCanShoot = false;
+    public void UnlockShooting() => _isCanShoot = true;
+
 }

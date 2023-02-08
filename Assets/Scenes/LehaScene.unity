@@ -622,6 +622,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7015982291206062930, guid: 9d6972a4860090f40b6d13b6f665f722, type: 3}
+      propertyPath: _rifle
+      value: 
+      objectReference: {fileID: 1189146477}
+    - target: {fileID: -7015982291206062930, guid: 9d6972a4860090f40b6d13b6f665f722, type: 3}
+      propertyPath: _shotgun
+      value: 
+      objectReference: {fileID: 533838336631747870}
     - target: {fileID: 6924524828984102728, guid: 9d6972a4860090f40b6d13b6f665f722, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -10311,6 +10319,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 533838336659500958, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5456757870563664777, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_Name
       value: FinalPlayer
@@ -10397,6 +10409,17 @@ PrefabInstance:
       objectReference: {fileID: 1363483664}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+--- !u!114 &533838336631747870 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1264350241, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+  m_PrefabInstance: {fileID: 533838336631747869}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150addeb05c5aac4985df3d96f922110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2795590433407634588
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class Rifle : Gun
         {
             direction = (hit.point - _shootingPoint.position).normalized * hit.distance;
             Instantiate(_hitParticles, hit.point, Quaternion.LookRotation(hit.normal));
-       
+            _gunVFX.ShowHitParticles(hit.transform.gameObject.layer);
             if (hit.transform.TryGetComponent(out IApplyableDamage damaged))
             {
                 _bullet.DealDamage(damaged, CalculateDamage(hit.distance));

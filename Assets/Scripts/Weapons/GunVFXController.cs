@@ -62,4 +62,10 @@ public class GunVFXController : MonoBehaviour
     {
         _curreentShootParticles.Play();
     }
+
+    public void ShowHitParticles(LayerMask layer) 
+    { 
+        
+    }
+
 }

@@ -1216,6 +1216,7 @@ MonoBehaviour:
   _elevatorDoors: {fileID: 605667163}
   _player: {fileID: 837287883}
   _playerCam: {fileID: 753033737}
+  _inputManager: {fileID: 0}
 --- !u!65 &874779144
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1859,7 +1860,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1264350269, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 533838336659500958, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_IsActive
