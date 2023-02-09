@@ -58,7 +58,7 @@ namespace Enemies
             EnemyWave wave = info.Wave;
 
             List<Transform> points = info.Points;
-            
+
             var random = new System.Random();
             points = points.OrderBy(point => random.Next()).ToList();
             
@@ -66,6 +66,8 @@ namespace Enemies
 
             var enemies = _enemySpawner.SpawnWave(wave, points);
             InitializeEnemies(enemies);
+            
+            TrySpawnExtraEnemies(info);
             
             _currentSquadIndex++;
         }
@@ -83,6 +85,25 @@ namespace Enemies
         {
             foreach (var obstacle in _obstacles.Where(obstacle => obstacle))
                 obstacle.SetActive(state);
+        }
+
+        private void TrySpawnExtraEnemies(EnemyWaveInfo info)
+        {
+            List<FullSpawnPointInfo> extraPoints = info.ExtraPoints;
+            if(extraPoints.Count == 0)
+                return;
+
+            var enemies = new List<Enemy>();
+            foreach (var extraPoint in extraPoints)
+            {
+                _currentSquadEnemiesCount += extraPoint.MeleeEnemiesCount + extraPoint.BombEnemiesCount;
+                
+                for (int i = 0; i < extraPoint.MeleeEnemiesCount; i++)
+                    enemies.Add(_enemySpawner.Spawn(EnemyType.Melee, extraPoint.Point.position));
+                for (int i = 0; i < extraPoint.BombEnemiesCount; i++)
+                    enemies.Add(_enemySpawner.Spawn(EnemyType.Bomb, extraPoint.Point.position));
+            }
+            InitializeEnemies(enemies);
         }
     }
 }

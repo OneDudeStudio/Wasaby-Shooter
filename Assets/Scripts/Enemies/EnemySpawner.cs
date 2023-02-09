@@ -31,7 +31,7 @@ namespace Enemies
                 Spawn(type, position);
         }
 
-        private Enemy Spawn(EnemyType type, Vector3 position)
+        public Enemy Spawn(EnemyType type, Vector3 position)
         {
             var enemy = _enemyFactory.Get(type);
 

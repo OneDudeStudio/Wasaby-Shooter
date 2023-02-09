@@ -10,8 +10,8 @@ namespace Enemies
         [SerializeField] private int _meleeEnemyCount;
         [SerializeField] private int _bombEnemyCount;
         [SerializeField] private List<Transform> _points;
+        [SerializeField] private List<FullSpawnPointInfo> _extraPoints;
 
-        
         private EnemyWave wave;
         public EnemyWave Wave
         {
@@ -27,6 +27,8 @@ namespace Enemies
             }
         }
         public List<Transform> Points => _points;
+        public List<FullSpawnPointInfo> ExtraPoints => _extraPoints;
+
         public int EnemiesCount => _meleeEnemyCount + _bombEnemyCount;
     }
 }

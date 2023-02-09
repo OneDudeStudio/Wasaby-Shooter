@@ -54,5 +54,5 @@ MonoBehaviour:
   _rangeModule:
     DamagePrecentMultiplier: -20
     AdditionalRange: 3
-  PelletCount: 15
+  PelletCount: 6
   Variance: 0.4
