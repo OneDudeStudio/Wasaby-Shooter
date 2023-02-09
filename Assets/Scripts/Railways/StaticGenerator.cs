@@ -40,7 +40,7 @@ public class StaticGenerator : MonoBehaviour
 
             GameObject newGameObject =
                 Instantiate(_gameObjectForGeneration,
-                    newGameObjectPosition + Vector3.down * transform.position.y + Vector3.down * 0.2f,
+                    newGameObjectPosition + Vector3.down * transform.localPosition.y + Vector3.down * 0.2f,
                     Quaternion.LookRotation(_direction) * Quaternion.Euler(0f, -90f, 0f));
             // TO DO:   can be delete if another prefab
             // TO DO: * Quaternion.Euler(0f, -90f, 0f) can delete if another prefab
