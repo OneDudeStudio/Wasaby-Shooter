@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class CursorController : MonoBehaviour
+public class CursorController
 {
-    private void Start()
+    public CursorController()
     {
         HideCursor();
     }
