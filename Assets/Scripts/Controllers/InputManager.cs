@@ -34,6 +34,7 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private Shop _shop;
 
+    private CursorController _cursorController;
 
 
     private bool _isCanMove = true;
@@ -50,6 +51,15 @@ public class InputManager : MonoBehaviour
 
     public void LockWeapons() => _isCanUseWeapon = false;
     public void UnlockWeapons() => _isCanUseWeapon = true;
+
+    public void ShowCursor() => _cursorController.ShowCursor();
+    public void HideCursor() => _cursorController.HideCursor();
+
+
+    private void Start()
+    {
+        _cursorController = new CursorController();
+    }
 
     private void Update()
     {

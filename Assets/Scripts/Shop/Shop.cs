@@ -6,7 +6,6 @@ public class Shop : MonoBehaviour
 {
     private UIController _uiController;
     private InputManager _inputManager;
-    private CursorController _cursorController;
     private GunController _gunController;
 
     private bool _isInShop = false;
@@ -14,7 +13,6 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        _cursorController = FindObjectOfType<CursorController>();
         _inputManager = FindObjectOfType<InputManager>();
         _uiController = FindObjectOfType<UIController>();
         _gunController = FindObjectOfType<GunController>();
@@ -54,7 +52,7 @@ public class Shop : MonoBehaviour
     private void OpenShopWindow()
     {
         _uiController.SetCanvasActive(CanvasType.Shop);
-        _cursorController.ShowCursor();
+        _inputManager.ShowCursor();
         _inputManager.LockCameraRotation();
         _inputManager.LockMovement();
         _inputManager.LockWeapons();
@@ -63,7 +61,7 @@ public class Shop : MonoBehaviour
     private void CloseShopWindow()
     {
         _uiController.SetCanvasDeactive(CanvasType.Shop);
-        _cursorController.HideCursor();
+        _inputManager.HideCursor();
         _inputManager.UnlockCameraRotation();
         _inputManager.UnlockMovement();
         _inputManager.UnlockWeapons();

@@ -1,3 +1,4 @@
+using Enemies;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,7 +28,7 @@ public class ElectricityController : MonoBehaviour
         if (!_isCanStartLightningChain)
             return;
 
-        Transform targetTransform = ((TestBox)victim).transform;
+        Transform targetTransform = ((Enemy)victim).transform;
         _isCanStartLightningChain = false;
 
         Collider[] colliders = new Collider[_maxTargets];
