@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using PlayerController;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -23,11 +24,12 @@ namespace Enemies
                 StartBattle();
         }
         
+        
         private void StartBattle()
         {
             _initialized = true;
             _enemyDetector.PlayerDetected = false;
-            _enemyDetector.Detected += SetObstacles;
+            _enemyDetector.Detected += TrySetObstacles;
             
             SpawnWave();
         }
@@ -77,9 +79,10 @@ namespace Enemies
             }
         }
 
-        private void SetObstacles(bool state)
+        private void TrySetObstacles(bool state)
         {
-            _obstacles.ForEach(obstacle => obstacle.SetActive(state));
+            foreach (var obstacle in _obstacles.Where(obstacle => obstacle))
+                obstacle.SetActive(state);
         }
     }
 }

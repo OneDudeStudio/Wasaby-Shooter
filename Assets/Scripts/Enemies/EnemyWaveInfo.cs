@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemies
 {
@@ -10,9 +9,9 @@ namespace Enemies
     {
         [SerializeField] private int _meleeEnemyCount;
         [SerializeField] private int _bombEnemyCount;
-
         [SerializeField] private List<Transform> _points;
 
+        
         private EnemyWave wave;
         public EnemyWave Wave
         {
