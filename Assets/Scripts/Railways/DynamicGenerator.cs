@@ -24,11 +24,6 @@ public class DynamicGenerator : MonoBehaviour
         _direction = _directionPoint.transform.position - transform.position;
     }
 
-    private void Awake()
-    {
-        
-    }
-
     private void Update()
     {
         if (Time.time > _nextTimeToSpawn)
@@ -36,7 +31,7 @@ public class DynamicGenerator : MonoBehaviour
             _nextTimeToSpawn = Time.time + _delay;
             if (Generatator)
             {
-                PlaySound();
+                //PlaySound();
                 StartCoroutine(TurnTrafficLight());
                 Generate();
             }
