@@ -1,3 +1,4 @@
+using PlayerController.PlayerLocomotionSystem;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -12,6 +13,10 @@ public class InputManager : MonoBehaviour
     [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode _sprintKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode _crouchKey = KeyCode.LeftControl;
+
+    [Space]
+    [Header("SwingingKeys")]
+    [SerializeField] private KeyCode _swingKey = KeyCode.E;
 
     [Space]
     [Header("Axis")]
@@ -68,24 +73,23 @@ public class InputManager : MonoBehaviour
             _playerCam.RotateCamera(Input.GetAxisRaw(_horizontalMouseAxis), Input.GetAxisRaw(_verticalMouseAxis));
         }
 
-
-        if(_isCanMove)
+        if (_isCanMove)
         {
             _movementAdvanced.SetInputs(Input.GetAxisRaw(_horizontalAxis), Input.GetAxisRaw(_verticalAxis));
 
             if (Input.GetKey(_jumpKey))
             {
-                _movementAdvanced.TryJump();
+                _movementAdvanced.TryJumpByHandler();
             }
 
             if (Input.GetKeyDown(_crouchKey))
             {
-                _movementAdvanced.TryStartCrouch();
+                _movementAdvanced.TryStartCrouchByHandler();
             }
 
             if (Input.GetKeyUp(_crouchKey))
             {
-                _movementAdvanced.StopCrouch();
+                _movementAdvanced.StopCrouchByHandler();
             }
 
             if (Input.GetKey(_sprintKey))
@@ -94,6 +98,15 @@ public class InputManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(_swingKey))
+        {
+            _movementAdvanced.StartSwingByHandler();
+        }
+
+        if (Input.GetKeyUp(_swingKey))
+        {
+            _movementAdvanced.StopSwingByHandler();
+        }
 
         if (_isCanUseWeapon)
         {

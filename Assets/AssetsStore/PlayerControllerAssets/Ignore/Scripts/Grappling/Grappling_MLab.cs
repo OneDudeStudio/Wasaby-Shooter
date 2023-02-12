@@ -63,7 +63,7 @@ public class Grappling_MLab: MonoBehaviour
 
     private bool grappleExecuted;
 
-    private PlayerMovementGrappling pm;
+   // private PlayerMovementGrappling pm;
 
     private void Start()
     {
@@ -72,7 +72,7 @@ public class Grappling_MLab: MonoBehaviour
             whatIsGrappleable = LayerMask.GetMask("Default");
 
         // get references
-        pm = GetComponent<PlayerMovementGrappling>();
+        //pm = GetComponent<PlayerMovementGrappling>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -195,7 +195,7 @@ public class Grappling_MLab: MonoBehaviour
         {
             // this will cause the PlayerMovement script to change to MovemementMode.freeze
             /// -> therefore the player will freeze mid-air for some time before grappling
-            pm.freeze = true;
+            //pm.freeze = true;
 
             grapplePoint = hit.point;
 
@@ -207,7 +207,7 @@ public class Grappling_MLab: MonoBehaviour
         else
         {
             // we still want to freeze the player for a bit
-            pm.freeze = true;
+           // pm.freeze = true;
 
             // the grapple point is now just a point in the air
             /// calculated by taking your cameras position + the forwardDirection times your maxGrappleDistance
@@ -221,7 +221,7 @@ public class Grappling_MLab: MonoBehaviour
     public void ExcecuteGrapple()
     {
         // make sure that the player can move again
-        pm.freeze = false;
+        //pm.freeze = false;
 
         if(grappleMode == GrappleMode.Precise)
         {
@@ -236,7 +236,7 @@ public class Grappling_MLab: MonoBehaviour
             // no upwards force when point is below player
             /// if (grapplePointRelativeYPos < 0) highestPointOfArc = 0;
 
-            pm.JumpToPosition(grapplePoint, highestPointOfArc);
+           // pm.JumpToPosition(grapplePoint, highestPointOfArc);
         }
 
         if(grappleMode == GrappleMode.Basic)
@@ -276,7 +276,7 @@ public class Grappling_MLab: MonoBehaviour
     public void StopGrapple()
     {
         // make sure player can move
-        pm.freeze = false;
+        //pm.freeze = false;
 
         // reset the grappleExecuted bool
         grappleExecuted = false;

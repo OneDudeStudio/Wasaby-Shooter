@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PlayerController.PlayerLocomotionSystem;
 using UnityEngine;
 
 public class ClimbingDone : MonoBehaviour
@@ -174,7 +175,7 @@ public class ClimbingDone : MonoBehaviour
 
         bool newWall = frontWallHit.transform != lastWall || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > minWallNormalAngleChange;
 
-        if ((wallFront && newWall) || pm.grounded)
+        if ((wallFront && newWall) || pm.IsGrounded)
         {
             climbTimer = maxClimbTime;
             climbJumpsLeft = climbJumps;
@@ -206,7 +207,7 @@ public class ClimbingDone : MonoBehaviour
     private void StartClimbing()
     {
         climbing = true;
-        pm.climbing = true;
+       // pm.climbing = true;
 
         lastWall = frontWallHit.transform;
         lastWallNormal = frontWallHit.normal;
@@ -222,7 +223,7 @@ public class ClimbingDone : MonoBehaviour
     private void StopClimbing()
     {
         climbing = false;
-        pm.climbing = false;
+        //pm.climbing = false;
     }
 
     private void ClimbJump()
@@ -278,8 +279,8 @@ public class ClimbingDone : MonoBehaviour
     {
         holding = true;
 
-        pm.restricted = true;
-        pm.unlimited = true;
+        pm.IsRestricted = true;
+        pm.IsUnlimited = true;
 
         currLedge = ledgeHit.transform;
         lastLedge = ledgeHit.transform;
@@ -313,8 +314,8 @@ public class ClimbingDone : MonoBehaviour
         // Hold onto ledge
         else
         {
-            if (pm.unlimited) pm.unlimited = false;
-            if (!pm.freeze) pm.freeze = true;
+            if (pm.IsUnlimited) pm.IsUnlimited = false;
+            if (!pm.IsFreeze) pm.IsFreeze = true;
             ///rb.velocity = Vector3.zero;
             print("hanging on ledge");
         }
@@ -325,9 +326,9 @@ public class ClimbingDone : MonoBehaviour
         holding = false;
         timeOnLedge = 0;
 
-        pm.freeze = false;
-        pm.unlimited = false;
-        pm.restricted = false;
+        pm.IsFreeze = false;
+        pm.IsUnlimited = false;
+        pm.IsRestricted = false;
 
         rb.useGravity = true;
 

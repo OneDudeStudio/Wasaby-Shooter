@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PlayerController.PlayerLocomotionSystem;
 using UnityEngine;
 
 public class SwingingDone : MonoBehaviour
@@ -8,7 +9,7 @@ public class SwingingDone : MonoBehaviour
     public LineRenderer lr;
     public Transform gunTip, cam, player;
     public LayerMask whatIsGrappleable;
-    public PlayerMovementGrappling pm;
+    public PlayerMovementAdvanced pm;
 
     [Header("Swinging")]
     private float maxSwingDistance = 25f;
@@ -31,31 +32,45 @@ public class SwingingDone : MonoBehaviour
     public KeyCode swingKey = KeyCode.Mouse0;
 
 
+    //in
     private void Update()
     {
-        if (Input.GetKeyDown(swingKey)) StartSwing();
-        if (Input.GetKeyUp(swingKey)) StopSwing();
+        if (Input.GetKeyDown(swingKey))
+        {
+            StartSwing();
+        }
+
+        if (Input.GetKeyUp(swingKey))
+        {
+            StopSwing();
+        }
 
         CheckForSwingPoints();
 
-        if (joint != null) OdmGearMovement();
+        if (joint != null)
+        {
+            OdmGearMovement();
+        }
     }
 
+
+    //in
     private void LateUpdate()
     {
         DrawRope();
     }
 
+    //in
     private void CheckForSwingPoints()
     {
         if (joint != null) return;
 
         RaycastHit sphereCastHit;
-        Physics.SphereCast(cam.position, predictionSphereCastRadius, cam.forward, 
+        Physics.SphereCast(cam.position, predictionSphereCastRadius, cam.forward,
                             out sphereCastHit, maxSwingDistance, whatIsGrappleable);
 
         RaycastHit raycastHit;
-        Physics.Raycast(cam.position, cam.forward, 
+        Physics.Raycast(cam.position, cam.forward,
                             out raycastHit, maxSwingDistance, whatIsGrappleable);
 
         Vector3 realHitPoint;
@@ -98,7 +113,7 @@ public class SwingingDone : MonoBehaviour
             GetComponent<Grappling>().StopGrapple();
         pm.ResetRestrictions();
 
-        pm.swinging = true;
+        pm.IsSwinging = true;
 
         swingPoint = predictionHit.point;
         joint = player.gameObject.AddComponent<SpringJoint>();
@@ -122,7 +137,7 @@ public class SwingingDone : MonoBehaviour
 
     public void StopSwing()
     {
-        pm.swinging = false;
+        pm.IsSwinging = false;
 
         lr.positionCount = 0;
 
@@ -164,12 +179,12 @@ public class SwingingDone : MonoBehaviour
 
     private void DrawRope()
     {
-        // if not grappling, don't draw rope
-        if (!joint) return;
+        if (!joint)
+        {
+            return;
+        }
 
-        currentGrapplePosition = 
-            Vector3.Lerp(currentGrapplePosition, swingPoint, Time.deltaTime * 8f);
-
+        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, swingPoint, Time.deltaTime * 8f);
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);
     }

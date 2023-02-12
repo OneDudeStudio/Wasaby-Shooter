@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using PlayerController.PlayerLocomotionSystem;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 

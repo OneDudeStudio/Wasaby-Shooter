@@ -7,7 +7,12 @@ namespace PlayerController
     public class PlayerManager : MonoBehaviour, IApplyableDamage
     {
         [SerializeField] private float _health = MaxHealth;
-       
+
+        private void Start()
+        {
+            //delete this later
+            Application.targetFrameRate = 60;
+        }
 
         private const float MaxHealth = 100f;
         private bool _canApplyDamage = true;
@@ -24,9 +29,6 @@ namespace PlayerController
         {
             if (!_canApplyDamage)
                 return false;
-
-            
-           
 
             _health -= damage;
 

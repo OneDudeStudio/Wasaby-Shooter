@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PlayerController.PlayerLocomotionSystem;
 using UnityEngine;
 
 // Dave's Tutorials - LedgeGrabbing
@@ -124,8 +125,8 @@ public class LedgeGrabbingDone : MonoBehaviour
 
         holding = true; //
 
-        pm.restricted = true; 
-        pm.unlimited = true;
+        pm.IsRestricted = true;
+        pm.IsUnlimited = true;
 
         currLedge = ledgeHit.transform; //
         lastLedge = ledgeHit.transform; //
@@ -153,8 +154,8 @@ public class LedgeGrabbingDone : MonoBehaviour
         // Hold onto ledge
         else
         {
-            if (pm.unlimited) pm.unlimited = false;
-            if (!pm.freeze) pm.freeze = true;
+            if (pm.IsUnlimited) pm.IsUnlimited = false;
+            if (!pm.IsFreeze) pm.IsFreeze = true;
             ///rb.velocity = Vector3.zero;
             print("hanging on ledge");
         }
@@ -171,9 +172,9 @@ public class LedgeGrabbingDone : MonoBehaviour
         holding = false; //
         timeOnLedge = 0; //
 
-        pm.freeze = false; //
-        pm.unlimited = false; 
-        pm.restricted = false;
+        pm.IsFreeze = false; //
+        pm.IsUnlimited = false;
+        pm.IsRestricted = false;
 
         rb.useGravity = true;
 
