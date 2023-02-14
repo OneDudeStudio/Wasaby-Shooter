@@ -27,16 +27,14 @@ namespace Enemies.CustomTasks
 
 		protected override void OnUpdate()
 		{
-			if (!Animator.isNull && Animator.value.GetCurrentAnimatorStateInfo(0).IsName("MeleePunch"))
+			if (!Animator.isNull && Animator.value.GetCurrentAnimatorStateInfo(0).IsName("Punch"))
 				return;
 			
-
-			RotateToTarget();
-			float distance = Vector3.Distance(agent.transform.position, Target.value.position);
-
 			if (Agent.isNull || !Agent.value.isOnNavMesh)
 				return;
 			
+			float distance = Vector3.Distance(agent.transform.position, Target.value.position);
+
 			if (distance > (MinimumDistance.value + radius))
 			{
 				 Agent.value.SetDestination(Target.value.transform.position);
@@ -55,22 +53,14 @@ namespace Enemies.CustomTasks
 
 		protected override void OnStop()
 		{
+			if (!Agent.value.gameObject)
+				return;
+			
 			if(!Agent.isNull && Agent.value.enabled)
 				Agent.value.SetDestination(Agent.value.transform.position);
 			
 			if (!Animator.isNull)
 				Animator.value.SetBool(WalkingAnimaitonId, false);
-		}
-
-		private void RotateToTarget()
-		{
-			const float rotationSpeed = 5f; 
-			Vector3 direction = (Target.value.position - Agent.value.transform.position).normalized;
-			direction.y = 0;
-			Quaternion rotation = Quaternion.LookRotation(direction);
-			
-			Agent.value.transform.rotation =
-			Quaternion.Lerp(Agent.value.transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 		}
 	}
 }

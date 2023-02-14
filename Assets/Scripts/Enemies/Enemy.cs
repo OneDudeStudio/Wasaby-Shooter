@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NodeCanvas.BehaviourTrees;
-using PlayerController;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,25 +10,29 @@ namespace Enemies
 {
     public abstract class Enemy : MonoBehaviour, IApplyableDamage, ISpeedChangeable, IApplyableEffect
     {
-        [SerializeField] protected float _defaultSpeed;
+        [SerializeField] protected float defaultSpeed;
+        [SerializeField] protected float damage;
+
         [SerializeField] private Material _hitMaterial;
         [SerializeField] private float _health;
         
         [SerializeField] private float _pushForce;
         [SerializeField] private float _pushTime;
 
+        [SerializeField] private float _flashTime;
+        
         protected BehaviourTreeOwner behaviourTreeOwner;
-        private List<SkinnedMeshRenderer> _meshRenderers;
+        private List<Renderer> _meshRenderers;
 
-        private bool _isHit;
         private bool _canApplyDamage = true;
-        private float _maxHealth;
+        private bool isFlashing;
 
         private NavMeshAgent _navMeshAgent;
-        protected PlayerManager playerManager;
+        protected IEnemyTarget target;
        
-        private Animator _animator;
+        protected Animator animator;
         private float _walkingAnimationSpeed;
+        
         private const string EnemySpeedModifier = "EnemySpeed";
 
         public event Action Died;
@@ -40,8 +43,8 @@ namespace Enemies
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            _meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
-            _animator = GetComponent<Animator>();
+            _meshRenderers = GetComponentsInChildren<Renderer>().ToList();
+            animator = GetComponent<Animator>();
             behaviourTreeOwner = GetComponent<BehaviourTreeOwner>();
 
             _applyableEffects.Add(new Burning(this));
@@ -53,18 +56,17 @@ namespace Enemies
 
         private void Start()
         {
-            playerManager = FindObjectOfType<PlayerManager>();
-            
-            _maxHealth = _health;
-            SetSpeed(_defaultSpeed);
+            SetSpeed(defaultSpeed);
             _navMeshAgent.enabled = true;
             
-            if(_animator)
-                _walkingAnimationSpeed = _animator.GetFloat(EnemySpeedModifier);
+            if(animator)
+                _walkingAnimationSpeed = animator.GetFloat(EnemySpeedModifier);
 
             FindObjectOfType<EffectsController>().AddVictim(this);
         }
 
+        public void SetTarget(IEnemyTarget target) => this.target = target;
+        
 
         public void StartEffect<T>() where T : Effect
         {
@@ -81,11 +83,10 @@ namespace Enemies
             }
         }
 
-        public abstract void Attack(IApplyableDamage player);
+        public abstract void TryAttack(IApplyableDamage player);
 
         public void SetSpeed(float speed)
         {
-            //_navMeshAgent.speed = _navMeshAgent.acceleration = speed;
             if(_navMeshAgent)
                 _navMeshAgent.speed = speed;
         }
@@ -95,67 +96,46 @@ namespace Enemies
             if (!_canApplyDamage)
                 return false;
 
-            if (damage < 0)
+            if (damage <= 0)
                 return true;
 
-            if(Math.Abs(_health - _maxHealth) < 1e-5)
-                Damaged?.Invoke();
-
+            Damaged?.Invoke();
             _health -= damage;
+            
             if (_health <= 0)
             {
-                Die();
                 _canApplyDamage = false;
+                Die();
                 return false;
             }
 
-            if (_isHit)
-                return true;
-
-            _isHit = true;
-            StartCoroutine(Hit());
+            if (!isFlashing)
+            {
+                isFlashing = true;
+                StartCoroutine(ApplyFlash());
+            }
+            
+            StartCoroutine(ApplyPush());
             
             return true;
         }
         
-        private IEnumerator Hit()
+        private IEnumerator ApplyPush()
         {
-            List<Material> materials = new List<Material>();
-
-            foreach (var meshRenderer in _meshRenderers)
-            {
-                materials.Add(meshRenderer.material);
-                meshRenderer.material = _hitMaterial;
-            }
-            
-            yield return new WaitForSeconds(.05f);
-            
-            for (int i = 0; i < _meshRenderers.Count; i++)
-                _meshRenderers[i].material = materials[i];
-
-            _isHit = false;
-            StartCoroutine(nameof(Push));
-        }
-
-        private IEnumerator Push()
-        {
-            Vector3 start = transform.position;
-            Vector3 direction = (start - playerManager.transform.position).normalized * _pushForce;
-            Vector3 end = new Vector3((start + direction).x, start.y, (start + direction).z);
-            
-            float timer = _pushTime;
+            Transform victimTransform = transform;
+            Vector3 pushVector = (victimTransform.position - ((MonoBehaviour)target).transform.position).normalized * _pushForce;
             
             _navMeshAgent.enabled = false;
-            
-            while (timer > 0)
-            {
-                float interpolant = (_pushTime - timer) / _pushTime;
-                transform.position = Vector3.Lerp(start, end, interpolant);
-                timer -= Time.deltaTime;
-                yield return null;
-            }
-            
+            StartCoroutine(VictimPusher.Push(victimTransform, pushVector, _pushTime));
+            yield return new WaitForSeconds(_pushTime);
             _navMeshAgent.enabled = true;
+        }
+        
+        private IEnumerator ApplyFlash()
+        {
+            StartCoroutine(VictimFlasher.Flash(_meshRenderers, _hitMaterial, _flashTime));
+            yield return new WaitForSeconds(_flashTime);
+            isFlashing = false;
         }
 
         public void Die()
@@ -166,19 +146,18 @@ namespace Enemies
 
         public void ModifySpeed(float modifier)
         {
-            SetSpeed(_defaultSpeed * modifier);
+            SetSpeed(defaultSpeed * modifier);
   
-            if(_animator)
-                _animator.SetFloat(EnemySpeedModifier, modifier);
+            if(animator)
+                animator.SetFloat(EnemySpeedModifier, modifier);
         }
 
         public void ResetSpeed()
         {
-            SetSpeed(_defaultSpeed);
+            SetSpeed(defaultSpeed);
             
-            if(_animator)
-                _animator.SetFloat(EnemySpeedModifier, _walkingAnimationSpeed);
+            if(animator)
+                animator.SetFloat(EnemySpeedModifier, _walkingAnimationSpeed);
         }
     }
 }
-

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Enemies
 {
-    public class EnemyDetector : MonoBehaviour
+    public class TargetDetector : MonoBehaviour
     {
         [SerializeField] private bool _playerDetected;
 

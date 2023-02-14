@@ -4,14 +4,13 @@ namespace Enemies
 {
     public class BombEnemy : Enemy
     {
-        [SerializeField] private int _damage;
         [SerializeField] private GameObject _explosion;
 
-        public override void Attack(IApplyableDamage player)
+        public override void TryAttack(IApplyableDamage player)
         {
-            player.TryApplyDamage(_damage);
-            Die();
+            player.TryApplyDamage(damage);
             Instantiate(_explosion, transform.position, Quaternion.identity);
+            Die();
         }
     }
 }

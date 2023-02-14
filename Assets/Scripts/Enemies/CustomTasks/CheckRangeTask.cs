@@ -10,34 +10,20 @@ namespace Enemies.CustomTasks{
 		public BBParameter<Transform> Origin;
 		public BBParameter<Transform> Target;
 
-		public float radius { get; set; }
+		public float AdditionalDistance { get; set; }
 
 		protected override bool OnCheck()
 		{
 			float targetRadius = Target.value.gameObject.GetComponent<CapsuleCollider>().radius;
 			float originRadius = Origin.value.gameObject.GetComponent<CapsuleCollider>().radius;
-			radius = originRadius + targetRadius;
+			AdditionalDistance = originRadius + targetRadius;
 			
-			if (Target.value == null)
+			if (Target.isNull)
 				return false;
 			
-			float distance = Vector3.Distance(Origin.value.position, Target.value.position) - radius;
-
-			if(distance <= Range.value)
-				RotateToTarget();
+			float distance = Vector3.Distance(Origin.value.position, Target.value.position) - AdditionalDistance;
 			
 			return distance <= Range.value;
-		}
-		
-		private void RotateToTarget()
-		{
-			const float rotationSpeed = 5f; 
-			Vector3 direction = (Target.value.position - Origin.value.transform.position).normalized;
-			direction.y = 0;
-			Quaternion rotation = Quaternion.LookRotation(direction);
-			
-			Origin.value.transform.rotation =
-			Quaternion.Lerp(Origin.value.transform.rotation, rotation, rotationSpeed * Time.deltaTime);
 		}
 	}
 }

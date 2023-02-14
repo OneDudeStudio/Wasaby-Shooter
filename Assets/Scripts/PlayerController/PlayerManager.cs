@@ -1,10 +1,11 @@
 using System;
+using Enemies;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace PlayerController
 {
-    public class PlayerManager : MonoBehaviour, IApplyableDamage
+    public class PlayerManager : MonoBehaviour, IEnemyTarget
     {
         [SerializeField] private float _health = MaxHealth;
 
@@ -43,8 +44,6 @@ namespace PlayerController
             
             return true;
         }
-
-      
     }
 }
 

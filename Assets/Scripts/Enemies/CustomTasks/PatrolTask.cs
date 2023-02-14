@@ -20,13 +20,11 @@ namespace Enemies.CustomTasks{
 		}
 
 		protected override void OnUpdate(){
-			if (!Animator.isNull && Animator.value.GetCurrentAnimatorStateInfo(0).IsName("MeleePunch"))
+			if (!Animator.isNull && Animator.value.GetCurrentAnimatorStateInfo(0).IsName("Push"))
 				return;
 
 			if (!Agent.isNull && Agent.value.remainingDistance <= Agent.value.stoppingDistance)
-			{
 				TrySetNewWayPoint();
-			}
 		}
 
 		private void TrySetNewWayPoint()

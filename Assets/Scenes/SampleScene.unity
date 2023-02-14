@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.1802917, g: 0.22572428, b: 0.30693048, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3341,6 +3341,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1667764299707229032, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: _predictionPoint
+      value: 
+      objectReference: {fileID: 313223375}
     - target: {fileID: 5456757870563664777, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_Name
       value: FinalPlayer
@@ -3752,16 +3756,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waves:
-  - _meleeEnemyCount: 4
-    _bombEnemyCount: 3
-    _points:
-    - {fileID: 660491301}
-    - {fileID: 568577736}
-    - {fileID: 1749539846}
-    - {fileID: 1437901214}
-    _extraPoints: []
+  - _randomSpawnInfo:
+      _enemySpawnInfos:
+      - _type: 0
+        _count: 4
+      - _type: 1
+        _count: 3
+      _points:
+      - {fileID: 660491301}
+      - {fileID: 568577736}
+      - {fileID: 1749539846}
+      - {fileID: 1437901214}
+    _fullSpawnInfos: []
   _enemySpawner: {fileID: 592610475}
-  _enemyDetector: {fileID: 313875572}
+  _targetDetector: {fileID: 313875572}
   _obstacles:
   - {fileID: 0}
   - {fileID: 0}
@@ -9213,20 +9221,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waves:
-  - _meleeEnemyCount: 2
-    _bombEnemyCount: 0
-    _points:
-    - {fileID: 1306539613}
-    - {fileID: 1702964867}
-    _extraPoints:
+  - _randomSpawnInfo:
+      _enemySpawnInfos:
+      - _type: 0
+        _count: 2
+      _points:
+      - {fileID: 1306539613}
+      - {fileID: 1702964867}
+    _fullSpawnInfos:
     - _point: {fileID: 54213261}
-      _meleeEnemiesEnemiesCount: 2
-      _bombEnemiesCountCount: 0
+      _enemySpawnInfos:
+      - _type: 0
+        _count: 2
     - _point: {fileID: 401235070}
-      _meleeEnemiesEnemiesCount: 2
-      _bombEnemiesCountCount: 0
+      _enemySpawnInfos:
+      - _type: 0
+        _count: 2
   _enemySpawner: {fileID: 592610475}
-  _enemyDetector: {fileID: 313875572}
+  _targetDetector: {fileID: 313875572}
   _obstacles:
   - {fileID: 2121237251}
   - {fileID: 1248558207}
@@ -10186,7 +10198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parentBlackboard: {fileID: 0}
   _serializedBlackboard: '{"_variables":{"Player":{"_value":1,"_name":"Player","_id":"f3e9ece7-db1d-4199-8563-7317bc82d2f0","$type":"NodeCanvas.Framework.Variable`1[[PlayerController.PlayerManager,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"Detector":{"_value":2,"_name":"Detector","_id":"8c2b2960-e7e5-43ef-8731-fc83d7acc176","$type":"NodeCanvas.Framework.Variable`1[[Enemies.EnemyDetector,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"},"Detector":{"_value":2,"_name":"Detector","_id":"3e527ccc-cd09-4e44-8cc3-51059f113acb","$type":"NodeCanvas.Framework.Variable`1[[Enemies.TargetDetector,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}}}'
   _objectReferences:
   - {fileID: 0}
@@ -10198,7 +10210,7 @@ MonoBehaviour:
     _references:
     - {fileID: 0}
     - {fileID: 1975706591}
-  - _json: '{"_value":1,"_name":"Detector","_id":"8c2b2960-e7e5-43ef-8731-fc83d7acc176","$type":"NodeCanvas.Framework.Variable`1[[Enemies.EnemyDetector,
+  - _json: '{"_value":1,"_name":"Detector","_id":"3e527ccc-cd09-4e44-8cc3-51059f113acb","$type":"NodeCanvas.Framework.Variable`1[[Enemies.TargetDetector,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]"}'
     _references:
     - {fileID: 0}
@@ -12228,30 +12240,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waves:
-  - _meleeEnemyCount: 8
-    _bombEnemyCount: 0
-    _points:
-    - {fileID: 348578539}
-    - {fileID: 1045407956}
-    - {fileID: 1638754312}
-    - {fileID: 582731529}
-    - {fileID: 2028977781}
-    - {fileID: 438280695}
-    _extraPoints: []
-  - _meleeEnemyCount: 15
-    _bombEnemyCount: 7
-    _points:
-    - {fileID: 348578539}
-    - {fileID: 1045407956}
-    - {fileID: 1638754312}
-    - {fileID: 582731529}
-    - {fileID: 2028977781}
-    - {fileID: 438280695}
-    - {fileID: 1823219942}
-    - {fileID: 692463170}
-    _extraPoints: []
+  - _randomSpawnInfo:
+      _enemySpawnInfos:
+      - _type: 0
+        _count: 8
+      _points:
+      - {fileID: 348578539}
+      - {fileID: 1045407956}
+      - {fileID: 1638754312}
+      - {fileID: 582731529}
+      - {fileID: 2028977781}
+      - {fileID: 438280695}
+    _fullSpawnInfos: []
+  - _randomSpawnInfo:
+      _enemySpawnInfos:
+      - _type: 0
+        _count: 15
+      - _type: 1
+        _count: 7
+      _points:
+      - {fileID: 348578539}
+      - {fileID: 1045407956}
+      - {fileID: 1638754312}
+      - {fileID: 582731529}
+      - {fileID: 2028977781}
+      - {fileID: 438280695}
+      - {fileID: 1823219942}
+      - {fileID: 692463170}
+    _fullSpawnInfos: []
   _enemySpawner: {fileID: 592610475}
-  _enemyDetector: {fileID: 313875572}
+  _targetDetector: {fileID: 313875572}
   _obstacles:
   - {fileID: 2017696120}
   - {fileID: 1184184470}

@@ -1,83 +1,110 @@
 using System.Collections.Generic;
 using System.Linq;
 using PlayerController;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemies
 {
-    public class BattleSequence : MonoBehaviour
+    public class BattleSequence : MonoBehaviour, IBattleSequence
     {
         [SerializeField] private List<EnemyWaveInfo> _waves;
         [SerializeField] private EnemySpawner _enemySpawner;
-        [SerializeField] private EnemyDetector _enemyDetector;
+        [SerializeField] private TargetDetector _targetDetector;
         [SerializeField] private List<GameObject> _obstacles;
 
         private bool _initialized;
-        private int _currentSquadIndex;
-        private int _currentSquadEnemiesCount;
+        private int _currentWaveIndex;
+        private int _currentWaveEnemiesCount;
+
+        private IEnemyTarget _target;
+
+        private void Awake()
+        {
+            _target = FindObjectOfType<PlayerManager>();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if(other.TryGetComponent(out PlayerManager _) && !_initialized)
-                StartBattle();
+                InitializeSequence();
         }
         
         
-        private void StartBattle()
+        public void InitializeSequence()
         {
             _initialized = true;
-            _enemyDetector.PlayerDetected = false;
-            _enemyDetector.Detected += TrySetObstacles;
+            _targetDetector.PlayerDetected = false;
+            _targetDetector.Detected += TrySetObstacles;
             
             SpawnWave();
         }
 
-        private void FinishBattle()
+        public void FinishSequence()
         {
-            _enemyDetector.PlayerDetected = false;
+            _targetDetector.PlayerDetected = false;
         }
         
-        private void ChangeScenario()
+        public void UpdateSequenceScenario()
         {
-            _currentSquadEnemiesCount--;
+            _currentWaveEnemiesCount--;
 
-            if (_currentSquadEnemiesCount != 0) 
+            if (_currentWaveEnemiesCount != 0) 
                 return;
 
-            if (_currentSquadIndex != _waves.Count)
+            if (_currentWaveIndex != _waves.Count)
                 SpawnWave();
             else
-                FinishBattle();
+                FinishSequence();
         }
 
         private void SpawnWave()
         {
-            EnemyWaveInfo info = _waves[_currentSquadIndex];
-            EnemyWave wave = info.Wave;
+            EnemyWaveInfo info = _waves[_currentWaveIndex];
 
-            List<Transform> points = info.Points;
-
-            var random = new System.Random();
-            points = points.OrderBy(point => random.Next()).ToList();
-            
-            _currentSquadEnemiesCount = info.EnemiesCount;
-
-            var enemies = _enemySpawner.SpawnWave(wave, points);
-            InitializeEnemies(enemies);
-            
+            TrySpawnEnemiesInRandomPoints(info);
             TrySpawnExtraEnemies(info);
             
-            _currentSquadIndex++;
+            _currentWaveIndex++;
         }
 
+        private void TrySpawnEnemiesInRandomPoints(EnemyWaveInfo info)
+        {
+            RandomSpawnInfo spawnInfo = info.RandomSpawnInfo;
+
+            foreach (var enemySpawnInfo in spawnInfo.EnemySpawnInfos)
+            {
+                _currentWaveEnemiesCount += enemySpawnInfo.Count;
+            }
+            
+            spawnInfo.RandomizePoints();
+            
+            var enemies = _enemySpawner.SpawnWave(spawnInfo);
+            InitializeEnemies(enemies);
+        }
+        
+        private void TrySpawnExtraEnemies(EnemyWaveInfo info)
+        {
+            List<FullEnemiesSpawnInfo> pointInfos = info.FullSpawnInfos;
+            
+            if(pointInfos.Count == 0)
+                return;
+
+            var enemies = _enemySpawner.SpawnWave(pointInfos);
+            
+            foreach (var pointInfo in pointInfos)
+                foreach (var enemySpawnInfo in pointInfo.EnemySpawnInfos)
+                    _currentWaveEnemiesCount += enemySpawnInfo.Count;
+
+            InitializeEnemies(enemies);
+        }
+        
         private void InitializeEnemies(List<Enemy> enemies)
         {
             foreach (var enemy in enemies)
             {
-                enemy.Died += ChangeScenario;
-                enemy.Damaged += () => _enemyDetector.PlayerDetected = true;
+                enemy.SetTarget(_target);
+                enemy.Died += UpdateSequenceScenario;
+                enemy.Damaged += () => _targetDetector.PlayerDetected = true;
             }
         }
 
@@ -85,25 +112,6 @@ namespace Enemies
         {
             foreach (var obstacle in _obstacles.Where(obstacle => obstacle))
                 obstacle.SetActive(state);
-        }
-
-        private void TrySpawnExtraEnemies(EnemyWaveInfo info)
-        {
-            List<FullSpawnPointInfo> extraPoints = info.ExtraPoints;
-            if(extraPoints.Count == 0)
-                return;
-
-            var enemies = new List<Enemy>();
-            foreach (var extraPoint in extraPoints)
-            {
-                _currentSquadEnemiesCount += extraPoint.MeleeEnemiesCount + extraPoint.BombEnemiesCount;
-                
-                for (int i = 0; i < extraPoint.MeleeEnemiesCount; i++)
-                    enemies.Add(_enemySpawner.Spawn(EnemyType.Melee, extraPoint.Point.position));
-                for (int i = 0; i < extraPoint.BombEnemiesCount; i++)
-                    enemies.Add(_enemySpawner.Spawn(EnemyType.Bomb, extraPoint.Point.position));
-            }
-            InitializeEnemies(enemies);
         }
     }
 }
