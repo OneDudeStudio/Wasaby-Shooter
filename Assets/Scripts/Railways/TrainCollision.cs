@@ -1,3 +1,5 @@
+using PlayerController;
+using Railways;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,23 +8,20 @@ public class TrainCollision : MonoBehaviour
     [SerializeField] private float _pushForce = 5;
     [SerializeField] private float _pushHeight = 5;
     [SerializeField] private float _damage = 5;
-    [SerializeField] private AudioSource _soundForCollision;
 
     private Ragdoll _otherObjectRagdoll;
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
-        _otherObjectRagdoll = collision.gameObject.GetComponent<Ragdoll>();
+        //if (collision.gameObject.TryGetComponent<PlayerManager>(out var player))
+        if (TryGetComponent(out Move move) && move.enabled)
+        {
+            _otherObjectRagdoll = collision.gameObject.GetComponent<Ragdoll>();
 
-        PushObject(collision);
-        PlaySound();
-        TakeDamage(collision.gameObject, _damage);
-    }
-
-    private void PlaySound()
-    {
-        _soundForCollision.pitch = Random.Range(0.9f, 1.1f);
-        _soundForCollision.Play();
+            PushObject(collision);
+            _otherObjectRagdoll.PlaySound();
+            TakeDamage(collision.gameObject, _damage);
+        }
     }
 
     private void PushObject(Collision collision)
