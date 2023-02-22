@@ -1,11 +1,6 @@
-using System;
-using System.Threading;
-using Railways;
 using Railways.GeneratorsAndDestroyers;
 using Railways.Trains;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.Serialization;
 
 public class Test : MonoBehaviour
 {
@@ -13,12 +8,14 @@ public class Test : MonoBehaviour
     public Destroyer Destroyer;
 
     private ControlledTrain _controlledTrain;
-    
+
     private void Start()
     {
-        _controlledTrain = DynamicGeneratorByController.Generate().GetComponent<ControlledTrain>();
+        GenerateInstance();
         Destroyer.OnDestroy += GenerateInstance;
-        _controlledTrain.Arrive += Process;
+        _controlledTrain.OnArrive += StartProcess;
+        // нужно подписаться на событие что все враги вышли
+        // enemySpawner.AllEnemiesLeaveTrain = += FinishProcess;
     }
 
     public void GenerateInstance()
@@ -26,16 +23,15 @@ public class Test : MonoBehaviour
         _controlledTrain = DynamicGeneratorByController.Generate().GetComponent<ControlledTrain>();
     }
 
-    public void Process()
+    public void StartProcess()
     {
-        
         _controlledTrain.StopMove();
         _controlledTrain.OpenDoors();
-        Debug.Log("process2");
-        /*_controlledTrain.CloseDoors();
-        Debug.Log("process3");*/
-        //_controlledTrain.StartMove();
-        
     }
-    
+
+    public void FinishProcess()
+    {
+        _controlledTrain.CloseDoors();
+        _controlledTrain.StartMove();
+    }
 }

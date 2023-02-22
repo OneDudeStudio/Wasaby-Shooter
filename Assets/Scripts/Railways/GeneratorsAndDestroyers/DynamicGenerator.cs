@@ -12,16 +12,16 @@ namespace Railways.GeneratorsAndDestroyers
         [SerializeField] private GameObject _directionPoint;
         [SerializeField] private AudioSource _soundForGeneration;
         [SerializeField] private Renderer _rendererForGeneration;
-        
+
         public GameObject Generate()
         {
             //PlaySound();
             StartCoroutine(TurnOnRenderer());
+
+            GameObject generatedGameObject = GetGeneratedGameObject();
+            SetMove(generatedGameObject);
             
-            GameObject newGameObject = GetGeneratedGameObject();
-            SetMove(newGameObject);
-            
-            return newGameObject;
+            return generatedGameObject;
         }
         
         private IEnumerator TurnOnRenderer()

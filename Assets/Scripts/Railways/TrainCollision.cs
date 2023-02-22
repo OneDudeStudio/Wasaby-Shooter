@@ -1,7 +1,5 @@
-using PlayerController;
 using Railways;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class TrainCollision : MonoBehaviour
 {
