@@ -74,7 +74,7 @@ namespace Enemies
         {
             Speed = defaultSpeed;
             
-            if(!GetComponent<ProceduralEnemyMovement>())
+            if(!_proceduralMovement.enabled)
                 _navMeshAgent.enabled = true;
             
             if(_animator)
