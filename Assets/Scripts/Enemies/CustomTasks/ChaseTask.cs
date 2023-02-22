@@ -22,7 +22,6 @@ namespace Enemies.CustomTasks
 			float originRadius = Agent.value.gameObject.GetComponent<CapsuleCollider>().radius;
 			
 			radius = originRadius + targetRadius;
-			Agent.value.updateRotation = false;
 		}
 
 		protected override void OnUpdate()

@@ -24,5 +24,7 @@ namespace Enemies.CustomTasks{
 			Origin.value.transform.rotation =
 				Quaternion.Lerp(Origin.value.transform.rotation, rotation, RotationSpeed.value * Time.deltaTime);
 		}
+		
+		
 	}
 }
