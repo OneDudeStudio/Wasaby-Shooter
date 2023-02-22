@@ -89,6 +89,9 @@ namespace Enemies.BattleSequence
             {
                 enemy.SetTarget(_target);
                 enemy.Damaged += () => _targetDetector.PlayerDetected = true;
+                
+                ProceduralEnemyMovement movement = enemy.ProceduralMovement;
+                movement.enabled = true;
             }
         }
 
@@ -111,7 +114,6 @@ namespace Enemies.BattleSequence
 
                 ProceduralEnemyMovement movement = enemy.ProceduralMovement;
                 movement.Jumped += UpdateSequenceScenario;
-                movement.enabled = true;
                 movement.StartRoute(jumpPoint, landingPoint);
                 
                 yield return new WaitForSeconds(movementStartDelayInSeconds);
