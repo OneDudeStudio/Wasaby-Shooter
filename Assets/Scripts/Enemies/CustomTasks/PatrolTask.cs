@@ -23,7 +23,7 @@ namespace Enemies.CustomTasks{
 			if (!Animator.isNull && Animator.value.GetCurrentAnimatorStateInfo(0).IsName("Push"))
 				return;
 
-			if (!Agent.isNull && Agent.value.remainingDistance <= Agent.value.stoppingDistance)
+			if (Agent.value && Agent.value.isOnNavMesh && Agent.value.remainingDistance <= Agent.value.stoppingDistance)
 				TrySetNewWayPoint();
 		}
 

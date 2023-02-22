@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Enemies
+namespace Enemies.Spawn
 {
     [Serializable]
     public class EnemyWaveInfo

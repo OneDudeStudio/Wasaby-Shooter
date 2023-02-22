@@ -27,14 +27,28 @@ namespace Enemies
         private bool _canApplyDamage = true;
         private bool isFlashing;
 
+        private ProceduralEnemyMovement _proceduralMovement;
+
         private NavMeshAgent _navMeshAgent;
         protected IEnemyTarget target;
-       
-        protected Animator animator;
+
+        private Animator _animator;
         private float _walkingAnimationSpeed;
         
         private const string EnemySpeedModifier = "EnemySpeed";
 
+        public ProceduralEnemyMovement ProceduralMovement => _proceduralMovement;
+        
+        public float Speed
+        {
+            get => _navMeshAgent.speed;
+            set
+            {
+                if(_navMeshAgent)
+                    _navMeshAgent.speed = value;
+            }
+        }
+        
         public event Action Died;
         public event Action Damaged;
 
@@ -44,7 +58,9 @@ namespace Enemies
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _meshRenderers = GetComponentsInChildren<Renderer>().ToList();
-            animator = GetComponent<Animator>();
+            _animator = GetComponent<Animator>();
+            _proceduralMovement = GetComponent<ProceduralEnemyMovement>();
+            
             behaviourTreeOwner = GetComponent<BehaviourTreeOwner>();
 
             _applyableEffects.Add(new Burning(this));
@@ -56,17 +72,18 @@ namespace Enemies
 
         private void Start()
         {
-            SetSpeed(defaultSpeed);
-            _navMeshAgent.enabled = true;
+            Speed = defaultSpeed;
             
-            if(animator)
-                _walkingAnimationSpeed = animator.GetFloat(EnemySpeedModifier);
+            if(!GetComponent<ProceduralEnemyMovement>())
+                _navMeshAgent.enabled = true;
+            
+            if(_animator)
+                _walkingAnimationSpeed = _animator.GetFloat(EnemySpeedModifier);
 
             FindObjectOfType<EffectsController>().AddVictim(this);
         }
 
         public void SetTarget(IEnemyTarget target) => this.target = target;
-        
 
         public void StartEffect<T>() where T : Effect
         {
@@ -84,12 +101,6 @@ namespace Enemies
         }
 
         public abstract void TryAttack(IApplyableDamage player);
-
-        public void SetSpeed(float speed)
-        {
-            if(_navMeshAgent)
-                _navMeshAgent.speed = speed;
-        }
 
         public bool TryApplyDamage(float damage)
         {
@@ -146,18 +157,28 @@ namespace Enemies
 
         public void ModifySpeed(float modifier)
         {
-            SetSpeed(defaultSpeed * modifier);
+            Speed = defaultSpeed * modifier;
   
-            if(animator)
-                animator.SetFloat(EnemySpeedModifier, modifier);
+            if(_animator)
+                _animator.SetFloat(EnemySpeedModifier, modifier);
         }
 
         public void ResetSpeed()
         {
-            SetSpeed(defaultSpeed);
+            Speed = defaultSpeed;
             
-            if(animator)
-                animator.SetFloat(EnemySpeedModifier, _walkingAnimationSpeed);
+            if(_animator)
+                _animator.SetFloat(EnemySpeedModifier, _walkingAnimationSpeed);
+        }
+
+        public void SetNavmeshAgent(bool state)
+        {
+            _navMeshAgent.enabled = state;
+        }
+
+        public Animator GetAnimator()
+        {
+            return _animator;
         }
     }
 }

@@ -34,7 +34,6 @@ namespace Enemies
                     !.AdditionalDistance;
 
             float distance = Vector3.Distance(((MonoBehaviour)target).transform.position, transform.position) - _excessDistance;
-
             return distance <= (float)attackRange.value && CheckAttackFieldView();
         }
         

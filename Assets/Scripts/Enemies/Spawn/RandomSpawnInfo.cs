@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Enemies
+namespace Enemies.Spawn
 {
     [Serializable]
     public class RandomSpawnInfo
@@ -18,6 +18,11 @@ namespace Enemies
         {
             var random = new System.Random();
             _points = _points.OrderBy(point => random.Next()).ToList();
+        }
+
+        private RandomSpawnInfo GenerateRandomSpawnInfo(List<EnemyType> _availableTypes)
+        {
+            return null;
         }
     }
 }

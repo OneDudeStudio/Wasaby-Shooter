@@ -1,7 +1,8 @@
 using System;
+using System.Xml.Linq;
 using UnityEngine;
 
-namespace Enemies
+namespace Enemies.Spawn
 {
     [Serializable]
     public class EnemySpawnInfo
@@ -11,5 +12,11 @@ namespace Enemies
 
         public EnemyType Type => _type;
         public int Count => _count;
+
+        public EnemySpawnInfo(EnemyType type, int count)
+        {
+            _type = type;
+            _count = count;
+        }
     }
 }

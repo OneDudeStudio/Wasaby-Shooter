@@ -1,4 +1,4 @@
-namespace Enemies
+namespace Enemies.BattleSequence
 {
     public interface IBattleSequence
     {

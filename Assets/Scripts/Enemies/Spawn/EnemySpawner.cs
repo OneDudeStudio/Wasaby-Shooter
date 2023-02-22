@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-namespace Enemies
+namespace Enemies.Spawn
 {
     public class EnemySpawner : MonoBehaviour
     {
@@ -40,13 +39,23 @@ namespace Enemies
             return enemies;
         }
 
+        public List<Enemy> SpawnWave(EnemySpawnInfo spawnInfo, Vector3 position)
+        {
+            var enemies = new List<Enemy>();
+            
+            for (int i = 0; i < spawnInfo.Count; i++)
+            {
+                var enemy = Spawn(spawnInfo.Type, position);
+                enemies.Add(enemy);
+            }
+            
+            return enemies;
+        }
+
         public Enemy Spawn(EnemyType type, Vector3 position)
         {
             var enemy = _enemyFactory.Get(type);
 
-            if (!NavMesh.SamplePosition(position, out NavMeshHit hit, 1f, NavMesh.AllAreas))
-                return null;
-            
             enemy.transform.position = position;
             return enemy;
         }

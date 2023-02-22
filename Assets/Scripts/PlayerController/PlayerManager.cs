@@ -9,18 +9,19 @@ namespace PlayerController
     {
         [SerializeField] private float _health = MaxHealth;
 
-        private void Start()
-        {
-            //delete this later
-            Application.targetFrameRate = 60;
-        }
-
         private const float MaxHealth = 100f;
         private bool _canApplyDamage = true;
 
         public event Action<float> Damaged;
 
         public bool IsAlive() => _canApplyDamage;
+        
+        private void Start()
+        {
+            //delete this later
+            Application.targetFrameRate = 60;
+        }
+        
         public void Die()
         { 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using Enemies.Spawn;
 using PlayerController;
 using UnityEngine;
 
-namespace Enemies
+namespace Enemies.BattleSequence
 {
     public class BattleSequence : MonoBehaviour, IBattleSequence
     {
