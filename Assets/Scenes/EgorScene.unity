@@ -2666,8 +2666,8 @@ MonoBehaviour:
   - {fileID: 70476680}
   _trainPrefab: {fileID: 6843236436396378239, guid: 8bc8a14daf0c39543aad0e8a5ff33174, type: 3}
   _stopPoint: {fileID: 1226028283}
-  _meleeEnemyMaxCount: 5
-  _bombEnemyMaxCount: 5
+  _meleeEnemyMaxCount: 7
+  _bombEnemyMaxCount: 7
 --- !u!4 &1954979684
 Transform:
   m_ObjectHideFlags: 0

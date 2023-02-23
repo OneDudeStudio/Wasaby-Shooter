@@ -26,6 +26,8 @@ namespace Enemies.BattleSequence
         private List<Enemy> _enemies;
         private int _enemyCount;
 
+        private int _jumpPointIndex;
+
         private void Awake()
         {
             _target = FindObjectOfType<PlayerManager>();
@@ -106,10 +108,13 @@ namespace Enemies.BattleSequence
         private IEnumerator StartProceduralMovement()
         {
             const float movementStartDelayInSeconds = 0.01f;
+
+            List<Transform> jumpPoints = _train.JumpPoints;
+            _jumpPointIndex = new Random().Next(jumpPoints.Count - 1);
             
             foreach (var enemy in _enemies)
             {
-                Transform jumpPoint = GetRandomJumpPoint(_train.JumpPoints);
+                Transform jumpPoint = GetJumpPoint(jumpPoints);
                 Transform landingPoint = GetLandingPoint(jumpPoint);
 
                 ProceduralEnemyMovement movement = enemy.ProceduralMovement;
@@ -120,10 +125,10 @@ namespace Enemies.BattleSequence
             }
         }
 
-        private Transform GetRandomJumpPoint(List<Transform> jumpPoints)
+        private Transform GetJumpPoint(List<Transform> jumpPoints)
         {
-            var random = new Random();
-            return jumpPoints[random.Next(jumpPoints.Count - 1)];
+            _jumpPointIndex = (_jumpPointIndex + 1) % jumpPoints.Count;
+            return jumpPoints[_jumpPointIndex];
         }
         private Transform GetLandingPoint(Transform jumpPoint)
         {
