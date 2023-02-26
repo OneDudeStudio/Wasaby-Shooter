@@ -1,31 +1,39 @@
 using UnityEngine;
-
 public abstract class Grenade : MonoBehaviour
 {
-    private Explosion _explosion;
-    [SerializeField] protected GrenadesConfig _config;
-    protected IApplyableDamage[] _victims;
-    protected Collision _collision;
-
+    protected Explosion _explosion;
+    
     private void Start()
     {
         _explosion = GetComponent<Explosion>();
-        _explosion.SetConfig(GetConfig());
+        SetExplosionConfig();
+        SetExplosionDamageDealer();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         Stabilization(collision.contacts[0]);
-
-        _victims = _explosion.Explode();
-        _collision = collision;
-        ExplosionPostEffects();
+        ExplodeGrenade(collision);
     }
 
     private void Stabilization(ContactPoint contactPoint) => transform.position = contactPoint.point + contactPoint.normal * .2f;
 
-    public virtual void ExplosionPostEffects()
+    protected virtual void SetExplosionDamageDealer()
     {
+        _explosion.SetDamageDealer(new ExplosionDamageDealer());
     }
-    protected abstract GrenadeConfig GetConfig(); 
+
+    private void SetExplosionConfig()
+    {
+        _explosion.SetConfig(GetConfig());
+    }
+
+    protected virtual void ExplodeGrenade(Collision collision)
+    {
+        _explosion.Explode();
+    }
+
+    protected abstract ExplosionConfig GetConfig();
+
+    protected ExplosionItemsConfig LoadConfig() => FindObjectOfType<ConfigsLoader>().RootConfig.ExplosionItemsConfig;
 }

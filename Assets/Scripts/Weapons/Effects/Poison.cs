@@ -7,15 +7,12 @@ public class Poison : Effect
     private float _interval;
 
     private float _lastTickTime = 0;
-
     private IApplyableDamage _victim;
-    public Poison(IApplyableDamage victim)
+
+    public Poison(IApplyableDamage victim, EffectsConfig config)
     {
-        EffectsConfig config = Resources.Load<EffectsConfig>("EffectsConfig");
-        _damage = config.Poison.Damage;
-        _interval = config.Poison.Interval;
         _victim = victim;
-        _lastTickTime = Time.time;
+        SetCharacteristics(config);
     }
 
     public override void Apply(float currentTime)
@@ -24,6 +21,12 @@ public class Poison : Effect
         {
             _isPoisoned = false;
         }
+    }
+
+    public override void SetCharacteristics(EffectsConfig config)
+    {
+        _damage = config.Poison.Damage;
+        _interval = config.Poison.Interval;
     }
 
     public override void StartEffect()

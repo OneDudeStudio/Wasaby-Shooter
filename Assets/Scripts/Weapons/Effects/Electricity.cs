@@ -9,13 +9,11 @@ public class Electricity : Effect
     private float _cooldown;
     private float _lastHitTime = 0;
 
-    public Electricity(IApplyableDamage victim, ElectricityController controller)
+    public Electricity(IApplyableDamage victim, ElectricityController controller, EffectsConfig config)
     {
-        EffectsConfig config = Resources.Load<EffectsConfig>("EffectsConfig");
-        _damage = config.Electric.Damage;
-        _cooldown = config.Electric.Interval * config.Electric.MaxConductors * .8f;
         _electricityController = controller;
         _victim = victim;
+        SetCharacteristics(config);
     }
 
     public override void Apply(float currentTime)
@@ -24,6 +22,12 @@ public class Electricity : Effect
         {
             _canBeDamaged = true;
         }
+    }
+
+    public override void SetCharacteristics(EffectsConfig config)
+    {
+        _damage = config.Electric.Damage;
+        _cooldown = config.Electric.Interval * config.Electric.MaxConductors * .8f;
     }
 
     public override void StartEffect()

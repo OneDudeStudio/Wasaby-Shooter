@@ -16,7 +16,7 @@ public class PoisonController : MonoBehaviour
 
     private void Start()
     {
-        EffectsConfig config = Resources.Load<EffectsConfig>("EffectsConfig");
+        EffectsConfig config = FindObjectOfType<ConfigsLoader>().RootConfig.EffectsConfig;
         _ticks = config.Poison.Ticks;
         _interval = config.Poison.Interval;
         ProjectSpawnpoints();
@@ -28,6 +28,7 @@ public class PoisonController : MonoBehaviour
         {
             yield return new WaitForSeconds(_interval);
             List<IApplyableEffect> victims = new List<IApplyableEffect>();
+
             foreach (PoisonCaster caster in _poisonCasters)
             {
                 if (caster)
@@ -41,15 +42,18 @@ public class PoisonController : MonoBehaviour
                     });
                 }
             }
-            foreach(IApplyableEffect victim in victims)
+
+            foreach (IApplyableEffect victim in victims)
             {
                 victim.StartEffect<Poison>();
             }
         }
+
         foreach (PoisonCaster caster in _poisonCasters)
         {
             Destroy(caster.gameObject);
         }
+
         Destroy(gameObject);
     }
 
@@ -66,11 +70,17 @@ public class PoisonController : MonoBehaviour
         StartCoroutine(PoisonCoroutine());
     }
 
+    private IEnumerator DelayedPoisonSpawn(float delay, RaycastHit hit)
+    {
+        yield return new WaitForSeconds(delay);
+        _poisonCasters.Add(Instantiate(_poisonPrefab, hit.point + hit.normal * .1f, Quaternion.LookRotation(hit.normal)));
+    }
+
     private void ProjectPoint(Transform point)
     {
-        if (Physics.Raycast(point.position, Vector3.down, out RaycastHit hit, 100f, _layer))
+        if (Physics.Raycast(point.position, Vector3.down, out RaycastHit hit, 60f, _layer))
         {
-            _poisonCasters.Add(Instantiate(_poisonPrefab, hit.point, Quaternion.identity));
+            StartCoroutine(DelayedPoisonSpawn(hit.distance/20f, hit));
         }
     }
 

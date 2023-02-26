@@ -1,14 +1,13 @@
-public class EffectBullet<T> : IBullet where T : Effect
+public class EffectBullet<T> : IDamageDealer where T : Effect
 {
-    private IBullet _bullet;
-    
+    private IDamageDealer _bullet;    
 
     public EffectBullet(int additioanlDamagePrecent)
     {
         _bullet = new Bullet(additioanlDamagePrecent);
     }
 
-    public EffectBullet(IBullet bullet)
+    public EffectBullet(IDamageDealer bullet)
     {
         _bullet = bullet;
     }

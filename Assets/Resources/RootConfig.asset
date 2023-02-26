@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d36d90be4bf3b3340aabba77aaecb617, type: 3}
+  m_Name: RootConfig
+  m_EditorClassIdentifier: 
+  _gunConfig: {fileID: 11400000, guid: f2e7abc4a95652f4090e4a3e93bd85fa, type: 2}
+  _shotgunConfig: {fileID: 11400000, guid: a4fdcfeab316d4045813f23b2cb8e494, type: 2}
+  _bulletsConfig: {fileID: 11400000, guid: 4397cb7b463c44e44b790051a3503469, type: 2}
+  _effectsConfig: {fileID: 11400000, guid: 68d087323af585e49b234bb19a95cfa0, type: 2}
+  _explosionItemsConfig: {fileID: 11400000, guid: f191e1fa2c976ae4587f9fdcaa61a940, type: 2}

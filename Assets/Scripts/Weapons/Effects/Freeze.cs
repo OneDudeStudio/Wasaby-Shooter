@@ -10,12 +10,10 @@ public class Freeze : Effect
     private float _startTime;
     private ISpeedChangeable _victim;
 
-    public Freeze(ISpeedChangeable victim)
+    public Freeze(ISpeedChangeable victim, EffectsConfig config)
     {
-        EffectsConfig config = Resources.Load<EffectsConfig>("EffectsConfig");
-        _duration = config.Freeze.FreezeDuration;
-        _speedModifier = SupportFunctions.PrecentToFloat(config.Freeze.SpeedPrecentModifier);
         _victim = victim;
+        SetCharacteristics(config);
     }
 
     public override void Apply(float currentTime)
@@ -28,6 +26,12 @@ public class Freeze : Effect
             _isFreezing = false;
             _victim.ResetSpeed();
         }
+    }
+
+    public override void SetCharacteristics(EffectsConfig config)
+    {
+        _duration = config.Freeze.FreezeDuration;
+        _speedModifier = SupportFunctions.PrecentToFloat(config.Freeze.SpeedPrecentModifier);
     }
 
     public override void StartEffect()

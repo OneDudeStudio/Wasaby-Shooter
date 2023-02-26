@@ -9,11 +9,10 @@ public class Stan : Effect
     private float _startTime;
     private ISpeedChangeable _victim;
 
-    public Stan(ISpeedChangeable victim)
+    public Stan(ISpeedChangeable victim, EffectsConfig config)
     {
-        EffectsConfig config = Resources.Load<EffectsConfig>("EffectsConfig");
-        _duration = config.Stan.StanDuration;
         _victim = victim;
+        SetCharacteristics(config);
     }
 
     public override void Apply(float currentTime)
@@ -28,9 +27,13 @@ public class Stan : Effect
         }
     }
 
+    public override void SetCharacteristics(EffectsConfig config)
+    {
+        _duration = config.Stan.StanDuration;
+    }
+
     public override void StartEffect()
     {
-        Debug.Log("Stan");
         _startTime = Time.time;
         _isStanned = true;
         _victim.ModifySpeed(0);

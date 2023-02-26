@@ -6,9 +6,7 @@ public class GunController : MonoBehaviour
     private Gun _currentGun;
     private GrenadeLauncher _currentLauncher;
 
-    [SerializeField] private BulletsConfig _bulletsConfig;
-
-    private IBullet[] _bullets = new IBullet[4];
+    private IDamageDealer[] _bullets = new IDamageDealer[4];
     private Type[] _moduleTypes = new Type[] { typeof(NullModule), typeof(ExtendedMag), typeof(BarrelModule), typeof(ShutterModule) };
     private Type[] _grenadeTypes = new Type[] { null, typeof(DefaultExplosionGrenade), typeof(PoisonGrenade), typeof(FlashGrenade) };
 
@@ -19,10 +17,11 @@ public class GunController : MonoBehaviour
 
     private void Start()
     {
-        _bullets[0] = new Bullet(_bulletsConfig.Default.AdditionalDamagePrecent);
-        _bullets[1] = new EffectBullet<Burning>(_bulletsConfig.Fire.AdditionalDamagePrecent);
-        _bullets[2] = new EffectBullet<Freeze>(_bulletsConfig.Freeze.AdditionalDamagePrecent);
-        _bullets[3] = new EffectBullet<Electricity>(_bulletsConfig.Electric.AdditionalDamagePrecent);
+        BulletsConfig config = FindObjectOfType<ConfigsLoader>().RootConfig.BulletsConfig;
+        _bullets[0] = new Bullet(config.Default.AdditionalDamagePrecent);
+        _bullets[1] = new EffectBullet<Burning>(config.Fire.AdditionalDamagePrecent);
+        _bullets[2] = new EffectBullet<Freeze>(config.Freeze.AdditionalDamagePrecent);
+        _bullets[3] = new EffectBullet<Electricity>(config.Electric.AdditionalDamagePrecent);
 
         SetGun(_shotgun);
     }

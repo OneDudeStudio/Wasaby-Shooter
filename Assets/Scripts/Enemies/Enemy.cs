@@ -63,11 +63,12 @@ namespace Enemies
             
             behaviourTreeOwner = GetComponent<BehaviourTreeOwner>();
 
-            _applyableEffects.Add(new Burning(this));
-            _applyableEffects.Add(new Freeze(this));
-            _applyableEffects.Add(new Poison(this));
-            _applyableEffects.Add(new Electricity(this, FindObjectOfType<ElectricityController>()));
-            _applyableEffects.Add(new Stan(this));
+            EffectsConfig config = FindObjectOfType<ConfigsLoader>().RootConfig.EffectsConfig;
+            _applyableEffects.Add(new Burning(this, config));
+            _applyableEffects.Add(new Freeze(this, config));
+            _applyableEffects.Add(new Poison(this, config));
+            _applyableEffects.Add(new Electricity(this, FindObjectOfType<ElectricityController>(), config));
+            _applyableEffects.Add(new Stan(this, config));
         }
 
         private void Start()

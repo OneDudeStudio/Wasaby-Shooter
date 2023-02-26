@@ -1,9 +1,4 @@
-public interface IBullet
-{
-    public void DealDamage(IApplyableDamage target, float damage);
-}
-
-public class Bullet : IBullet
+public class Bullet : IDamageDealer
 {
     private float _damageMultiplyer;
 

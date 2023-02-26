@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7356302956007961276}
   - component: {fileID: 7356302956007961272}
   - component: {fileID: 7356302956007961275}
-  - component: {fileID: 7598222540710289227}
   - component: {fileID: 6962970012676669367}
   m_Layer: 0
   m_Name: RedBarrel
@@ -60,26 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2e1ccd1de7cfe448a2c6914711652d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionDamage: 15
-  _explosionRadius: 2
-  _explosionParticles: {fileID: 8680538276989047155, guid: 0224ca1d09814aa48965f391b7e91822, type: 3}
-  _maxTargets: 10
-  _checkLayers:
-    serializedVersion: 2
-    m_Bits: 1536
---- !u!135 &7598222540710289227
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7356302956007961274}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.59344035
-  m_Center: {x: 0, y: 0, z: 0}
+  isAffectingPlayer: 1
+  _explosionParticles: {fileID: 341564755673579289, guid: b4651306bb1dc0247aa3dbd29a159032, type: 3}
 --- !u!136 &6962970012676669367
 CapsuleCollider:
   m_ObjectHideFlags: 0

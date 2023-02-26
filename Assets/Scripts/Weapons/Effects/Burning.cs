@@ -14,14 +14,10 @@ public class Burning : Effect
 
     private IApplyableDamage _victim;
 
-    public Burning(IApplyableDamage damageable)
+    public Burning(IApplyableDamage damageable, EffectsConfig config)
     {
-        EffectsConfig config = Resources.Load<EffectsConfig>("EffectsConfig");
-        _ticks = config.Burning.Ticks;
-        _interval = config.Burning.Interval;
-        _damage = config.Burning.Damage;
-
         _victim = damageable;
+        SetCharacteristics(config);
     }
 
     public override void Apply(float currentTime)
@@ -40,6 +36,13 @@ public class Burning : Effect
             }
             _lastTickTime = currentTime;
         }
+    }
+
+    public override void SetCharacteristics(EffectsConfig config)
+    {
+        _ticks = config.Burning.Ticks;
+        _interval = config.Burning.Interval;
+        _damage = config.Burning.Damage;
     }
 
     public override void StartEffect()

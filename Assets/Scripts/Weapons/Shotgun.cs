@@ -8,8 +8,8 @@ public class Shotgun : Gun
     protected override void SetStatsFromConfig()
     {
         base.SetStatsFromConfig();
-        _pelletCount = ((ShotgunConfig)ThisGunConfig).PelletCount;
-        _variance = ((ShotgunConfig)ThisGunConfig).Variance;
+        _pelletCount = ((ShotgunConfig)_gunConfig).PelletCount;
+        _variance = ((ShotgunConfig)_gunConfig).Variance;
     }
 
     protected override void Shoot()

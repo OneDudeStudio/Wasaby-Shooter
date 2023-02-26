@@ -11,8 +11,9 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] protected GunVFXController _gunVFX;
     [SerializeField] protected GameObject _hitParticles;
     [SerializeField] protected Transform _shootingPoint;
+    [SerializeField] protected GunConfig _gunConfig;
 
-    public GunConfig ThisGunConfig;
+    public GunConfig Config => _gunConfig;
 
     private float _damage;
     private int _maxAmmo;
@@ -22,15 +23,14 @@ public abstract class Gun : MonoBehaviour
     private int _currentAmmo;
     protected bool _isCanShoot = true;
 
-
     protected Camera _playerCamera;
     protected BulletHolesPool _holePool;
-    protected IBullet _bullet;
+    protected IDamageDealer _bullet;
     private ModuleManager _moduleManager;
 
     public float Damage
     {
-        get => ThisGunConfig._defaultDamage;
+        get => _gunConfig.DefaultDamage;
         set
         {
             if (value >= 0)
@@ -41,19 +41,20 @@ public abstract class Gun : MonoBehaviour
     }
     public int Ammo
     {
-        get => ThisGunConfig._defaultMaxAmmo;
+        get => _gunConfig.DefaultMaxAmmo;
         set
         {
             if (value > 0)
             {
                 _maxAmmo = value;
+                _currentAmmo = value;
             }
 
         }
     }
     public float Range
     {
-        get => ThisGunConfig._defaultRange;
+        get => _gunConfig.DefaultRange;
         set
         {
             if (value > 0)
@@ -64,7 +65,7 @@ public abstract class Gun : MonoBehaviour
     }
     public float Interval
     {
-        get => ThisGunConfig._defaultIntervalTime;
+        get => _gunConfig.DefaultIntervalTime;
         set
         {
             if (value >= 0)
@@ -83,7 +84,6 @@ public abstract class Gun : MonoBehaviour
         _moduleManager = new ModuleManager(this);
 
         SetStatsFromConfig();
-        _currentAmmo = ThisGunConfig._defaultMaxAmmo;
 
         SetBullet(new Bullet(0));
         //SetBullet(new EffectBullet<Freeze>(0));
@@ -139,7 +139,7 @@ public abstract class Gun : MonoBehaviour
         _isCanShoot = true;
     }
 
-    protected float CalculateDamage(float len) => Mathf.Clamp01(ThisGunConfig._damageByDistance.Evaluate(len / _range)) * _damage;
+    protected float CalculateDamage(float len) => Mathf.Clamp01(_gunConfig.DamageByDistance.Evaluate(len / _range)) * _damage;
 
     private IEnumerator IntervalBetweenShoots()
     {
@@ -153,7 +153,7 @@ public abstract class Gun : MonoBehaviour
         _moduleManager.SetModule(type);
         _currentAmmo = _maxAmmo;
     }
-    public void SetBullet(IBullet bullet)
+    public void SetBullet(IDamageDealer bullet)
     {
         _bullet = bullet;
         _gunVFX.SetBulletVFX(bullet.GetType());

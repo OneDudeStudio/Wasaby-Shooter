@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf141aeaca8b2b741b5fa240b70f1222, type: 3}
+  m_Name: GunConfig
+  m_EditorClassIdentifier: 
+  DefaultDamage: 3
+  DefaultMaxAmmo: 20
+  DefaultRange: 30
+  DefaultIntervalTime: 0.16
+  DamageByDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.013339913
+      outSlope: 0.013339913
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.1767955
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.0735412
+      outSlope: -3.0735412
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.034530878
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  DefaultRecoil: {x: -15, y: 9, z: 0.7}
+  DefaultReturnSpeed: 10
+  DefaultSnappines: 15
+  DefaultPositionRecoil: {x: 0.01, y: 0.01, z: -0.2}
+  DefaultPositionReturnSpeed: 10
+  DefaultPositionSnappines: 20
+  _damageModule:
+    DamagePrecentMultiplier: 15
+    AdditionalRange: -5
+  _extendedMagModule:
+    AdditioanalAmmo: 5
+  _rangeModule:
+    DamagePrecentMultiplier: -20
+    AdditionalRange: 5

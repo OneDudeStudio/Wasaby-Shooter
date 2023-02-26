@@ -1,48 +1,60 @@
+using PlayerController;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
+    [SerializeField] private bool isAffectingPlayer;
+
     private float _explosionDamage;
     private float _explosionRadius;
-    private int _maxTargets;
-    private LayerMask _checkLayers;
+    private LayerMask _obstacles;
+
+    private EnemyController _enemyController;
+    private Transform _player;
+    private IDamageDealer _explosionDamageDealer;
     [SerializeField] private ParticleSystem _explosionParticles;
+    
 
-    public IApplyableDamage[] Explode()
+    private void Start()
     {
-        Instantiate(_explosionParticles, transform.position, Quaternion.identity);
+        _enemyController = FindObjectOfType<EnemyController>();
+        _player = FindObjectOfType<PlayerManager>().transform;
+    }
 
-        Collider[] colliders = new Collider[_maxTargets];
-        int collidersNumber = Physics.OverlapSphereNonAlloc(transform.position, _explosionRadius, colliders);
-        IApplyableDamage[] victims = new IApplyableDamage[collidersNumber];
-        int counter = 0;
+    public void Explode()
+    {
+        List<Transform> affectedAreaTargets = _enemyController.AffectAreaVictims(transform.position, _explosionRadius);
+        ParticleSystem particles = Instantiate(_explosionParticles, transform.position, Quaternion.identity);
+        particles.transform.localScale = new Vector3(_explosionRadius * 1.5f, _explosionRadius * 1.5f, _explosionRadius * 1.5f);
 
-        for (int i = 0; i < collidersNumber; i++)
+
+
+        if (isAffectingPlayer)
         {
-            if (colliders[i].TryGetComponent(out IApplyableDamage damaged))
+            if ((_player.position - transform.position).sqrMagnitude < _explosionRadius * _explosionRadius)
             {
-                float distance = Vector3.Distance(transform.position, colliders[i].transform.position);
+                affectedAreaTargets.Add(_player);
+            }
+        }
 
-                if (!Physics.Raycast(transform.position, (colliders[i].transform.position - transform.position).normalized, distance, _checkLayers))
-                {
-                    damaged.TryApplyDamage(_explosionDamage);
-
-                    if (damaged != null)
-                    {
-                        victims[counter++] = damaged;
-                    }
-                }
+        foreach (var target in affectedAreaTargets)
+        {
+            Debug.DrawRay(transform.position, (target.position - transform.position), Color.red, 2f);
+            if (!Physics.Raycast(transform.position, (target.position - transform.position).normalized, (target.position - transform.position).magnitude, _obstacles))
+            {
+                _explosionDamageDealer.DealDamage(target.GetComponent<IApplyableDamage>(), _explosionDamage);
             }
         }
         Destroy(gameObject);
-        return victims;
     }
 
-    public void SetConfig(GrenadeConfig config)
+    public void SetConfig(ExplosionConfig config)
     {
         _explosionDamage = config.ExplosionDamage;
         _explosionRadius = config.ExplosionRadius;
-        _maxTargets = config.MaxTargets;
-        _checkLayers = config.CheckLayers;
+        _obstacles = config.CheckLayers;
     }
+
+    public void SetDamageDealer(IDamageDealer dealer) => _explosionDamageDealer = dealer;
 }

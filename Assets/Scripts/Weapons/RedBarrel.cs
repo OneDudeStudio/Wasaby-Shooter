@@ -4,14 +4,21 @@ public class RedBarrel : MonoBehaviour, IApplyableDamage
 {
     [SerializeField] private float _health = 2;
     private bool _isCanApplyDamage = true;
+
     private Explosion _explosion;
 
-    private void Start() => _explosion = GetComponent<Explosion>();
+    private void Start()
+    {
+        _explosion = GetComponent<Explosion>();
+        _explosion.SetConfig(FindObjectOfType<ConfigsLoader>().RootConfig.ExplosionItemsConfig.Barrel);
+        _explosion.SetDamageDealer(new ExplosionDamageDealer());
+    }
+    
     public void Die()
     {
-        GlobalEventManager.SendDie(transform);
         _explosion.Explode();
     }
+
     public bool TryApplyDamage(float damage)
     {
         if (!_isCanApplyDamage)

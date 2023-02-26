@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e85b884957858b4f8f2995a21703835, type: 3}
+  m_Name: ExplosionItemsConfig
+  m_EditorClassIdentifier: 
+  _default:
+    ExplosionDamage: 20
+    ExplosionRadius: 3
+    CheckLayers:
+      serializedVersion: 2
+      m_Bits: 1536
+  _poison:
+    ExplosionDamage: 1
+    ExplosionRadius: 2
+    CheckLayers:
+      serializedVersion: 2
+      m_Bits: 1536
+  _flash:
+    ExplosionDamage: 5
+    ExplosionRadius: 2
+    CheckLayers:
+      serializedVersion: 2
+      m_Bits: 1536
+  _redBarrel:
+    ExplosionDamage: 30
+    ExplosionRadius: 4
+    CheckLayers:
+      serializedVersion: 2
+      m_Bits: 1536

@@ -76,7 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fd9b47e283ed84280b12be5483368f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: 300d096220f93b446ab7d38a2de7a4a7, type: 2}
   _poisonSpawnerPrefab: {fileID: 751403257988168549, guid: 63e49160a1c49f645b9424782f3c22df, type: 3}
 --- !u!114 &7003860376725172852
 MonoBehaviour:
@@ -90,7 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2e1ccd1de7cfe448a2c6914711652d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionParticles: {fileID: 19844430, guid: 6c4ae31fa47a6c143a4e64ca4b65fc4a, type: 3}
+  isAffectingPlayer: 0
+  _explosionParticles: {fileID: 2566832553158840664, guid: 88535539461c4f34aa2576a93eb4dcd7, type: 3}
 --- !u!1 &6556894828082212052
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,26 +11,22 @@ public class TestBox : MonoBehaviour, IApplyableDamage, ISpeedChangeable, IApply
     [SerializeField] private Material _hitMaterial;
     private Material _defaultMaterial;
 
-    //private void OnDestroy()
-    //{
-    //    FindObjectOfType<EffectsController>().RemoveVictim(this);
-    //}
-
-    private float _electricDamage = .5f;
-
-
+    private EnemyController _enemyController;
     private List<Effect> _applyableEffects = new List<Effect>();
 
     private void Start()
     {
         _renderer = GetComponent<Renderer>();
+        _enemyController = FindObjectOfType<EnemyController>();
+        _enemyController.AddVictim(transform);
         _defaultMaterial = _renderer.material;
 
-        _applyableEffects.Add(new Burning(this));
-        _applyableEffects.Add(new Freeze(this));
-        _applyableEffects.Add(new Poison(this));
-        _applyableEffects.Add(new Electricity(this, FindObjectOfType<ElectricityController>()));
-        _applyableEffects.Add(new Stan(this));
+        EffectsConfig config = FindObjectOfType<ConfigsLoader>().RootConfig.EffectsConfig;
+        _applyableEffects.Add(new Burning(this, config));
+        _applyableEffects.Add(new Freeze(this, config));
+        _applyableEffects.Add(new Poison(this, config));
+        _applyableEffects.Add(new Electricity(this, FindObjectOfType<ElectricityController>(), config));
+        _applyableEffects.Add(new Stan(this, config));
     }
 
     private bool _isCanApplyDamage = true;
@@ -60,15 +56,8 @@ public class TestBox : MonoBehaviour, IApplyableDamage, ISpeedChangeable, IApply
 
     public void Die()
     {
-        Destroy(gameObject);
-    }
-
-    public void Electric(bool isStartPoint)
-    {
-        TryApplyDamage(_electricDamage);
-        if (isStartPoint)
-            GlobalEventManager.SendLightningChain(transform);
-    }
+        _enemyController.DestroyVictim(transform);
+    }   
 
     public void ModifySpeed(float modifier)
     {

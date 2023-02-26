@@ -76,7 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde49f6cc1728f04db0589d0aab59cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: 300d096220f93b446ab7d38a2de7a4a7, type: 2}
 --- !u!114 &4077780242905802851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2e1ccd1de7cfe448a2c6914711652d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionParticles: {fileID: 19848870, guid: a7c694f0877ea874fa57e033221095c3, type: 3}
+  isAffectingPlayer: 0
+  _explosionParticles: {fileID: 341564755673579289, guid: b4651306bb1dc0247aa3dbd29a159032, type: 3}
 --- !u!1 &3374722493904284077
 GameObject:
   m_ObjectHideFlags: 0

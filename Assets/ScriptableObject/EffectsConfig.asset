@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6856aaed86940b846bcb0ed8386e314b, type: 3}
+  m_Name: EffectsConfig
+  m_EditorClassIdentifier: 
+  _burning:
+    Ticks: 5
+    Interval: 1
+    Damage: 2
+  _freeze:
+    FreezeDuration: 5
+    SpeedPrecentModifier: -50
+  _poison:
+    Ticks: 10
+    Interval: 1
+    Damage: 1
+  _electric:
+    Interval: 0.1
+    MaxRadius: 5
+    MaxConductors: 5
+    Damage: 1
+  _stan:
+    StanDuration: 7

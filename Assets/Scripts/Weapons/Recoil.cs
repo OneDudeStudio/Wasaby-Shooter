@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Recoil : MonoBehaviour
 {
     [SerializeField] private Gun _gun;
     [SerializeField] private Transform _targetToRecoilEffect;
- 
+
 
     private Vector3 _currentRotation;
     private Vector3 _targetRotation;
@@ -17,7 +16,7 @@ public class Recoil : MonoBehaviour
 
     private Vector3 _currentPosition;
     private Vector3 _targetPosition;
-    private Vector3 _defaultPosition;  
+    private Vector3 _defaultPosition;
 
     private Vector3 _positionRecoil;
     private float _positionReturnSpeed;
@@ -26,12 +25,12 @@ public class Recoil : MonoBehaviour
 
     public Vector3 RecoilValue
     {
-        get => _gun.ThisGunConfig._defaultRecoil;
+        get => _gun.Config.DefaultRecoil;
         set => _recoil = value;
     }
     public float ReturnSpeedValue
     {
-        get => _gun.ThisGunConfig._defaultReturnSpeed;
+        get => _gun.Config.DefaultReturnSpeed;
         set
         {
             if (value > 0)
@@ -43,18 +42,18 @@ public class Recoil : MonoBehaviour
     }
     public float SnappinesValue
     {
-        get => _gun.ThisGunConfig._defaultSnappines;
+        get => _gun.Config.DefaultSnappines;
         set => _snappines = value;
     }
 
     public Vector3 PositionRecoilValue
     {
-        get => _gun.ThisGunConfig._defaultPositionRecoil;
+        get => _gun.Config.DefaultPositionRecoil;
         set => _positionRecoil = value;
     }
     public float PositionReturnSpeedValue
     {
-        get => _gun.ThisGunConfig._defaultPositionReturnSpeed;
+        get => _gun.Config.DefaultPositionReturnSpeed;
         set
         {
             if (value > 0)
@@ -66,7 +65,7 @@ public class Recoil : MonoBehaviour
     }
     public float PositionSnappinesValue
     {
-        get => _gun.ThisGunConfig._defaultPositionSnappines;
+        get => _gun.Config.DefaultPositionSnappines;
         set => _positionSnappines = value;
     }
 
@@ -77,7 +76,7 @@ public class Recoil : MonoBehaviour
         _targetPosition = _defaultPosition;
         _currentPosition = _defaultPosition;
     }
-    
+
     private void FixedUpdate()
     {
         _targetRotation = Vector3.Lerp(_targetRotation, Vector3.zero, _returnSpeed * Time.fixedDeltaTime);
@@ -92,6 +91,6 @@ public class Recoil : MonoBehaviour
     public void RecoilFire()
     {
         _targetRotation += new Vector3(_recoil.x, Random.Range(-_recoil.y, _recoil.y), Random.Range(-_recoil.z, _recoil.z));
-        _targetPosition += new Vector3(Random.Range(-_positionRecoil.x, _positionRecoil.x), Random.Range(-_positionRecoil.y, _positionRecoil.y), Random.Range(_positionRecoil.z/2, _positionRecoil.z));
-    }   
+        _targetPosition += new Vector3(Random.Range(-_positionRecoil.x, _positionRecoil.x), Random.Range(-_positionRecoil.y, _positionRecoil.y), Random.Range(_positionRecoil.z / 2, _positionRecoil.z));
+    }
 }
