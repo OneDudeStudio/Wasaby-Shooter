@@ -58,10 +58,10 @@ namespace Enemies.BattleSequence
             if(_enemyCount == 0)
                 FinishSequence();
         }
-
+        
         public void FinishSequence()
         {
-           FinishProcess();
+            FinishProcess();
         }
 
         private void GenerateTrain()
@@ -97,9 +97,12 @@ namespace Enemies.BattleSequence
                 new EnemySpawnInfo(EnemyType.Bomb, bombEnemyCount)
             };
 
+            Vector3 spawnPosition = _train.SpawnPoint.position;
+
             foreach (var spawnInfo in infos)
             {
-                List<Enemy> enemies = _enemySpawner.SpawnWave(spawnInfo, _train.SpawnPoint.position);
+                List<Enemy> enemies = _enemySpawner.SpawnWave(spawnInfo, spawnPosition);
+
                 Initialize(enemies);
                 _enemies.AddRange(enemies);
             }

@@ -130,7 +130,8 @@ namespace Enemies
                 StartCoroutine(ApplyFlash());
             }
             
-            StartCoroutine(ApplyPush());
+            if (!_proceduralMovement.enabled)
+                StartCoroutine(ApplyPush());
             
             return true;
         }

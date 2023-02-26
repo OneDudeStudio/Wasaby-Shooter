@@ -50,7 +50,7 @@ namespace Enemies
         {
             yield return MoveToJumpPoint(jumpPoint);
             yield return MoveToLandingPoint(landingPoint);
-            
+   
             FinishRoute();
         }
 
@@ -65,8 +65,12 @@ namespace Enemies
 
             if (_enemyAnimator)
             {
+                int jumpingAnimationId = Animator.StringToHash("Jumping");
+                
                 _enemyAnimator.SetBool(WalkingAnimaitonId, false);
-                _enemyAnimator.Play("Jumping");
+
+                if (_enemyAnimator.HasState(0, jumpingAnimationId))
+                    _enemyAnimator.Play(jumpingAnimationId);
             }
         }
         
@@ -78,12 +82,11 @@ namespace Enemies
                 Mathf.Abs(_enemy.transform.position.y - landingPoint.transform.position.y) >= comparisonDistance;
             
             yield return MoveToPoint(landingPoint, Condition);
+            FinishRoute();
         }
 
         private void FinishRoute()
         {
-            Jumped?.Invoke();
-            
             if(_enemyAnimator)
                 _enemyAnimator.SetBool(WalkingAnimaitonId, false);
             
@@ -115,6 +118,11 @@ namespace Enemies
         private void Jump()
         {
             StartCoroutine(MoveToLandingPoint(_landingPoint));
+        }
+
+        private void OnDisable()
+        {
+            Jumped?.Invoke();
         }
     }
 }
