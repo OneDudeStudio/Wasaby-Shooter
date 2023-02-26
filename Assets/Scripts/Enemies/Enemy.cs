@@ -79,8 +79,11 @@ namespace Enemies
             
             if(_animator)
                 _walkingAnimationSpeed = _animator.GetFloat(EnemySpeedModifier);
-
-            FindObjectOfType<EffectsController>().AddVictim(this);
+            
+            var effectController = FindObjectOfType<EffectsController>();
+            
+            if(effectController)
+                effectController.AddVictim(this);
         }
 
         public void SetTarget(IEnemyTarget target) => this.target = target;

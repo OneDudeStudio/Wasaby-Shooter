@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +6,15 @@ namespace Railways.Trains
 {
     public class ControlledTrain : Train
     {
+        [SerializeField] private List<Transform> _jumpPoints;
+        [SerializeField] private Transform _spawnPoint;
+
+        public List<Transform> JumpPoints => _jumpPoints;
+        public Transform SpawnPoint => _spawnPoint;
+
+        private bool _arrived;
+        
+        // Arrived
         public event Action OnArrive;
 
         private Animator _animator;
@@ -19,8 +27,9 @@ namespace Railways.Trains
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Finish"))
+            if (other.CompareTag("Finish") && !_arrived)
             {
+                _arrived = true;
                 OnArrive?.Invoke();
             }
         }

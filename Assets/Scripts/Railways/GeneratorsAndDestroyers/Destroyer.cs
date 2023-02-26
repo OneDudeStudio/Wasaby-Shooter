@@ -1,4 +1,5 @@
 using System;
+using Railways.Trains;
 using UnityEngine;
 
 namespace Railways.GeneratorsAndDestroyers

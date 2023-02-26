@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Enemies.Spawn;
 using PlayerController;
+using Railways.GeneratorsAndDestroyers;
+using Railways.Trains;
 using UnityEngine;
 using Random = System.Random;
 
@@ -11,17 +13,17 @@ namespace Enemies.BattleSequence
     {
         [SerializeField] private EnemySpawner _enemySpawner;
         
+        [SerializeField] private DynamicGeneratorByController _dynamicGeneratorByController;
+        [SerializeField] private Destroyer _destroyer;
+        
         [SerializeField] private TargetDetector _targetDetector;
-        [SerializeField ]private List<Transform> _landingPoints; 
-       
-        [SerializeField] private GameObject _trainPrefab;
-        [SerializeField] private Transform _stopPoint;
+        [SerializeField ]private List<Transform> _landingPoints;
 
         [SerializeField, Range(1, 10)] private int _meleeEnemyMaxCount;
-        [SerializeField, Range(1, 10)] private int _bombEnemyMaxCount;
+        [SerializeField, Range(0, 10)] private int _bombEnemyMaxCount;
         
         private IEnemyTarget _target;
-        private TestTrain _train;
+        private ControlledTrain _train;
 
         private List<Enemy> _enemies;
         private int _enemyCount;
@@ -43,8 +45,11 @@ namespace Enemies.BattleSequence
 
         public void InitializeSequence()
         {
-            _train = Instantiate(_trainPrefab, _stopPoint.position, Quaternion.identity).GetComponent<TestTrain>();
-            SpawnWave();
+            GenerateTrain();
+            _destroyer.OnDestroy += InitializeSequence;
+            
+            _train.OnArrive += StartProcess;
+            _train.OnArrive += SpawnWave;
         }
 
         public void UpdateSequenceScenario()
@@ -56,15 +61,32 @@ namespace Enemies.BattleSequence
 
         public void FinishSequence()
         {
-            Destroy(_train.gameObject);
+           FinishProcess();
         }
 
+        private void GenerateTrain()
+        {
+            _train = _dynamicGeneratorByController.Generate().GetComponent<ControlledTrain>();
+        }
+
+        private void StartProcess()
+        {
+            _train.StopMove();
+            _train.OpenDoors();
+        }
+
+        private void FinishProcess()
+        {
+            _train.CloseDoors();
+            _train.StartMove();
+        }
+        
         private void SpawnWave()
         {
             var random = new Random();
             
             int meleeEnemyCount = random.Next(1, _meleeEnemyMaxCount);
-            int bombEnemyCount = random.Next(1, _bombEnemyMaxCount);
+            int bombEnemyCount = random.Next(0, _bombEnemyMaxCount);
 
             _enemies = new List<Enemy>();
             _enemyCount = meleeEnemyCount + bombEnemyCount;
@@ -81,7 +103,7 @@ namespace Enemies.BattleSequence
                 Initialize(enemies);
                 _enemies.AddRange(enemies);
             }
-
+            
             TryMoveEnemies();
         }
 
@@ -144,7 +166,7 @@ namespace Enemies.BattleSequence
                     landingPoint = currentLandingPoint;
                 }
             }
-
+            
             return landingPoint;
         }
     }
