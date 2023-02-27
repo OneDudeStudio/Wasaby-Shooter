@@ -16,6 +16,7 @@ MonoBehaviour:
   DefaultMaxAmmo: 5
   DefaultRange: 12
   DefaultIntervalTime: 0.7
+  ReloadDuration: 2
   DamageByDistance:
     serializedVersion: 2
     m_Curve:

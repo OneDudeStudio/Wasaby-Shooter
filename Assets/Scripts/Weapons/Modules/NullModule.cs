@@ -6,6 +6,7 @@ public class NullModule : GunModule
         gun.Ammo = gun.Config.DefaultMaxAmmo;
         gun.Interval = gun.Config.DefaultIntervalTime;
         gun.Range = gun.Config.DefaultRange;
+        gun.ReloadDuration = gun.Config.ReloadDuration;
 
         gun.Rec.RecoilValue = gun.Config.DefaultRecoil;
         gun.Rec.ReturnSpeedValue = gun.Config.DefaultReturnSpeed;

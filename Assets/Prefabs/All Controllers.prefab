@@ -32,9 +32,84 @@ Transform:
   - {fileID: 7512230637597293935}
   - {fileID: 7512230637058035753}
   - {fileID: 7512230638931471816}
+  - {fileID: 4760111228464471441}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6815782481028747152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4760111228464471441}
+  - component: {fileID: 4986971972290297775}
+  - component: {fileID: 682733773515329428}
+  m_Layer: 0
+  m_Name: PoolsController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &4760111228464471441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815782481028747152}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9017862939857967670}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4986971972290297775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815782481028747152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f92eaeecc4572149bff27e9ca430498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletHolePrefab: {fileID: -5324150123114197274, guid: 6be6acdc254d0aa4fb98b8528ffe8cda, type: 3}
+  _impactPrefabs:
+  - {fileID: 7932958259156927031, guid: 8c97f9e08a617134ea5ec0b9eec8daad, type: 3}
+  - {fileID: 6212370925066272368, guid: f1be535be2b4cad4faf0e01a7bf42ce8, type: 3}
+  - {fileID: 8652727430404466508, guid: 17658d72d8dcfcf439388bd2e10d8c21, type: 3}
+  - {fileID: 965080696463434918, guid: 0b64055ff71a8c64a8d9b8219bb793a3, type: 3}
+  - {fileID: 140746548883337473, guid: 536d8077329e809438bed4bb8d68e950, type: 3}
+  _holesCount: 50
+  _impactsCount: 30
+--- !u!114 &682733773515329428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815782481028747152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c76c819c2bbac439fbfd0524cea1e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stone:
+  - {fileID: 2100000, guid: 90d2688a35001a645a8dfce9112314f5, type: 2}
+  _wood:
+  - {fileID: 2100000, guid: 86103a329eef161438b98db2726f7835, type: 2}
+  _metal:
+  - {fileID: 2100000, guid: 9b3062cd4a3dab34b85598c81c2de88a, type: 2}
+  - {fileID: 2100000, guid: d9d0bb992bb882041909bae29a36f756, type: 2}
+  _flesh:
+  - {fileID: 2100000, guid: d034595433c985b40977d26879de765b, type: 2}
 --- !u!1 &7512230637058035755
 GameObject:
   m_ObjectHideFlags: 0

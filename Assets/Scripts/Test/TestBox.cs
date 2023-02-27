@@ -19,7 +19,7 @@ public class TestBox : MonoBehaviour, IApplyableDamage, ISpeedChangeable, IApply
         _renderer = GetComponent<Renderer>();
         _enemyController = FindObjectOfType<EnemyController>();
         _enemyController.AddVictim(transform);
-        _defaultMaterial = _renderer.material;
+        _defaultMaterial = _renderer.sharedMaterial;
 
         EffectsConfig config = FindObjectOfType<ConfigsLoader>().RootConfig.EffectsConfig;
         _applyableEffects.Add(new Burning(this, config));
@@ -43,7 +43,7 @@ public class TestBox : MonoBehaviour, IApplyableDamage, ISpeedChangeable, IApply
             _isCanApplyDamage = false;
             return false;
         }
-        StartCoroutine(hit());
+       // StartCoroutine(hit());
         return true;
     }
 

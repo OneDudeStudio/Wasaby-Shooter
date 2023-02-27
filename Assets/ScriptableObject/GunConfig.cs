@@ -9,6 +9,7 @@ public class GunConfig : ScriptableObject
     public int DefaultMaxAmmo;
     public float DefaultRange;
     public float DefaultIntervalTime;
+    public float ReloadDuration;
     public AnimationCurve DamageByDistance;
 
     [Space]
