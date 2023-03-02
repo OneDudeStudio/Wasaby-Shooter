@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class Rifle : Gun
 {
+    protected override void SetStatsFromConfig()
+    {
+        _gunConfig = FindObjectOfType<ConfigsLoader>().RootConfig.GunConfig;
+        base.SetStatsFromConfig();
+    }
     protected override void Shoot()
     {
         Vector3 direction = _playerCamera.transform.forward * _range / 3;
-        if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out RaycastHit hit, _range))
+        if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out RaycastHit hit, _range, _affectingLayers))
         {
             _gunVFX.ShowHitParticles(hit);
             

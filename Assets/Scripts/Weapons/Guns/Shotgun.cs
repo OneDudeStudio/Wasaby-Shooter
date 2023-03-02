@@ -7,6 +7,7 @@ public class Shotgun : Gun
 
     protected override void SetStatsFromConfig()
     {
+        _gunConfig = FindObjectOfType<ConfigsLoader>().RootConfig.ShotgunConfig;
         base.SetStatsFromConfig();
         _pelletCount = ((ShotgunConfig)_gunConfig).PelletCount;
         _variance = ((ShotgunConfig)_gunConfig).Variance;
@@ -19,7 +20,7 @@ public class Shotgun : Gun
             Vector3 gauss = GaussDirection();
             Vector3 direction = gauss * _range;
 
-            if (Physics.Raycast(_playerCamera.transform.position, gauss, out RaycastHit hit, _range))
+            if (Physics.Raycast(_playerCamera.transform.position, gauss, out RaycastHit hit, _range, _affectingLayers))
             {
                 direction = (hit.point - _shootingPoint.position).normalized * hit.distance;
 

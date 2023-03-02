@@ -37,5 +37,4 @@ public class ModuleManager
             _currentModule.ResetModifiers();
         }
     }
-
 }

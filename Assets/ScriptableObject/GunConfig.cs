@@ -11,6 +11,7 @@ public class GunConfig : ScriptableObject
     public float DefaultIntervalTime;
     public float ReloadDuration;
     public AnimationCurve DamageByDistance;
+    public LayerMask AffectingLayers;
 
     [Space]
     [Header("Recoil Stats")]

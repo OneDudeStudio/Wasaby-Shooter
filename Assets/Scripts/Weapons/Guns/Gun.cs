@@ -11,7 +11,8 @@ public abstract class Gun : MonoBehaviour
     [SerializeField] protected GunSoundController _sound;
     [SerializeField] protected GunVFXController _gunVFX;
     [SerializeField] protected Transform _shootingPoint;
-    [SerializeField] protected GunConfig _gunConfig;
+    
+    protected GunConfig _gunConfig;
 
     /// <summary>
     /// !!!! kostil
@@ -26,6 +27,7 @@ public abstract class Gun : MonoBehaviour
     protected float _range;
     private float _reloadDuration;
     private int _currentAmmo;
+    protected LayerMask _affectingLayers;
 
 
     protected bool _isCanShoot = true;
@@ -101,9 +103,7 @@ public abstract class Gun : MonoBehaviour
     protected void Start()
     {
         _playerCamera = Camera.main;
-        _moduleManager = new ModuleManager(this);
         SetStatsFromConfig();
-
         SetBullet(new Bullet(0));
         //SetBullet(new EffectBullet<Freeze>(0));
     }
@@ -119,6 +119,8 @@ public abstract class Gun : MonoBehaviour
 
     protected virtual void SetStatsFromConfig()
     {
+        _affectingLayers = _gunConfig.AffectingLayers;
+        _moduleManager = new ModuleManager(this);
         SetModule(typeof(NullModule));
     }
 

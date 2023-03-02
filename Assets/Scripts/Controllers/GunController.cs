@@ -21,8 +21,8 @@ public class GunController : MonoBehaviour
         _bullets[2] = new EffectBullet<Freeze>(config.Freeze.AdditionalDamagePrecent);
         _bullets[3] = new EffectBullet<Electricity>(config.Electric.AdditionalDamagePrecent);
 
-        SetGun(_rifle);
-        //SetGun(_shotgun);
+       //SetGun(_rifle);
+        SetGun(_shotgun);
     }
 
     public void SetGun(Gun newGun)

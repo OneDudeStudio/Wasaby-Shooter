@@ -41,6 +41,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  AffectingLayers:
+    serializedVersion: 2
+    m_Bits: 7358071
   DefaultRecoil: {x: -20, y: 9, z: 0.9}
   DefaultReturnSpeed: 4
   DefaultSnappines: 10
