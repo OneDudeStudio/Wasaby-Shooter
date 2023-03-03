@@ -6,14 +6,14 @@ namespace Railways.GeneratorsAndDestroyers
 {
     public class Destroyer : MonoBehaviour
     {
-        public event Action OnDestroy;
+        public event Action Destroyed;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent<Move>(out var train))
             {
                 Destroy(other.gameObject);
-                OnDestroy?.Invoke();
+                Destroyed?.Invoke();
             }
         }
     }

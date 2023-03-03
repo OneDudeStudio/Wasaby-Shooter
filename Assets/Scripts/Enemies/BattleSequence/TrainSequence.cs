@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Enemies.Spawn;
@@ -43,13 +44,23 @@ namespace Enemies.BattleSequence
             }
         }
 
+        private void OnEnable()
+        {
+            _destroyer.Destroyed += InitializeSequence;
+        }
+
+        private void OnDisable()
+        {
+            _destroyer.Destroyed -= InitializeSequence;
+        }
+
         public void InitializeSequence()
         {
             GenerateTrain();
-            _destroyer.OnDestroy += InitializeSequence;
+            //_destroyer.Destroyed += InitializeSequence;
             
-            _train.OnArrive += StartProcess;
-            _train.OnArrive += SpawnWave;
+            _train.Arrived += StartProcess;
+            _train.Arrived += SpawnWave;
         }
 
         public void UpdateSequenceScenario()

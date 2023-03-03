@@ -14,15 +14,14 @@ namespace Railways.Trains
 
         private bool _arrived;
         
-        // Arrived
-        public event Action OnArrive;
+        public event Action Arrived;
 
         private Animator _animator;
 
         private void Start()
         {
             _animator = GetComponent<Animator>();
-            _animator.enabled = false;
+            //_animator.enabled = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -30,7 +29,7 @@ namespace Railways.Trains
             if (other.CompareTag("Finish") && !_arrived)
             {
                 _arrived = true;
-                OnArrive?.Invoke();
+                Arrived?.Invoke();
             }
         }
 
@@ -51,12 +50,12 @@ namespace Railways.Trains
                 collider.enabled = false;
             }
 
-            _animator.enabled = true;
+            //_animator.enabled = true;
         }
 
         public void StartMove()
         {
-            _animator.enabled = false;
+           // _animator.enabled = true;
 
             if (TryGetComponent(out Move move))
             {
@@ -70,7 +69,7 @@ namespace Railways.Trains
 
             if (TryGetComponent(out Collider collider))
             {
-                collider.enabled = false;
+                collider.enabled = true;
             }
         }
 

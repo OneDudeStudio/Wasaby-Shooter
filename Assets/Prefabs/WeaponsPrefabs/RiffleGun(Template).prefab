@@ -4948,9 +4948,9 @@ MonoBehaviour:
   _recoil: {fileID: 3524004760113458520}
   _sound: {fileID: 5812663714234277481}
   _gunVFX: {fileID: 8950664612529445657}
-  _hitParticles: {fileID: 4379133665793430431, guid: 3e92e1d66a344f346b40c0e5fb813b55, type: 3}
   _shootingPoint: {fileID: 3997905619818647263}
-  ThisGunConfig: {fileID: 0}
+  _gunConfig: {fileID: 0}
+  _reloadCooldown: {fileID: 0}
 --- !u!114 &3524004760113458520
 MonoBehaviour:
   m_ObjectHideFlags: 0

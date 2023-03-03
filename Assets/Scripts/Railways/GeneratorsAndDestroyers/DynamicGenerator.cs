@@ -51,7 +51,7 @@ namespace Railways.GeneratorsAndDestroyers
         {
             var direction = _directionPoint.transform.position - transform.position;
             
-            return Instantiate(_gameObjectForGeneration, transform.position,
+            return Instantiate(_gameObjectForGeneration, transform.position + _gameObjectForGeneration.transform.position,
                 Quaternion.LookRotation(direction));
             // TO DO:  + Vector3.up * objectSizeY / 2 can change if another prefab
             // see also static generator
