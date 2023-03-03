@@ -53,5 +53,5 @@ public class MaterialChoise : MonoBehaviour
     }
 
     public ImpactParticle GetMaterialsParticles(Material material) =>
-        _particlesDictionary.ContainsKey(material) ? _particlesDictionary[material]() : _poolsController.GetHitImpact(ImpactType.Default);
+    _particlesDictionary.ContainsKey(material) ? _particlesDictionary[material]() : _poolsController.GetHitImpact(ImpactType.Default);
 }

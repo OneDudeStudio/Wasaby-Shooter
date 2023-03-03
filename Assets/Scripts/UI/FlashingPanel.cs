@@ -23,7 +23,7 @@ namespace UI
 
         private void Flash(float health)
         {
-            _animator.SetTrigger("Damaged");
+            _animator.Play("RedFlashing");
         }
     }
 }

@@ -19,10 +19,10 @@ namespace Enemies
         public override void TryAttack(IApplyableDamage player)
         {
             if(CheckAttackConditions())
-                target.TryApplyDamage(damage);
+                player.TryApplyDamage(damage);
         }
-        
-        public bool CheckAttackConditions()
+
+        private bool CheckAttackConditions()
         {
             Variable attackRange = behaviourTreeOwner.graph.blackboard.GetVariable("attackRange");
 
