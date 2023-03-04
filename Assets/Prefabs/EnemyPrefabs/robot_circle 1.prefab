@@ -61,6 +61,7 @@ MonoBehaviour:
   _pushTime: 0.5
   _flashTime: 0.05
   _explosion: {fileID: 1338073775431958947, guid: 3435dbdf1e88a0447ad3a4ba1eadda06, type: 3}
+  _wheel: {fileID: 2486404420085127509}
 --- !u!114 &5016727104060328840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +212,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5287110965955366324}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: fbdbe079321ad8f46b846d13acc8769b, type: 2}
   m_CullingMode: 0

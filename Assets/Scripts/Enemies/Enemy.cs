@@ -83,8 +83,7 @@ namespace Enemies
             
             var effectController = FindObjectOfType<EffectsController>();
             
-            if(effectController)
-                effectController.AddVictim(this);
+            effectController.AddVictim(this);
         }
 
         public void SetTarget(IEnemyTarget target) => this.target = target;
@@ -129,18 +128,24 @@ namespace Enemies
                 isFlashing = true;
                 StartCoroutine(ApplyFlash());
             }
-            
+
             if (!_proceduralMovement.enabled)
-                StartCoroutine(ApplyPush());
+            {
+                Transform victimTransform = transform;
+                Vector3 pushVector = (victimTransform.position - ((MonoBehaviour)target).transform.position).normalized * _pushForce;
+                ApplyPush(pushVector, _pushTime);
+            }
             
             return true;
         }
-        
-        private IEnumerator ApplyPush()
+
+        public void ApplyPush(Vector3 pushVector, float time)
         {
-            Transform victimTransform = transform;
-            Vector3 pushVector = (victimTransform.position - ((MonoBehaviour)target).transform.position).normalized * _pushForce;
-            
+            StartCoroutine(PushCoroutine(transform, pushVector, time));
+        }
+        
+        private IEnumerator PushCoroutine(Transform victimTransform, Vector3 pushVector, float pushTime)
+        {
             _navMeshAgent.enabled = false;
             StartCoroutine(VictimPusher.Push(victimTransform, pushVector, _pushTime));
             yield return new WaitForSeconds(_pushTime);
