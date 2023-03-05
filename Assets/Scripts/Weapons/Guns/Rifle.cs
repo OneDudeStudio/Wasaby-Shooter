@@ -4,6 +4,7 @@ public class Rifle : Gun
 {
     protected override void Shoot()
     {
+        _gunVFX.PlayShootAnimation();
         Vector3 direction = _playerCamera.transform.forward * _range / 3;
         if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out RaycastHit hit, _range))
         {

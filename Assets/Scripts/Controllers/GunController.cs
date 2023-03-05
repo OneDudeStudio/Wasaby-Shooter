@@ -34,7 +34,7 @@ public class GunController : MonoBehaviour
         _currentGun = newGun;
         _currentGun.gameObject.SetActive(true);
         _currentLauncher = _currentGun.GetComponent<GrenadeLauncher>();
-        
+
     }
 
 

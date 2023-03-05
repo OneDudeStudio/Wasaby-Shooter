@@ -12,9 +12,13 @@ public class GunVFXController : MonoBehaviour
 
     private PoolsController _poolsController;
     private MaterialChoise _materialChoise;
+    [SerializeField] private Animator _animator;
+
+    private int _shootAnimationId;
 
     private void Start()
-    {
+    {       
+        _shootAnimationId = Animator.StringToHash("Shoot");
         _materialChoise = FindObjectOfType<MaterialChoise>();
         _poolsController = _materialChoise.PoolsController;
     }
@@ -82,10 +86,15 @@ public class GunVFXController : MonoBehaviour
     {
         if (hit.transform.TryGetComponent(out Renderer renderer))
         {
-            ImpactParticle particle = _materialChoise.GetMaterialsParticles(renderer.sharedMaterial);           
+            ImpactParticle particle = _materialChoise.GetMaterialsParticles(renderer.sharedMaterial);
             particle.transform.SetPositionAndRotation(hit.point, Quaternion.LookRotation(hit.normal));
             particle.gameObject.SetActive(true);
         }
+    }
+
+    public void PlayShootAnimation()
+    {
+        _animator.Play(_shootAnimationId);
     }
 
 }
