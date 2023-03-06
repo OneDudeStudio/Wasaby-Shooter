@@ -88,8 +88,7 @@ namespace Enemies.BattleSequence
 
         private void FinishProcess()
         {
-            _train.CloseDoors();
-            _train.StartMove();
+            _train.Departure();
         }
         
         private void SpawnWave()

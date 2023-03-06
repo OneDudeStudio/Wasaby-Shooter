@@ -33,6 +33,12 @@ namespace Railways.Trains
             }
         }
 
+        public void Departure()
+        {
+            CloseDoors();
+        }
+        
+
         public void StopMove()
         {
             if (TryGetComponent(out Move move))
@@ -53,9 +59,24 @@ namespace Railways.Trains
             //_animator.enabled = true;
         }
 
-        public void StartMove()
+        public void OpenDoors()
         {
-           // _animator.enabled = true;
+            _animator.SetTrigger("openDoors");
+        }
+
+        private void CloseDoors()
+        {
+            _animator.SetTrigger("closeDoors");
+        }
+
+        private void OnCloseDoorsAnimationOver()
+        {
+            StartMove();
+        }
+        
+        private void StartMove()
+        {
+            // _animator.enabled = true;
 
             if (TryGetComponent(out Move move))
             {
@@ -71,16 +92,6 @@ namespace Railways.Trains
             {
                 collider.enabled = true;
             }
-        }
-
-        public void OpenDoors()
-        {
-            _animator.SetTrigger("openDoors");
-        }
-
-        public void CloseDoors()
-        {
-            _animator.SetTrigger("closeDoors");
         }
     }
 }
