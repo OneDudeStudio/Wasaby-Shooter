@@ -13,7 +13,7 @@ namespace Railways.Trains
         public Transform SpawnPoint => _spawnPoint;
 
         private bool _arrived;
-        
+
         public event Action Arrived;
 
         private Animator _animator;
@@ -21,7 +21,6 @@ namespace Railways.Trains
         private void Start()
         {
             _animator = GetComponent<Animator>();
-            //_animator.enabled = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -37,7 +36,7 @@ namespace Railways.Trains
         {
             CloseDoors();
         }
-        
+
 
         public void StopMove()
         {
@@ -51,12 +50,15 @@ namespace Railways.Trains
                 trainCollision.enabled = false;
             }
 
+            foreach (Collider childCollider in GetComponentsInChildren<Collider>(true))
+            {
+                childCollider.enabled = true;
+            }
+            
             if (TryGetComponent(out Collider collider))
             {
                 collider.enabled = false;
             }
-
-            //_animator.enabled = true;
         }
 
         public void OpenDoors()
@@ -73,11 +75,9 @@ namespace Railways.Trains
         {
             StartMove();
         }
-        
+
         private void StartMove()
         {
-            // _animator.enabled = true;
-
             if (TryGetComponent(out Move move))
             {
                 move.enabled = true;
@@ -88,6 +88,11 @@ namespace Railways.Trains
                 trainCollision.enabled = true;
             }
 
+            foreach (Collider childCollider in GetComponentsInChildren<Collider>(true))
+            {
+                childCollider.enabled = false;
+            }
+            
             if (TryGetComponent(out Collider collider))
             {
                 collider.enabled = true;

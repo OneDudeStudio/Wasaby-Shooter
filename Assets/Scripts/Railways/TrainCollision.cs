@@ -1,60 +1,94 @@
-using Railways;
+using Enemies;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class TrainCollision : MonoBehaviour
+namespace Railways
 {
-    [SerializeField] private float _pushForce = 5;
-    [SerializeField] private float _pushHeight = 5;
-    [SerializeField] private float _damage = 5;
-
-    private Ragdoll _otherObjectRagdoll;
-
-    private void OnCollisionEnter(UnityEngine.Collision collision)
+    public class TrainCollision : MonoBehaviour
     {
-        //if (collision.gameObject.TryGetComponent<PlayerManager>(out var player))
-        if (TryGetComponent(out Move move) && move.enabled)
+        [SerializeField] private float _pushForce = 5;
+        [SerializeField] private float _pushHeight = 5;
+        [SerializeField] private float _pushDamage = 5;
+
+        private float _pushTime = 0.5f;
+
+
+        private void OnTriggerEnter(Collider other)
         {
-            _otherObjectRagdoll = collision.gameObject.GetComponent<Ragdoll>();
+            if (TryGetComponent(out Move move) && move.enabled)
+            {
+                var direction = GetPushDirection(other) * _pushForce;
+                _pushTime = direction.magnitude / move.Speed;
+                Debug.Log(_pushTime);
 
-            PushObject(collision);
-            _otherObjectRagdoll.PlaySound();
-            TakeDamage(collision.gameObject, _damage);
-        }
-    }
+                if (other.gameObject.TryGetComponent<Ragdoll>(out var player))
+                {
+                    StartCoroutine(VictimPusher.Push(player.transform, direction, _pushTime));
+                    player.PlaySound();
+                }
 
-    private void PushObject(Collision collision)
-    {
-        _otherObjectRagdoll.ActivateRagdoll();
+                else if (other.gameObject.TryGetComponent<Enemy>(out var enemy))
+                {
+                    enemy.ApplyPush(direction, _pushTime);
+                }
 
-        var direction = GetPushDirection(collision);
-
-        _otherObjectRagdoll.ApplyForce(new Vector3(direction.x * _pushForce, direction.y, direction.z * _pushForce));
-    }
-
-    private Vector3 GetPushDirection(Collision collision)
-    {
-        Vector3 vectorFromCollisionPointToCenter = new Vector3(transform.position.x - collision.contacts[0].point.x,
-            0,
-            transform.position.z - collision.contacts[0].point.z);
-
-        Vector3 direction;
-        if (Vector3.Dot(vectorFromCollisionPointToCenter, transform.right) <= 0)
-        {
-            direction = Quaternion.Euler(0, 45, 0) * transform.forward;
-        }
-        else
-        {
-            direction = Quaternion.Euler(0, -45, 0) * transform.forward;
+                TakeDamage(other.gameObject, _pushDamage);
+            }
         }
 
-        direction.y = _pushHeight;
+        private void PushObjectByPhysics(Ragdoll ragdoll, Vector3 direction)
+        {
+            ragdoll.ActivateRagdoll();
 
-        return direction;
-    }
+            ragdoll.ApplyForce(new Vector3(direction.x * _pushForce, direction.y,
+                direction.z * _pushForce));
+        }
 
-    private void TakeDamage(GameObject damagedObject, float amount)
-    {
-        IApplyableDamage iApplyableDamage = damagedObject.GetComponent<IApplyableDamage>();
-        if (iApplyableDamage != null) iApplyableDamage.TryApplyDamage(amount);
+        private Vector3 GetPushDirection(Collision collision)
+        {
+            Vector3 vectorFromCollisionPointToCenter = new Vector3(transform.position.x - collision.contacts[0].point.x,
+                0,
+                transform.position.z - collision.contacts[0].point.z);
+
+            Vector3 direction = GetRotation(vectorFromCollisionPointToCenter);
+
+            direction.y = _pushHeight;
+
+            return direction;
+        }
+
+        private Vector3 GetPushDirection(Collider collider)
+        {
+            Vector3 vectorFromCollisionPointToCenter = new Vector3(transform.position.x - collider.transform.position.x,
+                0,
+                transform.position.z - collider.transform.position.z);
+
+            Vector3 direction = GetRotation(vectorFromCollisionPointToCenter);
+
+            direction.y = _pushHeight;
+
+            return direction;
+        }
+
+        private Vector3 GetRotation(Vector3 vector)
+        {
+            Vector3 vectorWithRotation;
+            if (Vector3.Dot(vector, transform.right) <= 0)
+            {
+                vectorWithRotation = Quaternion.Euler(0, 45, 0) * transform.forward;
+            }
+            else
+            {
+                vectorWithRotation = Quaternion.Euler(0, -45, 0) * transform.forward;
+            }
+
+            return vectorWithRotation;
+        }
+
+        private void TakeDamage(GameObject damagedObject, float amount)
+        {
+            IApplyableDamage iApplyableDamage = damagedObject.GetComponent<IApplyableDamage>();
+            if (iApplyableDamage != null) iApplyableDamage.TryApplyDamage(amount);
+        }
     }
 }
