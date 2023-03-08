@@ -4511,7 +4511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866581902927624675, guid: cb4c1240f660d8b40b6b381bbfcde327, type: 3}
       propertyPath: _delay
-      value: 6
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8866581902927624675, guid: cb4c1240f660d8b40b6b381bbfcde327, type: 3}
       propertyPath: _rendererForGeneration
@@ -12679,7 +12679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866581902927624675, guid: cb4c1240f660d8b40b6b381bbfcde327, type: 3}
       propertyPath: _delay
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8866581902927624675, guid: cb4c1240f660d8b40b6b381bbfcde327, type: 3}
       propertyPath: _speed
@@ -18633,7 +18633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8866581902927624675, guid: cb4c1240f660d8b40b6b381bbfcde327, type: 3}
       propertyPath: _delay
-      value: 4
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8866581902927624675, guid: cb4c1240f660d8b40b6b381bbfcde327, type: 3}
       propertyPath: _speed

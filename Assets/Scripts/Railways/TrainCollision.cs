@@ -19,7 +19,6 @@ namespace Railways
             {
                 var direction = GetPushDirection(other) * _pushForce;
                 _pushTime = direction.magnitude / move.Speed;
-                Debug.Log(_pushTime);
 
                 if (other.gameObject.TryGetComponent<Ragdoll>(out var player))
                 {
