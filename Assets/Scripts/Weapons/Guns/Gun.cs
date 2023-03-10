@@ -105,7 +105,6 @@ public abstract class Gun : MonoBehaviour
         SetStatsFromConfig();
 
         SetBullet(new Bullet(0));
-        //SetBullet(new EffectBullet<Freeze>(0));
     }
 
     private void Update()

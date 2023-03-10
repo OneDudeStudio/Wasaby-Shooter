@@ -15,7 +15,7 @@ public class SongController : MonoBehaviour
     int sampleRate;
     float clipLength;
     float[] multiChannelSamples;
-    SpectralFluxAnalyzer preProcessedSpectralFluxAnalyzer;
+    //SpectralFluxAnalyzer preProcessedSpectralFluxAnalyzer;
     BeatDetector1 beatDetector;
     List<DetectedBeat> beats;
 
@@ -31,7 +31,7 @@ public class SongController : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        preProcessedSpectralFluxAnalyzer = new SpectralFluxAnalyzer();
+        //preProcessedSpectralFluxAnalyzer = new SpectralFluxAnalyzer();
         // Need all audio samples.  If in stereo, samples will return with left and right channels interweaved
         // [L,R,L,R,L,R]
         multiChannelSamples = new float[audioSource.clip.samples * audioSource.clip.channels];
@@ -71,6 +71,7 @@ public class SongController : MonoBehaviour
         //int indexToPlot = getIndexFromTime(audioSource.time) / 1024;
         //if (preProcessedSpectralFluxAnalyzer.spectralFluxSamples[indexToPlot].isPeak)
         //{
+
         //    StartCoroutine(show());
         //}
 
@@ -157,7 +158,7 @@ public class SongController : MonoBehaviour
                 float curSongTime = getTimeFromIndex(i) * spectrumSampleSize;
 
                 // Send our magnitude data off to our Spectral Flux Analyzer to be analyzed for peaks
-                preProcessedSpectralFluxAnalyzer.analyzeSpectrum(Array.ConvertAll(scaledFFTSpectrum, x => (float)x), curSongTime);
+                //preProcessedSpectralFluxAnalyzer.analyzeSpectrum(Array.ConvertAll(scaledFFTSpectrum, x => (float)x), curSongTime);
             }
 
             Debug.Log("Spectrum Analysis done");

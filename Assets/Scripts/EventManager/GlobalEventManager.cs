@@ -6,6 +6,9 @@ public class GlobalEventManager : MonoBehaviour
     public static UnityEvent<Transform> OnDie = new UnityEvent<Transform>();
     public static UnityEvent<Transform> OnStartLightningChain = new UnityEvent<Transform>();
 
+    public static UnityEvent<ConfigsLoader> OnConfigsLoaded = new UnityEvent<ConfigsLoader>();
+
+
     public static void SendDie(Transform tr)
     {
         OnDie.Invoke(tr);
