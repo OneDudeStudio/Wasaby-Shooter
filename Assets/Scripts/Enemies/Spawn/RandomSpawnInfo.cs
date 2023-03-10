@@ -19,10 +19,5 @@ namespace Enemies.Spawn
             var random = new System.Random();
             _points = _points.OrderBy(point => random.Next()).ToList();
         }
-
-        private RandomSpawnInfo GenerateRandomSpawnInfo(List<EnemyType> _availableTypes)
-        {
-            return null;
-        }
     }
 }

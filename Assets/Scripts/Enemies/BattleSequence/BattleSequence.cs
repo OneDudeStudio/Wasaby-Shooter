@@ -26,8 +26,10 @@ namespace Enemies.BattleSequence
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent(out PlayerManager _) && !_initialized)
-                InitializeSequence();
+            if (other.TryGetComponent(out PlayerManager _) && !_initialized)
+            {
+                InitializeSequence();                
+            }
         }
         
         
@@ -49,13 +51,19 @@ namespace Enemies.BattleSequence
         {
             _currentWaveEnemiesCount--;
 
-            if (_currentWaveEnemiesCount != 0) 
+            if (_currentWaveEnemiesCount != 0)
+            {
                 return;
+            }
 
             if (_currentWaveIndex != _waves.Count)
-                SpawnWave();
+            {
+                SpawnWave();                
+            }
             else
-                FinishSequence();
+            {
+                 FinishSequence();               
+            }
         }
 
         private void SpawnWave()
@@ -72,14 +80,14 @@ namespace Enemies.BattleSequence
         {
             RandomSpawnInfo spawnInfo = info.RandomSpawnInfo;
 
-            foreach (var enemySpawnInfo in spawnInfo.EnemySpawnInfos)
+            foreach (EnemySpawnInfo enemySpawnInfo in spawnInfo.EnemySpawnInfos)
             {
                 _currentWaveEnemiesCount += enemySpawnInfo.Count;
             }
             
             spawnInfo.RandomizePoints();
             
-            var enemies = _enemySpawner.SpawnWave(spawnInfo);
+            List<Enemy> enemies = _enemySpawner.SpawnWave(spawnInfo);
             InitializeEnemies(enemies);
         }
         
@@ -91,17 +99,21 @@ namespace Enemies.BattleSequence
                 return;
 
             var enemies = _enemySpawner.SpawnWave(pointInfos);
-            
-            foreach (var pointInfo in pointInfos)
-                foreach (var enemySpawnInfo in pointInfo.EnemySpawnInfos)
-                    _currentWaveEnemiesCount += enemySpawnInfo.Count;
 
+            foreach (FullEnemiesSpawnInfo pointInfo in pointInfos)
+            { 
+                foreach (EnemySpawnInfo enemySpawnInfo in pointInfo.EnemySpawnInfos)
+                {
+                    _currentWaveEnemiesCount += enemySpawnInfo.Count;                
+                }               
+            }
+            
             InitializeEnemies(enemies);
         }
         
         private void InitializeEnemies(List<Enemy> enemies)
         {
-            foreach (var enemy in enemies)
+            foreach (Enemy enemy in enemies)
             {
                 enemy.SetTarget(_target);
                 enemy.Died += UpdateSequenceScenario;
@@ -111,8 +123,10 @@ namespace Enemies.BattleSequence
 
         private void TrySetObstacles(bool state)
         {
-            foreach (var obstacle in _obstacles.Where(obstacle => obstacle))
-                obstacle.SetActive(state);
+            foreach (GameObject obstacle in _obstacles.Where(obstacle => obstacle))
+            {
+                obstacle.SetActive(state);                
+            }
         }
     }
 }
