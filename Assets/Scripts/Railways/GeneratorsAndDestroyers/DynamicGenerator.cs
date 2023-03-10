@@ -30,9 +30,12 @@ namespace Railways.GeneratorsAndDestroyers
         public GameObject Generate()
         {
             _generatedGameObject = null;
-            //StartCoroutine(StartGeneratorCoroutine());
+            
+            StartCoroutine(StartGeneratorCoroutine());
             GenerateDynamicGameObject();
             
+            Genereted?.Invoke();
+
             return _generatedGameObject;
         }
 
@@ -41,8 +44,8 @@ namespace Railways.GeneratorsAndDestroyers
             TurnOnRenderer();
             PlaySound();
             yield return new WaitForSeconds(2);
-            yield return new WaitUntil(_generateGameObject);
-            yield return new WaitForSeconds(1);
+            //yield return new WaitUntil(_generateGameObject);
+            //yield return new WaitForSeconds(1);
             TurnOffRenderer();
         }
 
@@ -72,7 +75,6 @@ namespace Railways.GeneratorsAndDestroyers
             // TO DO:  + Vector3.up * objectSizeY / 2 can change if another prefab
             // see also static generator
             SetMove(_generatedGameObject);
-            Genereted?.Invoke();
             return true;
         }
 
@@ -84,4 +86,5 @@ namespace Railways.GeneratorsAndDestroyers
             newGameObject.transform.parent = transform;
         }
     }
+    
 }
