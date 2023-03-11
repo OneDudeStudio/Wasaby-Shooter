@@ -16,6 +16,9 @@ namespace PlayerController.PlayerLocomotionSystem
         public float groundDrag;
         public float airMultiplier;
         public float crouchMultiplier;
+        public float dashSpeed;
+        public float dashSpeedChangeFactor;
+        public float maxYSpeed;
 
 
         private Vector3 moveDirection;

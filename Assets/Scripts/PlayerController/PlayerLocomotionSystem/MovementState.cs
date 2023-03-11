@@ -11,6 +11,7 @@ namespace PlayerController.PlayerLocomotionSystem
         Sliding,
         Swinging,
         Grappling,
-        Air
+        Air,
+        Dashing
     }
 }

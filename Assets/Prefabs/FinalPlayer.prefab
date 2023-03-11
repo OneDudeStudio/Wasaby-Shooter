@@ -436,12 +436,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5456757870563664778}
-  - component: {fileID: 1870121306}
-  - component: {fileID: 5456757870563664822}
   - component: {fileID: 5456757870563664779}
   - component: {fileID: 5456757870563664817}
+  - component: {fileID: 1870121306}
+  - component: {fileID: 5456757870563664822}
   - component: {fileID: 6031557618614204930}
   - component: {fileID: 704236742531860264}
+  - component: {fileID: 2073814940982480215}
   - component: {fileID: 5046213746663881695}
   - component: {fileID: 1667764299707229032}
   m_Layer: 6
@@ -469,42 +470,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1870121306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5456757870563664777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4b983c3ed6582a4895ae4e25ace3812, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 100
---- !u!114 &5456757870563664822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5456757870563664777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb0862e1b5544fc4bb916c43e2eaf995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movementState: 0
-  _jumpHandler: {fileID: 704236742531860264}
-  _crouchHandler: {fileID: 5046213746663881695}
-  _movementHandler: {fileID: 6031557618614204930}
-  _swingingHandler: {fileID: 1667764299707229032}
-  _playerCam: {fileID: 3412932156184853107}
-  _playerHeight: 2
-  _maxSlopeAngle: 40
-  _whatIsGround:
-    serializedVersion: 2
-    m_Bits: 1536
 --- !u!54 &5456757870563664779
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -535,6 +500,44 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1870121306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5456757870563664777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4b983c3ed6582a4895ae4e25ace3812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+--- !u!114 &5456757870563664822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5456757870563664777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0862e1b5544fc4bb916c43e2eaf995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementState: 0
+  _jumpHandler: {fileID: 704236742531860264}
+  _crouchHandler: {fileID: 5046213746663881695}
+  _movementHandler: {fileID: 6031557618614204930}
+  _dashHandler: {fileID: 2073814940982480215}
+  _swingingHandler: {fileID: 1667764299707229032}
+  _playerCam: {fileID: 3412932156184853107}
+  _playerHeight: 2
+  _maxSlopeAngle: 40
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1536
+  maxYSpeed: 0
 --- !u!114 &6031557618614204930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,6 +561,9 @@ MonoBehaviour:
   groundDrag: 4
   airMultiplier: 0.4
   crouchMultiplier: 0.5
+  dashSpeed: 0
+  dashSpeedChangeFactor: 0
+  maxYSpeed: 0
 --- !u!114 &704236742531860264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,6 +578,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpForce: 12
   _jumpCooldown: 0.5
+--- !u!114 &2073814940982480215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5456757870563664777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b630c94519914db785fa3060735c9038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashForce: 20
+  dashUpwardForce: 0
+  maxDashYSpeed: 0
+  dashDuration: 0.25
+  dashCooldown: 1.5
+  dashFov: 75
+  useCameraForward: 1
+  allowAllDirections: 1
+  disableGravity: 0
+  resetVel: 0
 --- !u!114 &5046213746663881695
 MonoBehaviour:
   m_ObjectHideFlags: 0

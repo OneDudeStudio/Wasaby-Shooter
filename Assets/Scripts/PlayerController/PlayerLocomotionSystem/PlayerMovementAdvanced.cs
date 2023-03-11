@@ -10,6 +10,7 @@ namespace PlayerController.PlayerLocomotionSystem
         [SerializeField] private JumpHandler _jumpHandler;
         [SerializeField] private CrouchHandler _crouchHandler;
         [SerializeField] private MovementHandler _movementHandler;
+        [SerializeField] private DashHandler _dashHandler;
         [SerializeField] private SwingingHandler _swingingHandler;
 
         [Header("Locomotion Settings")]
@@ -23,6 +24,7 @@ namespace PlayerController.PlayerLocomotionSystem
         private float _desiredMoveSpeed;
         private float _horizontalInput;
         private float _moveSpeed;
+        public float maxYSpeed;
         private bool keepMomentum;
         private Rigidbody rb;
         private RaycastHit slopeHit;
@@ -67,11 +69,18 @@ namespace PlayerController.PlayerLocomotionSystem
         private bool _isCrouching;
         private bool _isSwinging;
         private bool _isExitingSlope;
+        private bool _isDashing;
         public bool IsGrounded => _isGrounded;
         public bool IsSliding => _isSliding;
         public bool IsVaulting => _isVaulting;
         public bool IsSprinting => _isSprinting;
         public bool IsActiveGrapple => _isActiveGrapple;
+        
+        public bool IsDashing
+        {
+            get => _isDashing;
+            set => _isDashing = value;
+        }
         public bool IsCrouching
         {
             get => _isCrouching;
@@ -190,6 +199,11 @@ namespace PlayerController.PlayerLocomotionSystem
         {
             _jumpHandler.TryJump(this, rb);
         }
+        
+        public void TryDashByHandler()
+        {
+            _dashHandler.TryDash(this, rb, _playerCam);
+        }
 
         public void TryStartCrouchByHandler()
         {
@@ -212,7 +226,15 @@ namespace PlayerController.PlayerLocomotionSystem
 
         private void StateHandler()
         {
-            if (_isFreeze)
+            // Mode - Dashing
+            if (_isDashing)
+            {
+                _movementState = MovementState.Dashing;
+                DesiredMoveSpeed = _movementHandler.dashSpeed;
+                _movementHandler.speedIncreaseMultiplier = _movementHandler.dashSpeedChangeFactor;
+            }
+            
+            else if (_isFreeze)
             {
                 _movementState = MovementState.Freeze;
                 rb.velocity = Vector3.zero;

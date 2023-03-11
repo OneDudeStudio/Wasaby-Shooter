@@ -1,4 +1,5 @@
 using PlayerController.PlayerLocomotionSystem;
+using UI.UI;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class InputManager : MonoBehaviour
     [Space]
     [Header("MovementKeys")]
     [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
+    [SerializeField] private KeyCode _dashKey = KeyCode.LeftAlt;
     [SerializeField] private KeyCode _sprintKey = KeyCode.LeftShift;
     [SerializeField] private KeyCode _crouchKey = KeyCode.LeftControl;
 
@@ -28,7 +30,13 @@ public class InputManager : MonoBehaviour
     [Space]
     [Header("Environment")]
     [SerializeField] private KeyCode _openShopKey = KeyCode.F;
-    [SerializeField] private KeyCode _exitKey = KeyCode.Escape;
+    //[SerializeField] private KeyCode _exitKey = KeyCode.Escape;
+    
+    //[Space]
+    //[Header("UI interact")]
+    //[SerializeField] private KeyCode _pauseGameOrExit = KeyCode.Escape;
+    //[SerializeField] private KeyCode _exitKey = KeyCode.Escape;
+    
 
 
     [Space]
@@ -39,9 +47,12 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private Shop _shop;
 
+    [SerializeField] private GeneralCanvasCore _generalCanvas;
+
     private CursorController _cursorController;
 
 
+    private bool _isBlockAnyInput = false;
     private bool _isCanMove = true;
     private bool _isCanRotateCamera = true;
     private bool _isCanUseWeapon = true;
@@ -68,6 +79,11 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+       //if (_isBlockAnyInput)
+       //{
+       //    return;
+       //}
+        
         if (_isCanRotateCamera)
         {
             _playerCam.RotateCamera(Input.GetAxisRaw(_horizontalMouseAxis), Input.GetAxisRaw(_verticalMouseAxis));
@@ -80,6 +96,11 @@ public class InputManager : MonoBehaviour
             if (Input.GetKey(_jumpKey))
             {
                 _movementAdvanced.TryJumpByHandler();
+            }
+            
+            if (Input.GetKeyDown(_dashKey))
+            {
+                _movementAdvanced.TryDashByHandler();
             }
 
             if (Input.GetKeyDown(_crouchKey))
@@ -127,10 +148,27 @@ public class InputManager : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(_openShopKey))
-        {
-            _shop.TryUseShop(false);
-        }
+       if (Input.GetKeyDown(_openShopKey))
+       {
+           _shop.TryUseShop(false);
+       }
+        
+        //if (Input.GetKeyDown(_pauseGameOrExit))
+        //{
+        //    _isBlockAnyInput = _generalCanvas.TryGoToPause();
+//
+        //    switch (_isBlockAnyInput)
+        //    {
+        //        case true:
+        //            _cursorController.HideCursor();
+        //            break;
+        //        case false:
+        //            _cursorController.ShowCursor();
+        //            break;
+        //    }
+//
+        //    //_shop.TryUseShop(false);
+        //}
         //if (Input.GetKeyDown(_exitKey))
         //{
         //    _shop.TryUseShop(true);
