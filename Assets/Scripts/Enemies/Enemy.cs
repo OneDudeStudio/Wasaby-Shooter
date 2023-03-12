@@ -34,7 +34,9 @@ namespace Enemies
 
         private Animator _animator;
         private float _walkingAnimationSpeed;
-        
+
+        private ConfigsLoader _configsLoader;
+
         private const string EnemySpeedModifier = "EnemySpeed";
 
         public ProceduralEnemyMovement ProceduralMovement => _proceduralMovement;
@@ -63,16 +65,18 @@ namespace Enemies
             
             behaviourTreeOwner = GetComponent<BehaviourTreeOwner>();
 
-            EffectsConfig config = FindObjectOfType<ConfigsLoader>().RootConfig.EffectsConfig;
+            _configsLoader = FindObjectOfType<ConfigsLoader>();
+        }
+
+        private void Start()
+        {
+            EffectsConfig config = _configsLoader.RootConfig.EffectsConfig;
             _applyableEffects.Add(new Burning(this, config));
             _applyableEffects.Add(new Freeze(this, config));
             _applyableEffects.Add(new Poison(this, config));
             _applyableEffects.Add(new Electricity(this, FindObjectOfType<ElectricityController>(), config));
             _applyableEffects.Add(new Stan(this, config));
-        }
-
-        private void Start()
-        {
+            
             Speed = defaultSpeed;
             
             if(!_proceduralMovement.enabled)

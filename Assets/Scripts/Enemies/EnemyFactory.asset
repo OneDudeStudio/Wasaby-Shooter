@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemyFactory
   m_EditorClassIdentifier: 
   _meleeEnemyPrefab: {fileID: 7120964188874233761, guid: 7d53e7fc016fcaf4bb9a75572fd595b5, type: 3}
-  _bombEnemyPrefab: {fileID: 5016727104060328839, guid: 9b02c8e0c81a1c44c8100921ca166a41, type: 3}
+  _bombEnemyPrefab: {fileID: 3569697809262806547, guid: 496d1c7f95640f54b8517fa2699ad2ea, type: 3}
