@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,38 +12,30 @@ namespace Railways.GeneratorsAndDestroyers
         [SerializeField] private AudioSource _soundForGeneration;
         [SerializeField] private Renderer _rendererForGeneration;
 
-        private GameObject _generatedGameObject;
-        private Func<bool> _generateGameObject;
-        private event Action Genereted;
-
         private void Awake()
-        {
-            _generateGameObject = GenerateDynamicGameObject;
-        }
-
-        private void Start()
         {
             TurnOffRenderer();
         }
 
         public GameObject Generate()
         {
-            _generatedGameObject = null;
-            
-            StartCoroutine(StartGeneratorCoroutine());
-            GenerateDynamicGameObject();
-            
-            Genereted?.Invoke();
+            UnifyCoroutine<object> coroutine = new UnifyCoroutine<object>(GeneratedProcess(), ReturnValueCallback);
+            coroutine.Start();
 
-            return _generatedGameObject;
+            return GetGeneratedGameObject();
         }
 
-        private IEnumerator StartGeneratorCoroutine()
+        private void ReturnValueCallback(object returnValue)
+        {
+            Debug.Log("Return Value is * " + returnValue + " *");
+        }
+
+        private IEnumerator GeneratedProcess()
         {
             TurnOnRenderer();
             PlaySound();
             yield return new WaitForSeconds(2);
-            //yield return new WaitUntil(_generateGameObject);
+            //yield return GetGeneratedGameObject();
             //yield return new WaitForSeconds(1);
             TurnOffRenderer();
         }
@@ -65,26 +56,25 @@ namespace Railways.GeneratorsAndDestroyers
             _soundForGeneration.PlayOneShot(_soundForGeneration.clip, 1);
         }
 
-        private bool GenerateDynamicGameObject()
+        private GameObject GetGeneratedGameObject()
         {
             var direction = _directionPoint.transform.position - transform.position;
 
-            _generatedGameObject = Instantiate(_gameObjectForGeneration,
+            var generatedGameObject = Instantiate(_gameObjectForGeneration,
                 transform.position + _gameObjectForGeneration.transform.position,
                 Quaternion.LookRotation(direction));
             // TO DO:  + Vector3.up * objectSizeY / 2 can change if another prefab
             // see also static generator
-            SetMove(_generatedGameObject);
-            return true;
+            SetMove(generatedGameObject);
+            return generatedGameObject;
         }
 
-        private void SetMove(GameObject newGameObject)
+        private void SetMove(GameObject objectToMove)
         {
-            newGameObject.AddComponent<Move>();
-            newGameObject.GetComponent<Move>().Speed = _speed;
-            newGameObject.GetComponent<Move>().DirectionPoint = _directionPoint;
-            newGameObject.transform.parent = transform;
+            objectToMove.AddComponent<Move>();
+            objectToMove.GetComponent<Move>().Speed = _speed;
+            objectToMove.GetComponent<Move>().DirectionPoint = _directionPoint;
+            objectToMove.transform.parent = transform;
         }
     }
-    
 }

@@ -11,18 +11,18 @@ namespace Railways.GeneratorsAndDestroyers
         
         private void Start()
         {
-            _nextTimeToSpawn = Time.time;
+            _nextTimeToSpawn = Time.time + _delay;
         }
 
         private void Update()
         {
             if (Time.time > _nextTimeToSpawn)
             {
-                _nextTimeToSpawn = Time.time + _delay;
                 if (Generatator)
                 {
                     Generate();
                 }
+                _nextTimeToSpawn = Time.time + _delay;
             }
         }
 
