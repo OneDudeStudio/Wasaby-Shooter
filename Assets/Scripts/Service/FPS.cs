@@ -7,6 +7,7 @@ public class FPS : MonoBehaviour
     private void OnGUI()
     {
         fps = 1.0f / Time.deltaTime;
-        GUILayout.Label("FPS: " + (int)fps);
+        float normalizedFps = (0 < fps && fps < 1000) ? fps : 0;
+        GUILayout.Label("FPS: " + (int)normalizedFps);
     }
 }
