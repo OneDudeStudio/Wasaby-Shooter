@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028346, g: 0.22571373, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -452,9 +452,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5456757871262003695, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5456757871262003695, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5456757871262003695, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632343646757288416, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632343646757288416, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632343646757288416, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632343646757288416, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632343646757288416, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7006216672694739833, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 1183351
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006216672694739838, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006216672694739838, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006216672694739838, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5046213746663881695, guid: e57d2bcb4443827429bf0885fdca43b1, type: 3}

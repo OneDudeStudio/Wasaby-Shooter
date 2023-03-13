@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -27,7 +28,7 @@ namespace PlayerController.PlayerLocomotionSystem
         //add HeadBob
 
         public Transform Orientation => _orientation;
-
+        
         public void RotateCamera(float xInput, float yInput)
         {
             float mouseX = xInput * _sensX;
@@ -35,8 +36,9 @@ namespace PlayerController.PlayerLocomotionSystem
             yRotation += mouseX * _multiplier;
             xRotation -= mouseY * _multiplier;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-            _cameraHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-            _orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+            
+            _cameraHolder.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
+            _orientation.localRotation = Quaternion.Euler(0, yRotation, 0);
 
             if (_useFluentFov)
             {
