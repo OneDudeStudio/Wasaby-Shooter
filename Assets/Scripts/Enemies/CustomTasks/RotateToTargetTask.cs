@@ -9,7 +9,6 @@ namespace Enemies.CustomTasks{
 		public BBParameter<Transform> Target;
 		public BBParameter<float> RotationSpeed;
 
-
 		protected override void OnUpdate()
 		{
 			RotateToTarget();
