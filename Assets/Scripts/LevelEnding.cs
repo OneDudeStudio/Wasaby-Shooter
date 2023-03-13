@@ -20,7 +20,7 @@ public class LevelEnding : MonoBehaviour
             _inputManager.LockCameraRotation();
             _inputManager.LockMovement();
             _inputManager.LockWeapons();
-            _mainCanvas.SetActive(false);
+            //_mainCanvas.SetActive(false);
             _canvas.SetActive(true);
         }
     }
