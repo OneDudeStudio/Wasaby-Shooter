@@ -31,6 +31,7 @@ namespace UI.UI.Shop
         
         private void OnResumeButtonClicked()
         {
+            print("Resume");
             Resumed?.Invoke();
         }
 
