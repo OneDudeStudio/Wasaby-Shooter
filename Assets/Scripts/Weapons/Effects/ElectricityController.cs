@@ -6,7 +6,7 @@ public class ElectricityController : MonoBehaviour
 {
     private float _electricInterval = .2f;
     private float _maxRadius = 10f;
-   
+
     private bool _isCanStartLightningChain = true;
 
     private EnemyController _enemyController;
@@ -25,17 +25,17 @@ public class ElectricityController : MonoBehaviour
     {
         if (!_isCanStartLightningChain)
             return;
-         
+
         Transform firstTargetTransform = ((MonoBehaviour)victim).transform;
         _isCanStartLightningChain = false;
-        
+
         List<Transform> targets = _enemyController.AffectAreaVictims(firstTargetTransform.position, _maxRadius);
         targets.Remove(firstTargetTransform);
 
         if (targets.Count == 0)
             return;
 
-       StartCoroutine(LightningChain(firstTargetTransform, targets));
+        StartCoroutine(LightningChain(firstTargetTransform, targets));
     }
 
     private IEnumerator LightningChain(Transform firstTarget, List<Transform> targets)
@@ -43,12 +43,12 @@ public class ElectricityController : MonoBehaviour
         Lightning lightning = Instantiate(_lightningPrefab, firstTarget.position, Quaternion.identity);
         foreach (var target in targets)
         {
-            if(lightning == null)
+            if (lightning == null)
             {
                 break;
             }
 
-            if(Physics.Raycast(lightning.transform.position, (target.position - lightning.transform.position).normalized, _maxRadius, _obstacles))
+            if (target != null && Physics.Raycast(lightning.transform.position, (target.position - lightning.transform.position).normalized, _maxRadius, _obstacles))
             {
                 continue;
             }

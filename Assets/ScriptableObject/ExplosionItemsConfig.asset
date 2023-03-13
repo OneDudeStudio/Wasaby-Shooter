@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _default:
     ExplosionDamage: 20
-    ExplosionRadius: 3
+    ExplosionRadius: 5
     CheckLayers:
       serializedVersion: 2
       m_Bits: 1536
   _poison:
     ExplosionDamage: 1
-    ExplosionRadius: 2
+    ExplosionRadius: 3
     CheckLayers:
       serializedVersion: 2
       m_Bits: 1536
@@ -32,7 +32,7 @@ MonoBehaviour:
       m_Bits: 1536
   _redBarrel:
     ExplosionDamage: 30
-    ExplosionRadius: 4
+    ExplosionRadius: 6
     CheckLayers:
       serializedVersion: 2
       m_Bits: 1536

@@ -43,7 +43,7 @@ public class Lightning : MonoBehaviour
                 break;
             }
 
-            transform.position = Vector3.Lerp(startPosition, taret.position, t);
+            transform.position = Vector3.Lerp(startPosition, taret.position + Vector3.up * 2, t); ;
             t += Time.deltaTime / _duration;
             yield return null;
         }

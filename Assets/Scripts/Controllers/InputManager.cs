@@ -30,8 +30,8 @@ public class InputManager : MonoBehaviour
     [Space]
     [Header("Environment")]
     [SerializeField] private KeyCode _openShopKey = KeyCode.F;
- 
-    
+
+
     [Space]
     [Header("UI interact")]
     [SerializeField] private KeyCode _pauseGameOrExit = KeyCode.Escape;
@@ -47,16 +47,21 @@ public class InputManager : MonoBehaviour
     [SerializeField] private GeneralCanvasCore _generalCanvas;
 
     private CursorController _cursorController;
-    
+
     private bool _isCanMove = true;
     private bool _isCanRotateCamera = true;
     private bool _isCanUseWeapon = true;
+    private bool _isCanSwing = false;
 
     public void LockCameraRotation() => _isCanRotateCamera = false;
     public void UnlockCameraRotation() => _isCanRotateCamera = true;
 
     public void LockMovement() => _isCanMove = false;
     public void UnlockMovement() => _isCanMove = true;
+
+    public void LockSwing() => _isCanSwing = false;
+    public void UnlockSwing() => _isCanSwing = true;
+
 
 
     public void LockWeapons() => _isCanUseWeapon = false;
@@ -78,7 +83,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(_pauseGameOrExit))
         {
             _generalCanvas.TryGoToPause();
-            
+
             switch (_generalCanvas.IsInPausedState)
             {
                 case true:
@@ -91,12 +96,12 @@ public class InputManager : MonoBehaviour
                     break;
             }
         }
-        
+
         if (_generalCanvas.IsInPausedState)
-        { 
+        {
             return;
         }
-        
+
         if (_isCanRotateCamera)
         {
             _playerCam.RotateCamera(Input.GetAxisRaw(_horizontalMouseAxis), Input.GetAxisRaw(_verticalMouseAxis));
@@ -110,7 +115,7 @@ public class InputManager : MonoBehaviour
             {
                 _movementAdvanced.TryJumpByHandler();
             }
-            
+
             if (Input.GetKeyDown(_dashKey))
             {
                 _movementAdvanced.TryDashByHandler();
@@ -132,11 +137,13 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(_swingKey))
+        if (_isCanSwing)
         {
-            _movementAdvanced.StartSwingByHandler();
+            if (Input.GetKeyDown(_swingKey))
+            {
+                _movementAdvanced.StartSwingByHandler();
+            }
         }
-
         if (Input.GetKeyUp(_swingKey))
         {
             _movementAdvanced.StopSwingByHandler();
@@ -159,13 +166,13 @@ public class InputManager : MonoBehaviour
                 _gunController.TryShootGrenade();
             }
         }
-        
-       if (Input.GetKeyDown(_openShopKey))
-       {
-           _shop.TryUseShop(false);
-       }
+
+        if (Input.GetKeyDown(_openShopKey))
+        {
+            _shop.TryUseShop(false);
+        }
     }
-    
+
     private void TryHideCursor()
     {
         if (!_generalCanvas.IsInPausedState && !_shop.IsInShop)
