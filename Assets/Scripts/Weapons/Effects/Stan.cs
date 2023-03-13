@@ -20,8 +20,6 @@ public class Stan : Effect
         if (!_isStanned)
             return;
         
-        Debug.Log("Apply");
-
         if (currentTime - _startTime >= _duration)
         {
             _isStanned = false;
@@ -36,7 +34,6 @@ public class Stan : Effect
 
     public override void StartEffect()
     {
-        Debug.Log("Stan");
         _startTime = Time.time;
         _isStanned = true;
         _victim.ModifySpeed(0);

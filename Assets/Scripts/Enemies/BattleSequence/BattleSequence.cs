@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Enemies.Spawn;
@@ -18,7 +19,7 @@ namespace Enemies.BattleSequence
         private int _currentWaveEnemiesCount;
 
         private IEnemyTarget _target;
-
+        
         private void Awake()
         {
             _target = FindObjectOfType<PlayerManager>();

@@ -68,6 +68,7 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         _cursorController = new CursorController();
 
         _generalCanvas.Resumed += TryHideCursor;
