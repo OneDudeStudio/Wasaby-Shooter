@@ -34,10 +34,8 @@ public class InputManager : MonoBehaviour
     
     //[Space]
     //[Header("UI interact")]
-    //[SerializeField] private KeyCode _pauseGameOrExit = KeyCode.Escape;
-    //[SerializeField] private KeyCode _exitKey = KeyCode.Escape;
-    
-
+    // [SerializeField] private KeyCode _pauseGameOrExit = KeyCode.Escape;
+    // [SerializeField] private KeyCode _exitKey = KeyCode.Escape;
 
     [Space]
     [Header("Scripts")]
@@ -79,10 +77,27 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-       //if (_isBlockAnyInput)
-       //{
-       //    return;
-       //}
+       //  if (Input.GetKeyDown(_pauseGameOrExit))
+       //  {
+       //      _isBlockAnyInput = _generalCanvas.TryGoToPause();
+       //
+       //      switch (_isBlockAnyInput)
+       //      {
+       //          case true:
+       //              _cursorController.ShowCursor();
+       //              break;
+       //          case false:
+       //              _cursorController.HideCursor();
+       //              break;
+       //      }
+       //
+       //      _shop.TryUseShop(false);
+       //  }
+       //  
+       // if (_isBlockAnyInput)
+       // {
+       //     return;
+       // }
         
         if (_isCanRotateCamera)
         {
@@ -148,34 +163,19 @@ public class InputManager : MonoBehaviour
         }
 
 
-       if (Input.GetKeyDown(_openShopKey))
-       {
-           _shop.TryUseShop(false);
-       }
+       // if (Input.GetKeyDown(_openShopKey))
+       // {
+       //     _shop.TryUseShop(false);
+       // }
         
-        //if (Input.GetKeyDown(_pauseGameOrExit))
-        //{
-        //    _isBlockAnyInput = _generalCanvas.TryGoToPause();
-//
-        //    switch (_isBlockAnyInput)
-        //    {
-        //        case true:
-        //            _cursorController.HideCursor();
-        //            break;
-        //        case false:
-        //            _cursorController.ShowCursor();
-        //            break;
-        //    }
-//
-        //    //_shop.TryUseShop(false);
-        //}
-        //if (Input.GetKeyDown(_exitKey))
-        //{
-        //    _shop.TryUseShop(true);
 
-        //    ////
-
-        //}
+       // if (Input.GetKeyDown(_exitKey))
+       // {
+       //      _shop.TryUseShop(true);
+       //
+       //      ////
+       //
+       // }
 
     }
 }
