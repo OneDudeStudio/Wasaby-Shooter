@@ -20,7 +20,9 @@ namespace Enemies
         [SerializeField] private float _pushTime;
 
         [SerializeField] private float _flashTime;
-        
+
+        private EnemyController _enemyController;
+
         protected BehaviourTreeOwner behaviourTreeOwner;
         private List<Renderer> _meshRenderers;
 
@@ -66,6 +68,9 @@ namespace Enemies
             behaviourTreeOwner = GetComponent<BehaviourTreeOwner>();
 
             _configsLoader = FindObjectOfType<ConfigsLoader>();
+
+            _enemyController = FindObjectOfType<EnemyController>();
+            _enemyController.AddVictim(transform);
         }
 
         private void Start()
@@ -166,7 +171,8 @@ namespace Enemies
         public void Die()
         {
             Died?.Invoke();
-            Destroy(gameObject);
+
+            _enemyController.DestroyVictim(transform);
         }
 
         public void ModifySpeed(float modifier)

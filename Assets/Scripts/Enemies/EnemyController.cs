@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
 
         foreach(var victim in _victims)
         {
-            if((victim.position - center).sqrMagnitude < radius * radius)
+            if((victim.position+Vector3.up*2 - center).sqrMagnitude < radius * radius)
             {
                 inAreaVictims.Add(victim);
             }

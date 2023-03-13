@@ -26,7 +26,7 @@ MonoBehaviour:
       m_Bits: 1536
   _flash:
     ExplosionDamage: 5
-    ExplosionRadius: 2
+    ExplosionRadius: 4
     CheckLayers:
       serializedVersion: 2
       m_Bits: 1536
