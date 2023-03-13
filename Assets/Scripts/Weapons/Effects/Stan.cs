@@ -32,7 +32,6 @@ public class Stan : Effect
     public override void SetCharacteristics(EffectsConfig config)
     {
         _duration = config.Stan.StanDuration;
-        Debug.Log(_duration);
     }
 
     public override void StartEffect()

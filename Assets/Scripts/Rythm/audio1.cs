@@ -12,6 +12,13 @@ class audio1 : MonoBehaviour
     private int sampleRate;
     [SerializeField] private AudioSource audioSource;
     private double trackLength = 0;
+    private float _preshownBeats = 3;
+
+
+    [SerializeField] private MusicNote _uiPrefab;
+
+
+    private float beatDetectOffset = .2f;
 
     int numChannels;
     int numTotalSamples;
@@ -48,11 +55,20 @@ class audio1 : MonoBehaviour
             return;
         }
 
-        //Debug.Log(TimeSpan.FromSeconds(Time.time-songStartTime));
-        //Debug.Log(beats[counter].TimeOffset);
 
-        if (TimeSpan.FromSeconds((float)AudioSettings.dspTime - songStartTime) > beats[counter].TimeOffset)
+        //if (Input.GetKeyDown(KeyCode.Mouse0) &&
+        //    TimeSpan.FromSeconds(AudioSettings.dspTime - songStartTime + beatDetectOffset) > beats[counter].TimeOffset &&
+        //    TimeSpan.FromSeconds(AudioSettings.dspTime - songStartTime - beatDetectOffset) < beats[counter].TimeOffset)
+        //{
+        //    Debug.Log("hit!");
+        //}
+
+
+        if (counter < beats.Count && TimeSpan.FromSeconds((float)AudioSettings.dspTime - songStartTime+_preshownBeats) > beats[counter].TimeOffset)
         {
+            MusicNote note = Instantiate(_uiPrefab);
+            note.InitNote(beats[counter].TimeOffset);
+
             StartCoroutine(show());
             counter++;
         }
