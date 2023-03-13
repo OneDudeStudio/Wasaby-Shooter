@@ -11,6 +11,8 @@ public class Shop : MonoBehaviour
     private bool _isInShop = false;
     private bool _isShopUIOpened = false;
 
+    public bool IsInShop => _isInShop;
+
     private void Start()
     {
         _inputManager = FindObjectOfType<InputManager>();
@@ -51,6 +53,8 @@ public class Shop : MonoBehaviour
 
     private void OpenShopWindow()
     {
+        _uiController.SetCanvasDeactive(CanvasType.ShopHint);
+
         _uiController.SetCanvasActive(CanvasType.Shop);
         _inputManager.ShowCursor();
         _inputManager.LockCameraRotation();

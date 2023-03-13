@@ -35,7 +35,6 @@ public class InputManager : MonoBehaviour
     [Space]
     [Header("UI interact")]
     [SerializeField] private KeyCode _pauseGameOrExit = KeyCode.Escape;
-    [SerializeField] private KeyCode _exitKey = KeyCode.Escape;
 
     [Space]
     [Header("Scripts")]
@@ -48,13 +47,10 @@ public class InputManager : MonoBehaviour
     [SerializeField] private GeneralCanvasCore _generalCanvas;
 
     private CursorController _cursorController;
-
-
-    //private bool _isBlockAnyInput = false;
+    
     private bool _isCanMove = true;
     private bool _isCanRotateCamera = true;
     private bool _isCanUseWeapon = true;
-
 
     public void LockCameraRotation() => _isCanRotateCamera = false;
     public void UnlockCameraRotation() => _isCanRotateCamera = true;
@@ -73,31 +69,32 @@ public class InputManager : MonoBehaviour
     private void Start()
     {
         _cursorController = new CursorController();
-    }
 
+        _generalCanvas.Resumed += TryHideCursor;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(_pauseGameOrExit))
         {
             _generalCanvas.TryGoToPause();
             
-            switch (_generalCanvas.IsPaused)
+            switch (_generalCanvas.IsInPausedState)
             {
                 case true:
                     _cursorController.ShowCursor();
+                    Time.timeScale = 0;
                     break;
                 case false:
-                    _cursorController.HideCursor();
+                    TryHideCursor();
+                    Time.timeScale = 1;
                     break;
             }
-       
-            _shop.TryUseShop(false);
         }
         
-       if (_generalCanvas.IsPaused)
-       {
-           return;
-       }
+        if (_generalCanvas.IsInPausedState)
+        { 
+            return;
+        }
         
         if (_isCanRotateCamera)
         {
@@ -161,21 +158,19 @@ public class InputManager : MonoBehaviour
                 _gunController.TryShootGrenade();
             }
         }
-
-
+        
        if (Input.GetKeyDown(_openShopKey))
        {
            _shop.TryUseShop(false);
        }
-        
-
-       // if (Input.GetKeyDown(_exitKey))
-       // {
-       //      _shop.TryUseShop(true);
-       //
-       //      ////
-       //
-       // }
-
+    }
+    
+    private void TryHideCursor()
+    {
+        if (!_generalCanvas.IsInPausedState && !_shop.IsInShop)
+        {
+            _cursorController.HideCursor();
+            Time.timeScale = 1;
+        }
     }
 }

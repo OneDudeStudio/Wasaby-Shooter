@@ -1,6 +1,7 @@
 using System;
 using UI.UI.Shop;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace UI.UI
 {
@@ -22,16 +23,17 @@ namespace UI.UI
         [SerializeField] private CanvasPanel _shopPanel;
         [SerializeField] private PausePanel _pausePanel;
 
-
+        
         [Header("State")] 
-        [SerializeField] private bool _isInPauseState;
-        [SerializeField] private bool _isInShopState;
+        [SerializeField] private bool _isInInPauseState;
+        [SerializeField] private bool _isInShopStateState;
         [SerializeField] private bool _isInDefaultState;
         
         [SerializeField] private CanvasPanel _currentPanel;
         [SerializeField] private CanvasPanel _previousPanel;
 
-        public bool IsPaused => _isInPauseState;
+        public bool IsInPausedState => _isInInPauseState;
+        public event Action Resumed;
         
         private void Start()
         {
@@ -55,25 +57,26 @@ namespace UI.UI
             {
                 _pausePanel.DeactivatePanel();
                 TryGoToPause();
+                Resumed?.Invoke();
             }
         }
 
         public bool TryGoToPause()
         {
-            if (_isInPauseState)
+            if (_isInInPauseState)
             {
                 OpenNewPanel(_defaultPanel);
                 _canvasState = CanvasState.InGame;
-                _isInPauseState = false;
+                _isInInPauseState = false;
             }
-            else if(!_isInPauseState)
+            else if(!_isInInPauseState)
             {
                 _canvasState = CanvasState.Pause;
                 OpenNewPanel(_pausePanel);
-                _isInPauseState = true;
+                _isInInPauseState = true;
             }
 
-            return _isInPauseState;
+            return _isInInPauseState;
         }
 
         public void OpenNewPanel(CanvasPanel panelToOpen)
