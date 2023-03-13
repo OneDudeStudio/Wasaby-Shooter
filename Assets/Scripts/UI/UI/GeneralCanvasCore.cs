@@ -1,3 +1,5 @@
+using System;
+using UI.UI.Shop;
 using UnityEngine;
 
 namespace UI.UI
@@ -15,24 +17,46 @@ namespace UI.UI
     public class GeneralCanvasCore : MonoBehaviour
     {
         [SerializeField] private CanvasState _canvasState;
-        [SerializeField] private CanvasPanel _pausePanel;
+        
         [SerializeField] private CanvasPanel _defaultPanel;
         [SerializeField] private CanvasPanel _shopPanel;
+        [SerializeField] private PausePanel _pausePanel;
 
 
         [Header("State")] 
         [SerializeField] private bool _isInPauseState;
         [SerializeField] private bool _isInShopState;
         [SerializeField] private bool _isInDefaultState;
+        
         [SerializeField] private CanvasPanel _currentPanel;
         [SerializeField] private CanvasPanel _previousPanel;
 
+        public bool IsPaused => _isInPauseState;
+        
         private void Start()
         {
             _previousPanel = _defaultPanel;
             _currentPanel = _defaultPanel;
         }
 
+        private void OnEnable()
+        {
+            _pausePanel.Resumed += OnResumed;
+        }
+
+        private void OnDisable()
+        {
+            _pausePanel.Resumed -= OnResumed;
+        }
+
+        private void OnResumed()
+        {
+            if (_pausePanel)
+            {
+                _pausePanel.DeactivatePanel();
+                TryGoToPause();
+            }
+        }
 
         public bool TryGoToPause()
         {
@@ -50,9 +74,8 @@ namespace UI.UI
             }
 
             return _isInPauseState;
-
         }
-        
+
         public void OpenNewPanel(CanvasPanel panelToOpen)
         {
             _previousPanel = _currentPanel;
@@ -60,6 +83,5 @@ namespace UI.UI
             _currentPanel = panelToOpen;
             _currentPanel.ActivatePanel();
         }
-
     }
 }

@@ -30,12 +30,12 @@ public class InputManager : MonoBehaviour
     [Space]
     [Header("Environment")]
     [SerializeField] private KeyCode _openShopKey = KeyCode.F;
-    //[SerializeField] private KeyCode _exitKey = KeyCode.Escape;
+ 
     
-    //[Space]
-    //[Header("UI interact")]
-    // [SerializeField] private KeyCode _pauseGameOrExit = KeyCode.Escape;
-    // [SerializeField] private KeyCode _exitKey = KeyCode.Escape;
+    [Space]
+    [Header("UI interact")]
+    [SerializeField] private KeyCode _pauseGameOrExit = KeyCode.Escape;
+    [SerializeField] private KeyCode _exitKey = KeyCode.Escape;
 
     [Space]
     [Header("Scripts")]
@@ -50,7 +50,7 @@ public class InputManager : MonoBehaviour
     private CursorController _cursorController;
 
 
-    private bool _isBlockAnyInput = false;
+    //private bool _isBlockAnyInput = false;
     private bool _isCanMove = true;
     private bool _isCanRotateCamera = true;
     private bool _isCanUseWeapon = true;
@@ -77,27 +77,27 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-       //  if (Input.GetKeyDown(_pauseGameOrExit))
-       //  {
-       //      _isBlockAnyInput = _generalCanvas.TryGoToPause();
-       //
-       //      switch (_isBlockAnyInput)
-       //      {
-       //          case true:
-       //              _cursorController.ShowCursor();
-       //              break;
-       //          case false:
-       //              _cursorController.HideCursor();
-       //              break;
-       //      }
-       //
-       //      _shop.TryUseShop(false);
-       //  }
-       //  
-       // if (_isBlockAnyInput)
-       // {
-       //     return;
-       // }
+        if (Input.GetKeyDown(_pauseGameOrExit))
+        {
+            _generalCanvas.TryGoToPause();
+            
+            switch (_generalCanvas.IsPaused)
+            {
+                case true:
+                    _cursorController.ShowCursor();
+                    break;
+                case false:
+                    _cursorController.HideCursor();
+                    break;
+            }
+       
+            _shop.TryUseShop(false);
+        }
+        
+       if (_generalCanvas.IsPaused)
+       {
+           return;
+       }
         
         if (_isCanRotateCamera)
         {
