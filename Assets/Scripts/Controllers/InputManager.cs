@@ -163,10 +163,10 @@ public class InputManager : MonoBehaviour
         }
 
 
-       // if (Input.GetKeyDown(_openShopKey))
-       // {
-       //     _shop.TryUseShop(false);
-       // }
+       if (Input.GetKeyDown(_openShopKey))
+       {
+           _shop.TryUseShop(false);
+       }
         
 
        // if (Input.GetKeyDown(_exitKey))
